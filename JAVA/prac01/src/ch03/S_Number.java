@@ -8,7 +8,7 @@ class : S_Number
 
 public class S_Number {
     public static void main(String[] args) {
-        // test
+
         // 변수 선언 및 초기화
         int a = 11;
         int b = 5;
