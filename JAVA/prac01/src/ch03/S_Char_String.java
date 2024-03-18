@@ -19,7 +19,7 @@ public class S_Char_String {
         System.out.println("char    a2      " + a2);
         System.out.println("char    a3      " + a3);
 
-        // 문자열 String 코드
+        // 문자열 String 리터럴 선언 코드
         String s1 = "Unhappy Java";
         String s2 = "a";
         String s3 = "123";
