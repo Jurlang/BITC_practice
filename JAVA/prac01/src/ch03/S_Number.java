@@ -12,19 +12,15 @@ public class S_Number {
         // 변수 선언 및 초기화
         int a = 11;
         int b = 5;
-        int c = 023;        // 8진수
-        int d = 0xc3;       // 16진수
 
         // 변수 값 확인용 출력
-        System.out.println("10진수 a  10      : " + a);
-        System.out.println("10진수 b  5       : " + b);
-        System.out.println("8진수  c  023     : " + c);
-        System.out.println("16진수 d  0xc3    : " + d);
-        System.out.println("a + b : " + (a + b));
-        System.out.println("a - b : " + (a - b));
-        System.out.println("a * b : " + (a * b));
-        System.out.println("a / b : " + (a / b));
-        System.out.println("a % b : " + (a % b));
+        System.out.println("10진수 a= 11      : " + a);
+        System.out.println("10진수 b= 5       : " + b);
+        System.out.println("덧셈      a + b : " + (a + b));
+        System.out.println("뺄셈      a - b : " + (a - b));
+        System.out.println("곱셈      a * b : " + (a * b));
+        System.out.println("나눔      a / b : " + (a / b));
+        System.out.println("남음      a % b : " + (a % b));
 
     }
 }
