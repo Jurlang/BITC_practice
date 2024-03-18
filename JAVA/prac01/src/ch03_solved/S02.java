@@ -1,9 +1,11 @@
-package ch03;
+package ch03_solved;
+
 /*
 class : S02
     - Method : main
         . 선생님 블로그 ( blog.naver.com/drv98 - 자바시작하기 - 연습문제 2번 )
  */
+
 public class S02 {
 	public static void main(String[] args) {
 		int math = 96;
