@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>Transform</title>
+    <style>
+      .origin {
+        width: 200px;
+        height: 134px;
+        border: 1px solid black;
+        margin: 40px;
+      }
+      .movex {
+        transition: all 10s;
+      }
+      .movex:hover {
+        transform: translateX(1000px);
+      }
+      .movey:hover {
+        transform: translateX(1000px);
+      }
+      .movexy:hover {
+        transform: translateX(1000px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="origin">
+      <div class="movex">
+        <img src="images/bus.jpg" />
+      </div>
+    </div>
+    <div class="origin">
+      <div class="movey">
+        <img src="images/bus.jpg" />
+      </div>
+    </div>
+    <div class="origin">
+      <div class="movexy">
+        <img src="images/bus.jpg" />
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 600px;
+        height: 600px;
+        background-color: blue;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: space-around;
+      }
+      *[class*="item"] {
+        width: 700px;
+        height: 100px;
+        background-color: yellow;
+        border: 1px solid #000;
+      }
+      .item1 {
+        order: 2;
+      }
+      .item2 {
+        order: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="item1"><h1>1</h1></div>
+      <div class="item2"><h1>2</h1></div>
+      <div class="item3"><h1>3</h1></div>
+      <div class="item4"><h1>4</h1></div>
+      <div class="item5"><h1>5</h1></div>
+    </div>
+  </body>
+</html>

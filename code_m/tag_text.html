@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2장-텍스트관련태그들</title>
+</head>
+<body>
+    <h1>텍스트를 묶어주는 태그들</h1>
+    <hr>
+    <h1>h1~h6까지 제목 태그들 - h1</h1>
+    <h2>h1~h6까지 제목 태그들 - h2</h2>
+    <h3>h1~h6까지 제목 태그들 - h3</h3>
+    <h4>h1~h6까지 제목 태그들 - h4</h4>
+    <h5>h1~h6까지 제목 태그들 - h5</h5>
+    <h6>h1~h6까지 제목 태그들 - h6</h6>
+    <p>
+        단락을 잡아주며,
+        줄바꿈(enter)이 안먹히는 p 태그 - br - <br>
+        줄을 나눠주는 br 태그
+    </p>
+    <blockquote>
+        인용문을 적을 수 있는 blockquote 태그들
+        p 태그와 같이 줄바꿈이 안먹히는 태그<br>
+
+        상하좌우 margin 값이 기본적으로 있다.
+    </blockquote>
+    <p>아래의 밑 줄은 hr 태그</p>
+    <hr>
+    <pre>소스에 적은 줄바꿈(enter) 및 공백(tab)들이
+그대로 다 입력되는 pre태그</pre>
+    <hr>
+    <h1>텍스트를 한 줄로 표시하는 태그</h1>
+    <p>
+        이것은 b <b>진하게</b> 표시하기<br>
+        이것은 i <i>기울여서</i> 표시하기<br>
+        이것은 q <q>양 쪽 쌍따옴표</q> 표시하기<br>
+        이것은 mark <mark>형광펜</mark> 표시하기<br>
+        이것은 span <span>한줄영역묶기</span> 표시하기<br>
+        이것은 div <div>블록영역묶기</div> 표시하기<br>
+        이것은 ruby/rt <ruby>松本行弘<rt>まつもとゆきひろ</rt></ruby> 표시하기<br>
+        위 ruby/rt 는 동아시아글자를 적고(ruby) 그 위에 주석을 적어주는 태그(rt)
+    </p>
+    <hr>
+    <h1>목록을 만드는 태그</h1>
+    <ul>
+        <li>1일차(unordered list - ul)
+            <ol type="1">
+                <li>해녀박물관(ordered list - ol)</li>
+                <li>낚시체험(list 목록 - li)</li>
+            </ol>
+        </li>
+        <li>2일차
+            <ol type="a" start="3">
+                <li>용눈이오름</li>
+                <li>만장굴</li>
+                <li>카약체험</li>
+            </ol>
+        </li>
+    </ul>
+    <dl>
+        <dt>영역을 잡는 dl 제목을 적는 dt</dt>
+        <dd>설명을 적는 dd</dd>
+        <dd>여러개 가능 dd</dd>
+        <dd>여러개 가능 dd</dd>
+    </dl>
+    <dl>
+        <dt>올레 1코스</dt>
+        <dd>코스 : 시흥초등학교 옆 ~ 광치기 해변</dd>
+        <dd>거리 : 14.6km ( 4~5시간 )</dd>
+        <dd>난이도 : 중</dd>
+    </dl>
+    <hr>
+    <h1>표를 만드는 태그</h1>
+    <figure>
+        <figcaption style="border:solid 1px;">
+            표의 제목 표시하는 figure / figcaption 태그<br>
+            사이즈는 block
+        </figcaption>
+        <table border="1">
+            <caption style="border:solid 1px;">
+                표에 대한 설명을 적어주는 caption 태그<br>
+                표 위에 위치 지정<br>
+                표 크기와 동일한 사이즈 지정 및 가운데 정렬
+            </caption>
+            <colgroup>
+                <col style="width:100px;">
+                <col style="width:100px;">
+                <col style="width:100px;">
+                <col style="width:100px;">
+            </colgroup>
+            <tr>
+                <th>table 태그</th>
+                <th>tr 태그</th>
+                <th>th 태그</th>
+                <th>td 태그</th>
+            </tr>
+            <tr>
+                <td>표 영역</td>
+                <td>1행 생성</td>
+                <td>제목</td>
+                <td>내용</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <th>열 합치기</th>
+                <th>colspan</th>
+                <td colspan="2">2 칸 합 침</td>
+            </tr>
+            <tr>
+                <th>행 합치기</th>
+                <th rowspan="2">rowspan</th>
+                <td rowspan="2">2행합침</td>
+                <td rowspan="2">2행합침</td>
+            </tr>
+            <tr>
+                <th>하하</th>
+            </tr>
+            <caption style="border:solid 1px;">
+                caption : 작성위치 관계없이 <mark>표 위에만</mark> 위치 지정<br>
+            </caption>
+        </table>
+        <figcaption style="border:solid 1px;">
+            표의 제목 표시하는 figure / figcaption 태그<br>
+            작성하는 위치에 따라 <mark>위나 아래에 가능</mark>
+        </figcaption>
+    </figure>
+    <table border="1">
+        <caption>표 구조 정의하기</caption>
+        <colgroup>
+            <col style="width:100px;">
+            <col span="2" style="width:200px; background-color: gray;">
+            <col style="width:100px;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>thead1</th>
+                <th>thead2</th>
+                <th>thead3</th>
+                <th>thead4</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th colspan="4">tfoot</th>
+            </tr>
+            <tr>
+                <th>tfoot</th>
+                <th>tfoot</th>
+                <th>tfoot</th>
+                <th>tfoot</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>tbody1</td>
+                <td>tbody2</td>
+                <td>tbody3</td>
+                <td>tbody4</td>
+            </tr>
+            <tr>
+                <td>tbody1</td>
+                <td>tbody2</td>
+                <td>tbody3</td>
+                <td>tbody4</td>
+            </tr>
+            <tr>
+                <td>tbody1</td>
+                <td>tbody2</td>
+                <td>tbody3</td>
+                <td>tbody4</td>
+            </tr>
+            <tr>
+                <td>tbody1</td>
+                <td>tbody2</td>
+                <td>tbody3</td>
+                <td>tbody4</td>
+            </tr>
+        </tbody>
+    </table>
+    </body>
+</html>

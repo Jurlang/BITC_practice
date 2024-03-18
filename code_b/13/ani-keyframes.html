@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>Transform</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        /* animation-name: change-bg;
+        animation-duration: 3s;
+        animation-iteration-count: infinite; */
+      }
+      div:hover {
+        animation-name: change-bg;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+      @keyframes change-bg {
+        from {
+          background-color: blue;
+        }
+        to {
+          background-color: #a5d6ff;
+          border-radius: 50%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div></div>
+  </body>
+</html>

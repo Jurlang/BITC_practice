@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-size: 10px;
+      }
+      .a2 {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        text-align: center;
+        color: white;
+      }
+      .a3 {
+        background-color: red;
+        width: 33%;
+        height: 200px;
+        font-size: 10em;
+      }
+      .b3 {
+        background-color: blue;
+        width: 33%;
+        height: 200px;
+        font-size: 10em;
+      }
+      .c3 {
+        background-color: green;
+        width: 33%;
+        height: 200px;
+        font-size: 10em;
+      }
+
+      @media screen and (max-width: 610px) {
+        body {
+          font-size: 5px;
+        }
+        .a2 {
+          display: block;
+        }
+        .a3,
+        .b3,
+        .c3 {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="a1">
+      <div class="a2">
+        <div class="a3"><span>a</span></div>
+        <div class="b3"><span>b</span></div>
+        <div class="c3"><span>c</span></div>
+      </div>
+    </div>
+  </body>
+</html>
