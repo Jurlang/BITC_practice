@@ -5,7 +5,8 @@ class : S_InnerMethod
     - Method : main
         . 수업 3장 문자열 내장 함수 - 코드 작성 및 실행 연습
         . 사용한 함수 : equals , indexOf , contains , charAt
-                      replaceAll , substring , toUpperCase , split
+                      replaceAll , substring , toUpperCase(toLowerCase)
+                      split
  */
 
 public class S_InnerMethod {
