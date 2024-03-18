@@ -1,7 +1,7 @@
 package ch03;
 
 /*
-class : S_InnerMehtod
+class : S_InnerMethod
     - Method : main
         . 수업 3장 문자열 내장 함수 - 코드 작성 및 실행 연습
         . 사용한 함수 : equals , indexOf , contains , charAt
