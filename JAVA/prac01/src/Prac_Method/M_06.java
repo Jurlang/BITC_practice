@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 
 /*
 A+ >= 95

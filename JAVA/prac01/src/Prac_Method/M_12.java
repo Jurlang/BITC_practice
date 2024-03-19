@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 /*
 * 주급 = 근무시간 x 기본 시급
 * 기본 시급 최저 8 이보다 작으면 경고문

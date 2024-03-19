@@ -1,4 +1,4 @@
-package Start_JAVA_Prac;
+package Prac_Start_JAVA;
 
 public class S01 {
 	public static void main(String[] args) {

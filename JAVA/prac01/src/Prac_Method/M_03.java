@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 /*
 * 가솔리 8.86L -> 182.736 Km 운행
 */

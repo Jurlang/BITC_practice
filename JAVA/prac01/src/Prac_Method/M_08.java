@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 
 import java.util.Scanner;
 

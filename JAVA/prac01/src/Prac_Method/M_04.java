@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 /*
 * 주사위의 눈 수만큼 달러 획득
 * 3번 던져 얻은 달러

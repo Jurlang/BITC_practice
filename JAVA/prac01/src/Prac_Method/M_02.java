@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 /*
 * 삼겹살 1인분의 무게는 180g
 * 삼겹살 1g의 칼로리가 5.179kcal

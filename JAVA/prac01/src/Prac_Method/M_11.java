@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 /*
 * 소개팅 어플 등급
 * 요소 : 성격, 외모, 능력

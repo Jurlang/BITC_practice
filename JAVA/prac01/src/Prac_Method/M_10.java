@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 /*
 * BMI = W / (T * T)
 * 비만 - 30 이상

@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 /*
 * 보컬과 댄스의 점수의 곱이 70 이상 합격*/
 public class M_07 {

@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 // 출생연도에 따른 12간지 동물의 띠를 출력하도록.
 public class M_09 {
 	public static void main(String[] args) {

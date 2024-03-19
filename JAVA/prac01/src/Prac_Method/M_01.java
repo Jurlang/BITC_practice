@@ -1,4 +1,4 @@
-package Method_Prac;
+package Prac_Method;
 /*
 * 제공되는 코드를 분석하고 oneLine() 메소드를 변경하여
 * 출력과 같은 결과를 얻으시오.
