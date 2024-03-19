@@ -1,4 +1,4 @@
-package ch03_solved;
+package Start_JAVA;
 
 public class S07 {
 	public static void main(String[] args) {

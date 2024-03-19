@@ -1,4 +1,4 @@
-package ch03_solved;
+package Start_JAVA;
 
 /*
 class : S02
