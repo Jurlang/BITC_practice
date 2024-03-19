@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/*
+class : S_Generics
+    - Method : main
+        . 수업 3장 기초 자료형 ( List - Generics ) - 코드 작성 및 실행 연습
+*/
+
 public class S_Generics {
 	public static void main(String[] args) {
 		ArrayList<String> as = new ArrayList<>();
