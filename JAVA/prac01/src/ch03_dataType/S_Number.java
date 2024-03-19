@@ -1,4 +1,4 @@
-package ch03;
+package ch03_dataType;
 
 /*
 class : S_Number
