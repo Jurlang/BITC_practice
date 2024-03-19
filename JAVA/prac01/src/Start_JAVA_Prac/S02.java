@@ -1,4 +1,4 @@
-package Start_JAVA;
+package Start_JAVA_Prac;
 
 /*
 class : S02
