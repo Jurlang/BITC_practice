@@ -8,7 +8,8 @@ class : S_Array
 
 public class S_Array {
 	public static void main(String[] args) {
-		String[] weeks = {"월", "화", "수", "목", "금", "토", "일"};
+		String[] weeks = {"월", "화", "수", "목", "금", "토", "일"}; // 생성 1. 초기 값 설정
+		String[] weeks2 = new String[7]; // 생성 2. 초기 size 설정
 
 		System.out.println("----------인덱스를 이용한 배열 값 접근(0부터 시작)");
 		System.out.println("weeks[3] = " + weeks[3]);
