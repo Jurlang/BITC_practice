@@ -1,5 +1,6 @@
 package Game;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -59,9 +60,10 @@ public class Rps2 {
 				int chk = in.nextInt();
 				if (chk == 1) {
 					chk_continue = false;
-					for (int i = 0; i < gResult.length; i++) {
-						gResult[i] = "_";
-					}
+					Arrays.fill(gResult, "_");
+//					for (int i = 0; i < gResult.length; i++) {
+//						gResult[i] = "_";
+//					}
 				} else if (chk == 2) {
 					_continue = false;
 					chk_continue = false;
