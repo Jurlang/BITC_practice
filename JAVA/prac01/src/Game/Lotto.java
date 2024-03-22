@@ -3,6 +3,9 @@ package Game;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/*
+로또 번호 얻어오기.
+ */
 public class Lotto {
 	public static void main(String[] args) {
 		ArrayList<Integer>[] lotto = new ArrayList[5];
