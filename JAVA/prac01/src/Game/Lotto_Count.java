@@ -1,7 +1,6 @@
 package Game;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 /*
 1. 앞서 만든 Lotto 를 10번 돌린다.
@@ -23,7 +22,7 @@ public class Lotto_Count {
 
 			for (int k = 0; k < 10; k++) {
 				for (int i = 0; i < 5; i++) {
-					ArrayList<Integer> lotto_line = new ArrayList();
+					ArrayList<Integer> lotto_line = new ArrayList<>();
 					for (int j = 0; j < 6; j++) {
 						int randomNum = (int) (Math.random() * 45 + 1);
 						if (lotto_line.contains(randomNum)) {
