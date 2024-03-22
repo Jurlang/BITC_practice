@@ -94,7 +94,7 @@ public class Rps {
 			while(chk_continue) {
 				System.out.print("한 번 더 하겠다. ( 1 )\n");
 				System.out.print("아니 그만 하겠다. ( 2 )\n");
-				System.out.print("너의 선택은 ?");
+				System.out.print("너의 선택은 ? ");
 				int chk = in.nextInt();
 				if (chk == 1) {
 					chk_continue = false;
