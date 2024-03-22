@@ -44,6 +44,12 @@ public class Rps2 {
 				else if (go[user - 1].compareTo(go[com - 1]) == -1) gResult[i - 1] = "패";
 				score += go[user - 1].compareTo(go[com - 1]);
 
+				if(score == 2 || score == -2 && i < 3){
+					System.out.println("--------------------------------------------");
+					System.out.println("허허허허허 결판이 난 것 같구나 !");
+					break;
+				}
+
 			}
 			System.out.println("--------------------------------------------");
 			System.out.printf("현재 결과 : %s %s %s\n", gResult[0], gResult[1], gResult[2]);
