@@ -47,7 +47,6 @@ public class Pirate_roulette {
 					break;
 				}
 			}
-			System.out.println("------------------userOrder : " + userOrder);
 			if (_Game(in, hook, users, userOrder)) break;
 		}
 
@@ -58,7 +57,6 @@ public class Pirate_roulette {
 		ArrayList<Integer> alreadyNum = new ArrayList<>();
 		int arround = 0;
 		hook.bomb = (int)(Math.random()*hook.size +1);
-		System.out.println("------------------------------------------------------- hook.bomb : " + hook.bomb);
 		System.out.println("----------------게임을 시작하지----------------");
 		while(hookChk){
 			for(int i = 0 ; i < users.size(); i++){
