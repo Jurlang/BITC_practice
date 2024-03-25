@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 /*
 *********인터페이스 예제
-공통 인터페이스를 구현하는 서로 다른 객체
+	.공통 인터페이스를 구현하는 서로 다른 객체
  */
-public class EI_EX {
+public class EI_EX_Interface {
 	public static void main(String[] args) {
 		Sounding dog = new Dog();
 		Sounding baby = new Baby();
