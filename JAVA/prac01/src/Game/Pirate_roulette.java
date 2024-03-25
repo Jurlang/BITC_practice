@@ -112,11 +112,7 @@ class Pirate{
 	}
 
 	boolean explode(int num){
-		if(this.bomb == num) {
-			return false;
-		} else {
-			return true;
-		}
+		return bomb != num;
 	}
 
 	@Override
