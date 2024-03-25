@@ -22,7 +22,10 @@ public class EI_EX_Interface {
 		for(int i = 0; i < list.size(); i++){
 			list.get(i).sound();
 		}
-
+		
+		// 추가 향상된 for문
+		for(Sounding sound : list)
+			sound.sound();
 	}
 }
 interface Sounding{
