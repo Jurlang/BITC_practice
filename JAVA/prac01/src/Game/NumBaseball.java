@@ -52,7 +52,7 @@ public class NumBaseball {
 			}
 
 			while(true) {
-				System.out.print("게임을 계속하시겠습니까 ? ( 1 ) // 안할란다 치아라 ( 2 )");
+				System.out.print("게임을 계속하시겠습니까 ? ( 1 ) // 안할란다 치아라 ( 2 ) ");
 				String chk = in.nextLine();
 				if (chk.equals("1"))
 					break;
@@ -71,7 +71,7 @@ class Com extends Number{
 	void setNum(int digit){
 		num = new ArrayList<>();
 		for(int i = 0 ; i < digit ; i ++ ) {
-			int a = (int) (Math.random() * 9 + 1);
+			int a = (int) (Math.random() * 10);
 			if(num.contains(a)) i -= 1;
 			else num.add(a);
 		}
