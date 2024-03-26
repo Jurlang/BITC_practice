@@ -30,9 +30,9 @@ public class NumBaseball {
 
 		while(true) {
 			while (true) {
-				System.out.print("게임할 숫자의 자리 수 ( 3 , 4 ) : ");
+				System.out.print("게임할 숫자의 자리 수 ( 3 , 4 , 5 ) : ");
 				String _digit = in.nextLine();
-				if (_digit.equals("3") || _digit.equals("4")) {
+				if (_digit.equals("3") || _digit.equals("4") || _digit.equals("5")) {
 					digit = Integer.parseInt(_digit);
 					break;
 				} else System.out.println("------------------------------------------ 3 또는 4 로 입력해주세요.");
@@ -66,7 +66,6 @@ public class NumBaseball {
 abstract class Number {
 	ArrayList<Integer> num;
 }
-
 class Com extends Number{
 	void setNum(int digit){
 		num = new ArrayList<>();
@@ -77,7 +76,6 @@ class Com extends Number{
 		}
 	}
 }
-
 class Gamer extends Number{
 	boolean setNum(int digit, String number){
 		if(number.length() != digit) return false;
@@ -94,7 +92,6 @@ class Gamer extends Number{
 		return num.size() == digit;
 	}
 }
-
 class NB_Rule{
 	int strike;
 	int ball;
