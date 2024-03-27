@@ -55,6 +55,10 @@ public class Pirate_roulette {
 	static boolean _Game(Scanner in, Pirate hook, ArrayList<User> users,ArrayList<Integer> userOrder){
 		boolean hookChk = true;
 		ArrayList<Integer> alreadyNum = new ArrayList<>();
+		ArrayList<Integer> numArr = new ArrayList<>();
+		for(int i = 0 ; i < hook.size ; i++){
+			numArr.add(i+1);
+		}
 		int arround = 0;
 		hook.bomb = (int)(Math.random()*hook.size +1);
 		System.out.println("----------------게임을 시작하지----------------");
@@ -73,6 +77,7 @@ public class Pirate_roulette {
 				}else {
 					alreadyNum.add(0, num);
 				}
+
 				if(!hook.explode(alreadyNum.get(0))){
 					System.out.println("------------------------------------------------------- 펑 !!!!!!!!!!!!!!!");
 					System.out.println();
@@ -90,6 +95,8 @@ public class Pirate_roulette {
 			}
 			arround++;
 			System.out.printf("--------------------------- 너네 %d 바퀴 돌았다. ----------------------------\n", arround);
+			for (Integer integer : alreadyNum) numArr.remove(integer);
+			System.out.println("남은 숫자 : " + numArr);
 		}
 		while(true) {
 			System.out.print("계속 할건가? (1) /// 그만 할건가? (2)\n");
