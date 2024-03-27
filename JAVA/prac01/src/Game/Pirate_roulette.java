@@ -89,7 +89,7 @@ public class Pirate_roulette {
 				continue;
 			}
 			arround++;
-			System.out.printf("------------------------------------------------------- 너네 %d 바퀴 돌았다.\n", arround);
+			System.out.printf("--------------------------- 너네 %d 바퀴 돌았다. ----------------------------\n", arround);
 		}
 		while(true) {
 			System.out.print("계속 할건가? (1) /// 그만 할건가? (2)\n");
@@ -118,6 +118,7 @@ class Pirate{
 		return "Pirate{" +"size=" + size +", bomb=" + bomb +'}';
 	}
 }
+
 class User{
 	String name;
 
