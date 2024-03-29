@@ -26,6 +26,6 @@ class Food{
 		this.price = price;
 	}
 	public String toString(){
-		return "{ name : " + name + ", price : " + price + " }";
+		return "Food{ name : " + name + ", price : " + price + " 원 }";
 	}
 }

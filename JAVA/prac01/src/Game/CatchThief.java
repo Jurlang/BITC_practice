@@ -34,12 +34,20 @@ public class CatchThief {
 		CardGamer u = new CardGamer();
 		CardGame game = new CardGame();
 
-		System.out.println("Card : " + card.getCard());
-
+		// 카드 나누기
 		game.devideCard(card, u, c);
-		System.out.println("Card : " + card.getCard());
-		System.out.println("u : " + u.getCard() + " // size : " + u.getSize());
-		System.out.println("c : " + c.getCard() + " // size : " + c.getSize());
+		System.out.println("c : " + c.getCard() + " | size : " + c.getSize());
+		System.out.println("u : " + u.getCard() + " | size : " + u.getSize());
+
+		// 본인 카드에서 한장씩 버리기
+		c.removeSameCard();
+		u.removeSameCard();
+		System.out.println("c : " + c.getCard() + " | size : " + c.getSize());
+		System.out.println("u : " + u.getCard() + " | size : " + u.getSize());
+
+		// 본인의 카드 보여주기 ( 랜덤한 값을 가진 ArrayList)
+
+
 	}
 }
 
@@ -54,8 +62,8 @@ class CardGamer{
 	}
 	public int getSize(){
 		int size = 0;
-		for(int i = 0 ; i < card.size(); i++)
-			size += card.get(i).size();
+		for (ArrayList<Integer> integers : card)
+			size += integers.size();
 		return size;
 	}
 	public ArrayList<ArrayList<Integer>> getCard() {
@@ -64,21 +72,30 @@ class CardGamer{
 		}
 		return card;
 	}
-	public ArrayList<Integer> getCard(Integer kind) {
-		return card.get(kind);
-	}
 	public void putCard(int kind, int num){
 		card.get(kind).add(num);
 	}
-	public void sameCardRemove(){
-		for(int kind = 0 ; kind < card.size() ; kind++ ){
-			for(int num = 0 ; num < card.get(kind).size() ; num++){
-				int count = 1;
-
-
+	public void removeSameCard() {
+		for(int i = 0; i < card.size()-1 ; i++){
+			for(int j = 0 ; j < card.get(i).size(); j++){
+				for(int k = i + 1 ; k < card.size() ; k++){
+					if(card.get(k).contains(card.get(i).get(j))) {
+						card.get(k).set(card.get(k).indexOf(card.get(i).get(j)), 0);
+						card.get(i).set(j,0);
+						break;
+					}
+				}
+			}
+		}
+		for (ArrayList<Integer> integers : card) {
+			for (int j = integers.size() - 1; j >= 0; j--) {
+				if (integers.get(j) == 0) {
+					integers.remove(j);
+				}
 			}
 		}
 	}
+
 }
 
 class Card{
@@ -96,12 +113,6 @@ class Card{
 		card.add(new ArrayList<>(List.of(99)));
 
 	}
-	public ArrayList<ArrayList<Integer>> getCard() {
-		return card;
-	}
-	public ArrayList<Integer> getCard(Integer i) {
-		return card.get(i);
-	}
 	public boolean removeCard(int kind, int num){
 		if (!(card.get(kind).get(num) == 0)) {
 			card.get(kind).set(num, 0);
@@ -111,7 +122,7 @@ class Card{
 		}
 	}
 	public void allRemoveCard(){
-		card.removeAll(card);
+		card.clear();
 	}
 }
 
