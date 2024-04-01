@@ -72,9 +72,11 @@ public class WindSpeed {
 		System.out.println("측정 시간\t\t" + printString(ob,"obsrDt"));
 		System.out.println("지역명\t\t\t" + printString(ob, "siteName"));
 		System.out.println("1m당 풍속\t\t" + printString(ob, "windSpeed1m"));
-		System.out.println("1m당 풍향\t\t" + printString(ob, "windDirection1m") + getDerectionNm(ob, "windDirection1m"));
+		System.out.println("1m당 풍향\t\t" + printString(ob, "windDirection1m")
+										  + getDerectionNm(ob, "windDirection1m"));
 		System.out.println("돌풍 풍속\t\t" + printString(ob, "windSpeedGust"));
-		System.out.println("돌풍 풍향\t\t" + printString(ob, "windDirectionGust") + getDerectionNm(ob, "windDirectionGust"));
+		System.out.println("돌풍 풍향\t\t" + printString(ob, "windDirectionGust")
+										  + getDerectionNm(ob, "windDirectionGust"));
 		System.out.println("상태\t\t\t\t" + printString(ob, "sttusNm"));
 		System.out.println("---------------------------------------------------------------------------------");
 	}
