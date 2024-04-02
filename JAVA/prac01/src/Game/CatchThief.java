@@ -29,6 +29,7 @@ import java.util.*;
  */
 public class CatchThief {
 	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
 		Card card = new Card();
 		CardGamer c = new CardGamer();
 		CardGamer u = new CardGamer();
@@ -36,23 +37,42 @@ public class CatchThief {
 
 		// 카드 나누기
 		game.devideCard(card, u, c);
-		System.out.println("c : " + c.getCard() + " | size : " + c.getSize());
-		System.out.println("u : " + u.getCard() + " | size : " + u.getSize());
 
 		// 본인 카드에서 한장씩 버리기
 		c.removeSameCard();
 		u.removeSameCard();
-		System.out.println("c : " + c.getCard() + " | size : " + c.getSize());
-		System.out.println("u : " + u.getCard() + " | size : " + u.getSize());
 
-		// 본인의 카드 보여주기 ( 랜덤한 값을 가진 ArrayList)
+		// 본인의 카드 보여주기 ( 랜덤한 값을 가진 ArrayList )
+		c.setGameCard(c.getCard());
+		u.setGameCard(u.getCard());
+		System.out.println("----------게임의 시작---------");
+		System.out.println("게임은 도둑잡기 - 조커(99) 뽑기 입니다.");
+		System.out.println("마지막 패에 조커(99)를 가진 유저/컴퓨터 가 패배합니다.");
+		System.out.println("행운이 따르시길....");
+		System.out.println("----------당신의 카드---------");
+		System.out.println("당신의 카드 : " + u.getGameCard());
+
+		// 내가 한 번 고르고, 컴퓨터가 한 번 고르고
+		while(true) {
+			if(game.gameCondition(u,c)) break;
+			game.selectComputerCard(u, c, in);
+			System.out.println();
+			System.out.println("당신의 카드 : " + u.getGameCard());
+
+			if(game.gameCondition(u,c)) break;
+			game.selectUserCard(u, c);
+			System.out.println();
+			System.out.println("당신의 카드 : " + u.getGameCard());
+		}
+
 
 
 	}
 }
 
 class CardGamer{
-	private ArrayList<ArrayList<Integer>> card;
+	private final ArrayList<ArrayList<Integer>> card;
+	private ArrayList<Integer> gameCard;
 
 	public CardGamer() {
 		card = new ArrayList<>();
@@ -60,12 +80,7 @@ class CardGamer{
 			card.add(new ArrayList<>());
 		}
 	}
-	public int getSize(){
-		int size = 0;
-		for (ArrayList<Integer> integers : card)
-			size += integers.size();
-		return size;
-	}
+	// CARD
 	public ArrayList<ArrayList<Integer>> getCard() {
 		for(int i = 0 ; i < 4 ; i++ ){
 			Collections.sort(card.get(i));
@@ -75,6 +90,7 @@ class CardGamer{
 	public void putCard(int kind, int num){
 		card.get(kind).add(num);
 	}
+	// REMOVE SAME CARD
 	public void removeSameCard() {
 		for(int i = 0; i < card.size()-1 ; i++){
 			for(int j = 0 ; j < card.get(i).size(); j++){
@@ -95,11 +111,36 @@ class CardGamer{
 			}
 		}
 	}
-
+	// GAMECARD
+	public void setGameCard(ArrayList<ArrayList<Integer>> card){
+		gameCard = new ArrayList<>();
+		for(ArrayList<Integer> kind : card){
+			gameCard.addAll(kind);
+		}
+		card.clear();
+	}
+	public ArrayList<Integer> getGameCard(){
+		return gameCard;
+	}
+	public Integer getGameCard(int idx){
+		return gameCard.get(idx);
+	}
+	public int getGameCardSize(){
+		return gameCard.size();
+	}
+	public boolean getContainsGameCard(int num){
+		return gameCard.contains(num);
+	}
+	public void removeGameCard(int num){
+		gameCard.remove((Integer)num);
+	}
+	public void putGameCard(int num){
+		gameCard.add(num);
+	}
 }
 
 class Card{
-	private ArrayList<ArrayList<Integer>> card;
+	private final ArrayList<ArrayList<Integer>> card;
 
 	public Card(){
 		card = new ArrayList<>();
@@ -127,6 +168,7 @@ class Card{
 }
 
 class CardGame{
+
 	void devideCard(Card card, CardGamer u, CardGamer c){
 		Random r = new Random();
 		for (int i = 0; i < 53; i++) {
@@ -149,5 +191,60 @@ class CardGame{
 			}
 		}
 		card.allRemoveCard();
+	}
+	void selectComputerCard(CardGamer u, CardGamer c, Scanner in){
+		System.out.println("----------당신의 차례----------");
+		ArrayList<Integer> num = new ArrayList<>();
+		System.out.print("들고갈 카드를 정하세요 ( ");
+		for(int i = 0 ; i < c.getGameCardSize(); i++){
+			int idx = (int)(Math.random()*c.getGameCardSize());
+			if(!num.contains(idx)){
+				num.add(idx);
+				System.out.printf("%d ", i+1);
+			} else{
+				i -= 1;
+			}
+		}
+		System.out.print(") : ");
+
+		int selectIdx = 0;
+		try {
+			selectIdx = in.nextInt();
+		}catch(InputMismatchException e){
+			System.out.println("뻐킹 넘버 쓰라고 범위 내에서");
+		}
+		System.out.println("컴퓨터에게서 " + c.getGameCard(num.get(selectIdx - 1))+"를 가져왔습니다.");
+		if(selectIdx > 0 && selectIdx <= c.getGameCardSize()) {
+			if(u.getContainsGameCard(c.getGameCard(num.get(selectIdx - 1)))){
+				u.removeGameCard(c.getGameCard(num.get(selectIdx - 1)));
+				c.removeGameCard(c.getGameCard(num.get(selectIdx - 1)));
+			} else{
+				u.putGameCard(c.getGameCard(num.get(selectIdx - 1)));
+				c.removeGameCard(c.getGameCard(num.get(selectIdx - 1)));
+			}
+		}
+		else System.out.println("적힌 숫자 범위로 입력 부탁드립니다.");
+
+	}
+	void selectUserCard(CardGamer u, CardGamer c){
+		System.out.println("----------컴퓨터 차례----------");
+		int selectIdx = (int)(Math.random()*u.getGameCardSize());
+		System.out.println("컴퓨터가 " + u.getGameCard(selectIdx) + "를 들고 갑니다.");
+		if(c.getContainsGameCard(u.getGameCard(selectIdx))){
+			c.removeGameCard(u.getGameCard(selectIdx));
+			u.removeGameCard(u.getGameCard(selectIdx));
+		} else{
+			c.putGameCard(u.getGameCard(selectIdx));
+			u.removeGameCard(u.getGameCard(selectIdx));
+		}
+	}
+	boolean gameCondition(CardGamer u, CardGamer c){
+		if((u.getGameCardSize() == 1 && c.getGameCardSize() == 0) || (u.getGameCardSize() == 0 && c.getGameCardSize() == 1)){
+			System.out.println("게임이 종료되었습니다.");
+			if(u.getGameCardSize() == 1) System.out.println("사용자의 패배입니다.");
+			else System.out.println("사용자의 승리입니다.");
+			return true;
+		}
+		return false;
 	}
 }
