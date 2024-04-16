@@ -1,20 +1,17 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: it
-  Date: 2024-04-15
-  Time: 오후 3:19
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>To-Do : List</title>
 </head>
 <body>
     <h1>할 일 리스트</h1>
 
-    ${list}
+    <ul>
+        <c:forEach items="${list}" var="dto">
+            <li><a href="read?tno=${dto.tno}">${dto.tno}</a> --- ${dto.title} --- ${dto.dueDate}</li>
+        </c:forEach>
+    </ul>
 
-    <br><a href="reg">등록</a>
 </body>
 </html>
