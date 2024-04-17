@@ -23,7 +23,6 @@ public class ConnectTests {
 
 		connection.close();
 	}
-
 	@Test
 	public void testHikariCP() throws Exception{
 		HikariConfig config = new HikariConfig();

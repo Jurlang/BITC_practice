@@ -1,7 +1,9 @@
 package org.zerock.jdbcex.dao;
 
 import lombok.Cleanup;
+import lombok.extern.log4j.Log4j2;
 import org.zerock.jdbcex.domain.TodoVO;
+import org.zerock.jdbcex.util.ConnectionUtil;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,6 +15,7 @@ import java.util.List;
 /*
 	Database CRUD ( Create Read Update Delete )
 */
+@Log4j2
 public class TodoDAO {
 
 	public String getTime(){
@@ -22,9 +25,9 @@ public class TodoDAO {
 		/*
 			try - catch 문에서 try () 안에 source 작성을 하면 객체를 자동으로 close 해준다.
 		*/
-		try( Connection conn = ConnectionUtil.INSTANCE.getConnection();
-			 PreparedStatement p = conn.prepareStatement(sql);
-			 ResultSet resultSet = p.executeQuery()
+		try(Connection conn = ConnectionUtil.INSTANCE.getConnection();
+			PreparedStatement p = conn.prepareStatement(sql);
+			ResultSet resultSet = p.executeQuery()
 			){
 			resultSet.next();
 			now = resultSet.getString(1);
@@ -34,7 +37,6 @@ public class TodoDAO {
 
 		return now;
 	}
-
 	public String getTime2() throws Exception {
 		String sql = "select now()";
 		System.out.println("TodoDAO _ sql _ getTime2 : " + sql);
@@ -50,7 +52,6 @@ public class TodoDAO {
 		now = resultSet.getString(1);
 		return now;
 	}
-
 	public List<TodoVO> selectAll() throws Exception{
 		String sql = "Select * from tbl_todo";
 		System.out.println("TodoDAO _ sql _ getList : " + sql);
@@ -73,7 +74,6 @@ public class TodoDAO {
 
 		return list;
 	}
-
 	public TodoVO selectOne(TodoVO param) throws Exception{
 		String sql = "Select * from tbl_todo where tno = ?";
 		System.out.println("TodoDAO _ sql _ selectOne : " + sql);
@@ -90,19 +90,16 @@ public class TodoDAO {
 				.finished(resultSet.getBoolean("finished"))
 				.build();
 	}
-
 	public void insert(TodoVO vo) throws Exception{
 		String sql = "insert into tbl_todo(title,dueDate,finished) values( ?, ?, ? )";
-		System.out.println("TodoDAO _ sql _ insert : " + sql);
-
 		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
 		@Cleanup PreparedStatement p = conn.prepareStatement(sql);
 		p.setString(1, vo.getTitle());
 		p.setDate(2, Date.valueOf(vo.getDueDate()));
 		p.setBoolean(3, vo.isFinished());
+		log.info(p);
 		p.executeQuery();
 	}
-
 	public void deleteOne(TodoVO vo) throws Exception{
 		String sql = "delete from tbl_todo where tno = ?";
 		System.out.println("TodoDAO _ sql _ delete : " + sql);
@@ -112,7 +109,6 @@ public class TodoDAO {
 		p.setLong(1, vo.getTno());
 		p.executeQuery();
 	}
-
 	public void updateOne(TodoVO vo) throws Exception{
 		String sql = "update tbl_todo set title = ?, dueDate = ?, finished = ? where tno = ?";
 

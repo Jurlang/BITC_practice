@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>JSP - Practice</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
+<h1><%= "Practice" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="todo/list">1. Todo Page</a>
 </body>
 </html>

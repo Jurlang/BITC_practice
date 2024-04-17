@@ -1,4 +1,4 @@
-package org.zerock.jdbcex.dao;
+package org.zerock.jdbcex.util;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -27,7 +27,6 @@ public enum ConnectionUtil {
 
 		ds = new HikariDataSource(config);
 	}
-
 	public Connection getConnection() throws Exception{
 		return ds.getConnection();
 	}
