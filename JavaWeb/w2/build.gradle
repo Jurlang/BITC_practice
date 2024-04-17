@@ -11,11 +11,11 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.9.2'
+    junitVersion = '5.10.2'
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = '11'
+targetCompatibility = '11'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -41,6 +41,14 @@ dependencies {
 
     // HikariCP ( Database Connection Pool )
     implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.0.0'
+
+    // ModelMapper ( getter / setter 등을 이용해 객체 정보를 다른 객체로 복사하는 기능 )
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
+
+    //Log4j 2
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.2'
 }
 
 test {
