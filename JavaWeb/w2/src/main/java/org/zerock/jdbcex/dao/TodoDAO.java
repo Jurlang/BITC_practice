@@ -20,7 +20,7 @@ public class TodoDAO {
 
 	public String getTime(){
 		String sql = "select now()";
-		System.out.println("TodoDAO _ sql _ getTime : " + sql);
+		log.info("DAO_getTime_SQL : "+sql);
 		String now = null;
 		/*
 			try - catch 문에서 try () 안에 source 작성을 하면 객체를 자동으로 close 해준다.
@@ -39,7 +39,7 @@ public class TodoDAO {
 	}
 	public String getTime2() throws Exception {
 		String sql = "select now()";
-		System.out.println("TodoDAO _ sql _ getTime2 : " + sql);
+		log.info("DAO_getTime2_SQL : "+sql);
 		String now;
 		/*
 			@Cleanup 을 이용하여 자동으로 close() 가 된다.
@@ -54,10 +54,10 @@ public class TodoDAO {
 	}
 	public List<TodoVO> selectAll() throws Exception{
 		String sql = "Select * from tbl_todo";
-		System.out.println("TodoDAO _ sql _ getList : " + sql);
 
 		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
 		@Cleanup PreparedStatement p = conn.prepareStatement(sql);
+		log.info("DAO_selectALL_SQL : "+p);
 		@Cleanup ResultSet resultSet = p.executeQuery();
 
 		List<TodoVO> list = new ArrayList<>();
@@ -76,11 +76,11 @@ public class TodoDAO {
 	}
 	public TodoVO selectOne(TodoVO param) throws Exception{
 		String sql = "Select * from tbl_todo where tno = ?";
-		System.out.println("TodoDAO _ sql _ selectOne : " + sql);
 
 		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
 		@Cleanup PreparedStatement p = conn.prepareStatement(sql);
 		p.setLong(1, param.getTno());
+		log.info("DAO_selectONE_SQL : "+p);
 		@Cleanup ResultSet resultSet = p.executeQuery();
 		resultSet.next();
 		return TodoVO.builder()
@@ -97,16 +97,16 @@ public class TodoDAO {
 		p.setString(1, vo.getTitle());
 		p.setDate(2, Date.valueOf(vo.getDueDate()));
 		p.setBoolean(3, vo.isFinished());
-		log.info(p);
+		log.info("DAO_INSERT_SQL : "+p);
 		p.executeQuery();
 	}
 	public void deleteOne(TodoVO vo) throws Exception{
 		String sql = "delete from tbl_todo where tno = ?";
-		System.out.println("TodoDAO _ sql _ delete : " + sql);
 
 		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
 		@Cleanup PreparedStatement p = conn.prepareStatement(sql);
 		p.setLong(1, vo.getTno());
+		log.info("DAO_DELETE_SQL : "+p);
 		p.executeQuery();
 	}
 	public void updateOne(TodoVO vo) throws Exception{
@@ -118,6 +118,7 @@ public class TodoDAO {
 		p.setDate(2, Date.valueOf(vo.getDueDate()));
 		p.setBoolean(3, vo.isFinished());
 		p.setLong(4, vo.getTno());
+		log.info("DAO_UPDATE_SQL : "+p);
 		p.executeQuery();
 	}
 }

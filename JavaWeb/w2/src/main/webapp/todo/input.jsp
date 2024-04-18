@@ -35,4 +35,8 @@
         >
         </form>
     </body>
+
+    <script>
+        document.getElementById('dueDate').value = new Date().toISOString().substring(0, 10);
+    </script>
 </html>
