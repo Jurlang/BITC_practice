@@ -37,6 +37,8 @@
     </body>
 
     <script>
+    <c:if test="${dto.tno == null}">
         document.getElementById('dueDate').value = new Date().toISOString().substring(0, 10);
+    </c:if>
     </script>
-</html>
+    </html>
