@@ -100,12 +100,12 @@ public class TodoDAO {
 		log.info("DAO_INSERT_SQL : "+p);
 		p.executeQuery();
 	}
-	public void deleteOne(TodoVO vo) throws Exception{
+	public void deleteOne(Long tno) throws Exception{
 		String sql = "delete from tbl_todo where tno = ?";
 
 		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
 		@Cleanup PreparedStatement p = conn.prepareStatement(sql);
-		p.setLong(1, vo.getTno());
+		p.setLong(1, tno);
 		log.info("DAO_DELETE_SQL : "+p);
 		p.executeQuery();
 	}

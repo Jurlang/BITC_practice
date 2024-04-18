@@ -60,9 +60,7 @@ public enum TodoService {
 	}
 	// 삭제 ( Delete )
 	public void delete(Long tno) throws Exception {
-		TodoVO vo = dao.selectOne(TodoVO.builder().tno(tno).build());
-		log.info("delete( VO > DB ) : " + vo);
-
-		dao.deleteOne(vo);
+		log.info("delete( VO > DB ) tno : " + tno);
+		dao.deleteOne(tno);
 	}
 }
