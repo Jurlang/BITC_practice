@@ -9,7 +9,7 @@
 
     <div>제목 : ${dto.title}</div>
     <div>날짜 : ${dto.dueDate}</div>
-    <div>완료 : ${dto.finished}</div>
+    <div>완료 : ${dto.finished ? "완료" : "미완료"}</div>
 
     <input type="button" value="목록" onclick="location.href='list'"/>
     <input type="button" value="수정" onclick="location.href='update?tno=${dto.tno}'"/>

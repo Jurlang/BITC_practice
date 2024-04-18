@@ -18,7 +18,7 @@
 
     <ul>
         <c:forEach items="${dtoList}" var="dto">
-            <li><a href="read?tno=${dto.tno}">${dto.tno}</a> ${dto.title} ${dto.dueDate} ${dto.finished}</li>
+            <li><a href="read?tno=${dto.tno}">${dto.tno}</a> ${dto.title} ${dto.dueDate} ${dto.finished ? "완료" : "미완료"}</li>
         </c:forEach>
     </ul>
 
