@@ -18,10 +18,10 @@ public class TodoListController extends HttpServlet {
 	private TodoService todoService = TodoService.INSTANCE;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		log.info("TodoList------------");
-
+		log.info("Get - List");
 		try{
 			List<TodoDTO> dtoList = todoService.listAll();
+			log.info("Service - List ( VO > DTO ) : " + dtoList);
 			req.setAttribute("dtoList", dtoList);
 			req.getRequestDispatcher("/todo/list.jsp").forward(req, resp);
 		} catch(Exception e){

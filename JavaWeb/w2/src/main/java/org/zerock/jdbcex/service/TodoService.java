@@ -22,36 +22,47 @@ public enum TodoService {
 		dao = new TodoDAO();
 		mapper = MapperUtil.INSTANCE.get();
 	}
-	// 전체 조회
+	// 전체 조회 ( Read All )
 	public List<TodoDTO> listAll() throws Exception{
 		List<TodoVO> voList = dao.selectAll();
-		log.info("volist=============");
-		log.info(voList);
+		log.info("listAll( DB > VO ) : " + voList);
 
 		List<TodoDTO> dtoList = new ArrayList<>();
-		for(int i = 0 ; i < voList.size(); i++){
-			TodoDTO dto = mapper.map(voList.get(i), TodoDTO.class);
+		for(TodoVO vo : voList){
+			TodoDTO dto = mapper.map(vo, TodoDTO.class);
 			dtoList.add(dto);
 		}
 
 		return dtoList;
 	}
-	// 상세 조회
+	// 상세 조회 ( Read one )
 	public TodoDTO listOne(Long tno) throws Exception{
 		TodoVO vo = dao.selectOne(TodoVO.builder().tno(tno).build());
-		log.info("vo===============");
-		log.info(vo);
+		log.info("listOne( DB > VO ) : " + vo);
 
 		TodoDTO dto = mapper.map(vo, TodoDTO.class);
 
 		return dto;
 	}
-	// 등록
+	// 등록 ( Create )
 	public void register(TodoDTO dto) throws Exception {
 		TodoVO vo = mapper.map(dto, TodoVO.class);
+		log.info("register( VO > DB ) : " + vo);
 
-		log.info(vo);
 		dao.insert(vo);
 	}
+	// 수정 ( Update )
+	public void update(TodoDTO dto) throws Exception {
+		TodoVO vo = mapper.map(dto, TodoVO.class);
+		log.info("update( VO > DB ) : " + vo);
 
+		dao.updateOne(vo);
+	}
+	// 삭제 ( Delete )
+	public void delete(Long tno) throws Exception {
+		TodoVO vo = dao.selectOne(TodoVO.builder().tno(tno).build());
+		log.info("delete( VO > DB ) : " + vo);
+
+		dao.deleteOne(vo);
+	}
 }
