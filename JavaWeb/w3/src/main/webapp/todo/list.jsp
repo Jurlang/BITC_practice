@@ -8,7 +8,9 @@
 <body>
 
     <h1>Todo List</h1>
-
+    <form action="../logout" method="post">
+        <button type="submit">로그아웃</button>
+    </form>
     <ul>
         <c:forEach items="${dtoList}" var="dto">
             <li><a href="read?tno=${dto.tno}">${dto.tno}</a> ${dto.title} ${dto.dueDate} ${dto.finished ? "완료" : "미완료"}</li>
