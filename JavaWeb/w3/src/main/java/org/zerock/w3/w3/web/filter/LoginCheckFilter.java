@@ -1,4 +1,4 @@
-package org.zerock.w3.w3.todo_6.filter;
+package org.zerock.w3.w3.web.filter;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -23,7 +23,7 @@ public class LoginCheckFilter implements Filter {
 
 		if(s.getAttribute("loginInfo") == null){
 			log.info("doFilter - Failed Log-in");
-			resp.sendRedirect("/w3/login");
+			resp.sendRedirect("/w3/member");
 		} else{
 			log.info("doFilter - Success Log-in");
 			filterChain.doFilter(servletRequest, servletResponse);

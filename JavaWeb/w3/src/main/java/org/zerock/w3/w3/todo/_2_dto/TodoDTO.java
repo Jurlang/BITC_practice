@@ -1,4 +1,4 @@
-package org.zerock.w3.w3.todo_2.dto;
+package org.zerock.w3.w3.todo._2_dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

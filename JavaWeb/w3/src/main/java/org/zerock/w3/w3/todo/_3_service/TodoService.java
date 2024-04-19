@@ -1,10 +1,10 @@
-package org.zerock.w3.w3.todo_3.service;
+package org.zerock.w3.w3.todo._3_service;
 
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
-import org.zerock.w3.w3.todo_5.dao.TodoDAO;
-import org.zerock.w3.w3.todo_4.domain.TodoVO;
-import org.zerock.w3.w3.todo_2.dto.TodoDTO;
+import org.zerock.w3.w3.todo._5_dao.TodoDAO;
+import org.zerock.w3.w3.todo._4_domain.TodoVO;
+import org.zerock.w3.w3.todo._2_dto.TodoDTO;
 import org.zerock.w3.w3.web.util.MapperUtil;
 
 import java.util.ArrayList;

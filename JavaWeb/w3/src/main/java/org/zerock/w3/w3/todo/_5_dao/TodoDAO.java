@@ -1,8 +1,8 @@
-package org.zerock.w3.w3.todo_5.dao;
+package org.zerock.w3.w3.todo._5_dao;
 
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
-import org.zerock.w3.w3.todo_4.domain.TodoVO;
+import org.zerock.w3.w3.todo._4_domain.TodoVO;
 import org.zerock.w3.w3.web.util.ConnectionUtil;
 
 import java.sql.Connection;

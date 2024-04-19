@@ -1,4 +1,4 @@
-package org.zerock.w3.w3.login_1.controller;
+package org.zerock.w3.w3.member._1_controller;
 
 import lombok.extern.log4j.Log4j2;
 

@@ -1,4 +1,4 @@
-package org.zerock.w3.w3.todo_6.filter;
+package org.zerock.w3.w3.web.filter;
 
 import lombok.extern.log4j.Log4j2;
 

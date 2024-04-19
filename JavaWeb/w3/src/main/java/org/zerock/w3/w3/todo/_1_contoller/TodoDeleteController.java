@@ -1,7 +1,7 @@
-package org.zerock.w3.w3.todo_1.contoller;
+package org.zerock.w3.w3.todo._1_contoller;
 
 import lombok.extern.log4j.Log4j2;
-import org.zerock.w3.w3.todo_3.service.TodoService;
+import org.zerock.w3.w3.todo._3_service.TodoService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

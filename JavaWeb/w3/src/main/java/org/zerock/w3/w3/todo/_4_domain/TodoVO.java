@@ -1,4 +1,4 @@
-package org.zerock.w3.w3.todo_4.domain;
+package org.zerock.w3.w3.todo._4_domain;
 
 import lombok.*;
 import org.checkerframework.checker.units.qual.A;

@@ -1,15 +1,14 @@
-package org.zerock.w3.w3.todo_1.contoller;
+package org.zerock.w3.w3.todo._1_contoller;
 
 import lombok.extern.log4j.Log4j2;
-import org.zerock.w3.w3.todo_2.dto.TodoDTO;
-import org.zerock.w3.w3.todo_3.service.TodoService;
+import org.zerock.w3.w3.todo._2_dto.TodoDTO;
+import org.zerock.w3.w3.todo._3_service.TodoService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 
