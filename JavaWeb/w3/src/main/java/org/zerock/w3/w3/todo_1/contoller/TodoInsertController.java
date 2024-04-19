@@ -20,18 +20,7 @@ public class TodoInsertController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		log.info("Get - Insert");
-		HttpSession s = req.getSession();
-		if(s.isNew()){
-			log.info("New Session User");
-			resp.sendRedirect("/w3/login");
-		}
-		else if(s.getAttribute("loginInfo")==null){
-			log.info("Not Login User");
-			resp.sendRedirect("/w3/login");
-		}
-		else {
-			req.getRequestDispatcher("/todo/input.jsp").forward(req, resp);
-		}
+		req.getRequestDispatcher("/todo/input.jsp").forward(req, resp);
 	}
 
 	@Override
@@ -46,7 +35,7 @@ public class TodoInsertController extends HttpServlet {
 		try {
 			todoService.register(dto);
 		} catch (Exception e) {
-			log.error(e);
+			log.error(e.getMessage());
 		}
 		resp.sendRedirect("list");
 	}
