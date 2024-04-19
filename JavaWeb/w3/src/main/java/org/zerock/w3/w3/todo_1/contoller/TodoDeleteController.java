@@ -20,7 +20,7 @@ public class TodoDeleteController extends HttpServlet {
 		try {
 			todoService.delete(Long.parseLong(req.getParameter("tno")));
 		} catch (Exception e) {
-			log.error(e);
+			log.error(e.getMessage());
 		}
 		resp.sendRedirect("list");
 	}

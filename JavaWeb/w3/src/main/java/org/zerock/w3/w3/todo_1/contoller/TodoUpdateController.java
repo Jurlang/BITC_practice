@@ -48,7 +48,7 @@ public class TodoUpdateController extends HttpServlet {
 		try {
 			todoService.update(dto);
 		} catch (Exception e) {
-			log.error(e);
+			log.error(e.getMessage());
 		}
 		resp.sendRedirect("read?tno="+dto.getTno());
 	}
