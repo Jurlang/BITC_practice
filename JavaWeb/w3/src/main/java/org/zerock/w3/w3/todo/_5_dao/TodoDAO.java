@@ -78,11 +78,15 @@ public class TodoDAO {
 		String sql = "Select * from tbl_todo where tno = ?";
 
 		@Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
+
 		@Cleanup PreparedStatement p = conn.prepareStatement(sql);
 		p.setLong(1, param.getTno());
 		log.info("DAO_selectONE_SQL : "+p);
+
 		@Cleanup ResultSet resultSet = p.executeQuery();
+
 		resultSet.next();
+
 		return TodoVO.builder()
 				.tno(resultSet.getLong("tno"))
 				.title(resultSet.getString("title"))

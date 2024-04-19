@@ -23,7 +23,7 @@ public class LoginCheckFilter implements Filter {
 
 		if(s.getAttribute("loginInfo") == null){
 			log.info("doFilter - Failed Log-in");
-			resp.sendRedirect("/w3/member");
+			resp.sendRedirect("/w3/login");
 		} else{
 			log.info("doFilter - Success Log-in");
 			filterChain.doFilter(servletRequest, servletResponse);
