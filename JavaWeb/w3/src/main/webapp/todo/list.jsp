@@ -9,6 +9,9 @@
 
     <h1>Todo List</h1>
     <form action="../logout" method="post">
+        <c:if test="${loginInfo != null}">
+            ${loginInfo.mname}님 어서오세요.
+        </c:if>
         <button type="submit">로그아웃</button>
     </form>
     <ul>
