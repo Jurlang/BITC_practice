@@ -42,7 +42,7 @@ public class TodoDAOTests {
 	@Test
 	public void testDeleteOne() throws Exception{
 		TodoVO vo = TodoVO.builder().tno(4L).build();
-		todoDAO.deleteOne(vo);
+		todoDAO.deleteOne(vo.getTno());
 		System.out.println("todoDAO.deleteOne()");
 	}
 	@Test

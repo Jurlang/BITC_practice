@@ -1,4 +1,4 @@
-package org.zerock.w3.w3.todo_0.util;
+package org.zerock.w3.w3.web.util;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

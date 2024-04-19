@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.zerock.w3.w3.todo_5.dao.TodoDAO;
 import org.zerock.w3.w3.todo_4.domain.TodoVO;
 import org.zerock.w3.w3.todo_2.dto.TodoDTO;
-import org.zerock.w3.w3.todo_0.util.MapperUtil;
+import org.zerock.w3.w3.web.util.MapperUtil;
 
 import java.util.ArrayList;
 import java.util.List;
