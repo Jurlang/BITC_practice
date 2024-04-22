@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>짝수 더하기</title>
-	<link rel="stylesheet" href="css/even.css">
-</head>
-<body>
-	<h1>짝수끼리 더하기</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>짝수 더하기</title>
+    <link rel="stylesheet" href="css/even.css" />
+  </head>
+  <body>
+    <h1>짝수끼리 더하기</h1>
+    <script>
+      var n = prompt("숫자를 입력하세요.");
+      var sum = 0;
 
-</body>
+      document.write("0 ~ " + n + " 까지의 짝수를 더하면? <br>");
+      for (var i = n; i >= 0; i = i - 2) {
+        if (i % 2 != 0) i -= 1;
+        i = i * 1;
+        sum += i;
+        if (i == 1 || i == 0) {
+          document.write(i + " = " + sum);
+        } else {
+          document.write(i + " + ");
+        }
+      }
+    </script>
+  </body>
 </html>
