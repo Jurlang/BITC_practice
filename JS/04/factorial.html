@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>팩토리얼 계산하기</title>
-	<link rel="stylesheet" href="css/factorial.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>팩토리얼 계산하기</title>
+    <link rel="stylesheet" href="css/factorial.css" />
+  </head>
+  <body>
+    <script>
+      function factorial() {
+        var num = prompt("숫자를 입력하세요 ! ");
+        var fact = 1;
 
-</body>
+        if (num != null && num != "" && num != 0) {
+          document.write(num + "! = ");
+          for (var i = num; i > 0; i--) {
+            fact = fact * i;
+            if (i != 1) document.write(i + " * ");
+            else document.write(i + " = " + fact);
+          }
+        } else {
+          alert("입력 에러 1 이상의 숫자를 입력해주세요.");
+          factorial();
+        }
+      }
+      factorial();
+    </script>
+  </body>
 </html>
