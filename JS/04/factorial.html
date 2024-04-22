@@ -16,7 +16,7 @@
         if (num != null && num != "" && num != 0) {
           document.write(num + "! = ");
           for (var i = num; i > 0; i--) {
-            fact = fact * i;
+            fact *= i;
             if (i != 1) document.write(i + " * ");
             else document.write(i + " = " + fact);
           }
