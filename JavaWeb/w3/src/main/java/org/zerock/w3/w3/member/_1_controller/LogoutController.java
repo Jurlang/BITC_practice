@@ -19,6 +19,7 @@ public class LogoutController extends HttpServlet {
 		HttpSession s = req.getSession();
 		s.removeAttribute("loginInfo"); // 세션의 로그인정보만 초기화
 		s.invalidate(); // 세션 초기화
+
 		resp.sendRedirect("./");
 	}
 }
