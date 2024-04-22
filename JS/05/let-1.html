@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>블록 변수의 특징</title>
-</head>
-<body>	
-		<script src="js/let-1.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>블록 변수의 특징</title>
+  </head>
+  <body>
+    <script>
+      let x = 10;
+      console.log("같은 스크립트 x 보다 뒤에 : " + x);
+      a = 10;
+      b = 20;
+      let y = (a, b) => {
+        var sum = a + b / 2;
+        return sum;
+      };
+      console.log("y : " + y(a, b));
+    </script>
+    <!-- <script src="js/let-1.js"></script> -->
+  </body>
 </html>

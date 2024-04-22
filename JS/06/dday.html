@@ -1,36 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>D-Day for love</title>
-	<link href="css/d-day.css" rel="stylesheet">
-</head>
-<body>
-	<div class="container">
-		<div class="day1">
-			<h3>우리 만난지</h3>
-			<p id="accent" class="accent"><span style="font-size:0.6em; font-style:italic">며칠?</span></p>
-			</div>
-			<div class="bar">기념일 계산</div>
-			<div class="day2">
-				<ul>
-					<li class="item-title">100일</li>         
-					<li class="item-date" id="date100"></li>
-				</ul>
-				<ul>
-					<li class="item-title">200일</li>
-					<li class="item-date" id="date200"></li>
-				</ul>     
-				<ul>
-						<li class="item-title">1년</li>
-						<li class="item-date" id="date365"></li>
-					</ul>      
-				<ul>
-							<li class="item-title">500일</li>
-							<li class="item-date" id="date500"></li>
-						</ul>      									     
-			</div>
-		</div>
-	</body>
-	</html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D-Day for love</title>
+    <link href="css/d-day.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="day1">
+        <h3>우리 만난지</h3>
+        <p id="accent" class="accent"><span style="font-size: 0.6em; font-style: italic">며칠?</span></p>
+        <button id="setDate" onclick="dateSetting();">날짜등록</button>
+      </div>
+      <div class="bar">기념일 계산</div>
+      <div class="day2">
+        <ul>
+          <li class="item-title">100일</li>
+          <li class="item-date" id="date100"></li>
+        </ul>
+        <ul>
+          <li class="item-title">200일</li>
+          <li class="item-date" id="date200"></li>
+        </ul>
+        <ul>
+          <li class="item-title">1년</li>
+          <li class="item-date" id="date365"></li>
+        </ul>
+        <ul>
+          <li class="item-title">500일</li>
+          <li class="item-date" id="date500"></li>
+        </ul>
+        <ul>
+          <li class="item-title">2950일</li>
+          <li class="item-date" id="date2950"></li>
+        </ul>
+        <ul>
+          <li class="item-title">3000일</li>
+          <li class="item-date" id="date3000"></li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      var now = new Date();
+      var toNow = now.getTime();
+      var firstDay;
+      var toFirst;
+      var passedTime;
+      var passedDay;
+
+      function dateSetting() {
+        var date = prompt("날짜를 입력하세요.");
+        firstDay = new Date(date);
+        toFirst = firstDay.getTime();
+        passedTime = toNow - toFirst;
+        passedDay = Math.round(passedTime / 1000 / 60 / 60 / 24);
+        textSetting();
+      }
+      function calcDate(days) {
+        var future = new Date(new Date(firstDay).getTime() + days * (1000 * 60 * 60 * 24));
+        var someday = new Date(future);
+        var year = someday.getFullYear();
+        var month = someday.getMonth() + 1;
+        var date = someday.getDate();
+        return year + "년 " + month + "월 " + date + "일";
+      }
+      function textSetting() {
+        document.querySelector("#accent").innerHTML = passedDay + "일";
+        document.querySelector("#date100").innerHTML = calcDate(100);
+        document.querySelector("#date200").innerHTML = calcDate(200);
+        document.querySelector("#date365").innerHTML = calcDate(365);
+        document.querySelector("#date500").innerHTML = calcDate(500);
+        document.querySelector("#date2950").innerHTML = calcDate(2950);
+        document.querySelector("#date3000").innerHTML = calcDate(3000);
+      }
+    </script>
+  </body>
+</html>
