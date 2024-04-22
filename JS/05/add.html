@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>함수</title>
-	<link rel="stylesheet" href="css/add.css">
-</head>
-<body>
-	<button>덧셈 계산하기</button>
-	
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>함수</title>
+    <link rel="stylesheet" href="css/add.css" />
+  </head>
+  <body>
+    <button>덧셈 계산하기</button>
+    <script>
+      var a = prompt("숫자 입력 : ");
+      var b = prompt("숫자 입력 : ");
+
+      function addNumber(a, b) {
+        var sum = Number(a) + Number(b);
+        alert(sum);
+      }
+      addNumber(a, b);
+    </script>
+  </body>
 </html>
