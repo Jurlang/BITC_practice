@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>3의 배수인지 확인</title>
-	<link rel="stylesheet" href="css/multi3.css">
-</head>
-<body>
-	<div id="result"></div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>3의 배수인지 확인</title>
+    <link rel="stylesheet" href="css/multi3.css" />
+  </head>
+  <body>
+    <div id="result"></div>
+    <script>
+      function multi3F() {
+        var number = prompt("숫자를 입력하세요");
+        var display = document.querySelector("#result");
+        if (number == null || number == "") {
+          alert("입 력 에 러 ! ! !");
+          multi3F();
+        } else {
+          if (number % 3 == 0) display.innerHTML = number + " 은 3의 배수 입니다.";
+          else display.innerHTML = number + " 은 3의 배수가 아닙니다.";
+        }
+      }
+      multi3F();
+    </script>
+  </body>
 </html>
