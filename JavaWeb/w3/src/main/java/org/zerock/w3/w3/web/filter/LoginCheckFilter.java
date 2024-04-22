@@ -49,15 +49,21 @@ public class LoginCheckFilter implements Filter {
 			resp.sendRedirect("/w3/login");
 		}
 	}
-	private Cookie findCookie(Cookie[] cookies, String name){
+	private Cookie findCookie(Cookie[] cookies, String cookieName){
 		Cookie targetCookie = null;
 		if(cookies != null && cookies.length > 0){
 			for(Cookie cookie : cookies){
-				if(cookie.getName().equals(name)){
+				if(cookie.getName().equals(cookieName)){
 					targetCookie = cookie;
 					break;
 				}
 			}
+		}
+		// 찾는 쿠키가 없을 경우에
+		if (targetCookie == null) {
+			targetCookie = new Cookie(cookieName, ""); //쿠키 생성
+			targetCookie.setPath("/w3");         //기본주소에 생성
+			targetCookie.setMaxAge(60*60*24);  //하루 생존
 		}
 		return targetCookie;
 	}

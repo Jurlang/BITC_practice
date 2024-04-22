@@ -29,15 +29,15 @@ public class TodoReadController extends HttpServlet {
 			String todoListStr = viewTodoCookie.getValue();
 			boolean exist = false;
 
-			if(todoListStr != null && todoListStr.indexOf(tno+"-") >= 0){
+			if (todoListStr != null && todoListStr.indexOf(tno + "-") >= 0) {
 				exist = true;
 			}
 			log.info("exist: " + exist);
 
-			if(!exist){
-				todoListStr += tno+"-";
+			if (!exist) {
+				todoListStr += tno + "-";
 				viewTodoCookie.setValue(todoListStr);
-				viewTodoCookie.setMaxAge(60*60*24);
+				viewTodoCookie.setMaxAge(60 * 60 * 24);
 				viewTodoCookie.setPath("/w3");
 				resp.addCookie(viewTodoCookie);
 			}
@@ -48,7 +48,7 @@ public class TodoReadController extends HttpServlet {
 		log.info("Service - Read( VO > DTO ) : " + dto);
 		req.setAttribute("dto", dto);
 
-		req.getRequestDispatcher("/todo/read.jsp").forward(req,resp);
+		req.getRequestDispatcher("/todo/read.jsp").forward(req, resp);
 	}
 	private Cookie findCookie(Cookie[] cookies, String cookieName) {
 		//쿠키는 배열이다. 쿠키이름으로 배열안에 쿠키를 찾아서 리턴한다.
@@ -64,7 +64,7 @@ public class TodoReadController extends HttpServlet {
 		// 찾는 쿠키가 없을 경우에
 		if (targetCookie == null) {
 			targetCookie = new Cookie(cookieName, ""); //쿠키 생성
-			targetCookie.setPath("/");         //기본주소에 생성
+			targetCookie.setPath("/w3");         //기본주소에 생성
 			targetCookie.setMaxAge(60*60*24);  //하루 생존
 		}
 		return targetCookie;
