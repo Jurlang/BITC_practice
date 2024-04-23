@@ -24,9 +24,11 @@
   </head>
   <body>
     <h1>쇼핑 리스트</h1>
-    <button onclick="cool()">쿨쿨</button>
+    <button id="btnCool">쿨쿨</button>
     <p id="first">오늘 끝내자</p>
     <p class="second">반드시!</p>
+    <input type="text" name="addList" id="addList" />
+    <button id="btn">입력</button>
     <ul>
       <li>노트북</li>
       <li>가방</li>
@@ -43,6 +45,17 @@
       function cool() {
         h1.classList.toggle("cool");
       }
+      const btnCool = document.querySelector("#btnCool");
+      btnCool.addEventListener("click", cool);
+
+      const item = document.getElementById("addList");
+      const ulist = document.querySelector("ul");
+      const btn = document.querySelector("#btn");
+      btn.addEventListener("click", function () {
+        const newList = document.createElement("li");
+        newList.appendChild(document.createTextNode(item.value));
+        ulist.appendChild(newList);
+      });
     </script>
   </body>
 </html>
