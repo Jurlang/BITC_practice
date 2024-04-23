@@ -1,13 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>To do list</title>
-</head>
-<body>
-	<div id="wrapper">
-		
-	</div>    
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="css/input.css" rel="stylesheet" />
+    <link href="css/list.css" rel="stylesheet" />
+    <title>To do list</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h2>여행 준비물 점검 목록</h2>
+      <form>
+        <input type="text" name="item" id="item" autofocus />
+        <button type="button" id="add" class="addBtn" onclick="addItem();">추가</button>
+      </form>
+      <div id="itemList"></div>
+    </div>
+    <script>
+      var arrItem = [];
+
+      function addItem() {
+        var item = document.querySelector("#item").value;
+        if (item != null && item != "") {
+          arrItem.push(item);
+        }
+        textItem();
+      }
+
+      function removeItem(idx) {
+        arrItem.splice(idx, 1);
+        textItem();
+      }
+      function removeList() {
+        alert("hello");
+      }
+
+      function textItem() {
+        var listCode = "<ul>";
+        for (var i = 0; i < arrItem.length; i++) {
+          //listCode += "<li>" + arrItem[i] + "<span id=" + i + " class='close'>X</span></li>";
+          listCode += "<li>" + arrItem[i] + "<span id=" + i + " onclick='removeItem(this.getAttribute(" + '"id"' + "));' class='close'>X</span></li>";
+        }
+        listCode += "</ul>";
+        document.querySelector("#itemList").innerHTML = listCode;
+      }
+    </script>
+  </body>
 </html>
