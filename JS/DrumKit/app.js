@@ -1,18 +1,21 @@
 const button = document.querySelector("button");
 const buttons = document.querySelectorAll(".drum");
-const arrName = { w: "tom1", a: "tom2", s: "tom3", d: "tom4", j: "snare", k: "crash", l: "kick-bass" };
+const objName = { w: "tom1", a: "tom2", s: "tom3", d: "tom4", j: "snare", k: "crash", l: "kick-bass" };
 
 for (var i = 0; i < buttons.length; i++) {
-  buttons[i].style.background = `url(images/${arrName[buttons[i].className.split(" ")[0]]}.png) center no-repeat`;
+  buttons[i].style.background = `url(images/${objName[buttons[i].textContent]}.png) center no-repeat`;
   buttons[i].style.backgroundSize = `cover`;
+  // buttons[i].addEventListener("click", function () {
+  //   mouseClick(this);
+  // });
   buttons[i].addEventListener("click", function () {
     mouseClick(this);
   });
 }
 
 function mouseClick(idx) {
-  var audio = new Audio("sounds/" + arrName[idx.className.split(" ")[0]] + ".mp3");
-  console.log(arrName[idx.className.split(" ")[0]] + ".mp3");
+  var audio = new Audio("sounds/" + objName[idx.textContent] + ".mp3");
+  console.log(objName[idx.textContent] + ".mp3");
   audio.play();
 }
 
@@ -25,8 +28,8 @@ function keyboardClick(idx) {
     case "j":
     case "k":
     case "l":
-      var audio = new Audio("sounds/" + arrName[idx] + ".mp3");
-      console.log(arrName[idx] + ".mp3");
+      var audio = new Audio("sounds/" + objName[idx] + ".mp3");
+      console.log(objName[idx] + ".mp3");
       audio.play();
       break;
     default:
@@ -34,4 +37,4 @@ function keyboardClick(idx) {
   }
 }
 
-window.onkeydown = (e) => keyboardClick(e.key);
+document.onkeydown = (e) => keyboardClick(e.key);
