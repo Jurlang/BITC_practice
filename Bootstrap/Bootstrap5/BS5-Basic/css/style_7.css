@@ -1,0 +1,14 @@
+div>div {
+	min-height: 70px;
+	min-width: 70px;
+	margin: 20px;
+	display: inline-block;
+	background-color: #1e1e1e;
+}
+div{
+	min-width: 50px;
+	min-height: 50px;
+}
+body {
+	margin-bottom: 500px;
+}

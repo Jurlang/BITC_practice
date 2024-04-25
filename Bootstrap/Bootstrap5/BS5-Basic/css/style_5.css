@@ -1,0 +1,11 @@
+div,span {
+		min-height: 70px;
+		min-width: 70px;
+		margin: 2px;
+}
+body {
+		margin-bottom: 500px;
+}
+hr{
+		margin: 50px 0;
+}
