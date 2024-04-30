@@ -9,6 +9,7 @@
                             https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
     <context:component-scan base-package="org.bitcprac.todospring.config"/>
+
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mariadb://hyeon-dev.iptime.org:9033/bitc"/>
@@ -22,12 +23,15 @@
             </props>
         </property>
     </bean>
+
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <constructor-arg ref="hikariConfig"/>
     </bean>
+
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
     </bean>
+
     <mybatis:scan base-package="org.bitcprac.todospring.mapper"/>
 </beans>

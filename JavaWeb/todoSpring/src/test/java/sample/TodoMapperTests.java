@@ -12,7 +12,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations="file:src/main/webapp/WEB-INF/root-context.xml")
 public class TodoMapperTests {
-	@Autowired(required = false)
+
+	@Autowired(required=false)
 	private TodoMapper todoMapper;
 
 	@Test
