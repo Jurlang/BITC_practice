@@ -12,6 +12,9 @@
 </head>
 <body>
 hello~<br>
-${message}
+message : ${message}<br>
+ex4_1 : ${todoDTO}<br>
+ex4_2 : ${dto}<br>
+ex6 | name : ${name} // result : ${result}
 </body>
 </html>

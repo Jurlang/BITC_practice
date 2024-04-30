@@ -26,6 +26,6 @@ public class TodoController {
 	public String registerPost(TodoDTO todoDTO){
 		log.info("Post - register");
 		log.info("todoDTO: {}", todoDTO);
-		return "list";
+		return "todo/list";
 	}
 }
