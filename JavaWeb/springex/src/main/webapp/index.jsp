@@ -8,6 +8,10 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<ul>
+	<li><a href="hello-servlet">Hello Servlet</a></li>
+	<li><a href="hello">Sample Package</a></li>
+	<li><a href="todo/list">Todo Package</a></li>
+</ul>
 </body>
 </html>
