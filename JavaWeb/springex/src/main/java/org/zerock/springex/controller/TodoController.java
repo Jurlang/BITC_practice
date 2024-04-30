@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.springex.dto.TodoDTO;
 
 @Controller
 @Log4j2
@@ -17,11 +18,14 @@ public class TodoController {
 	}
 
 	@GetMapping("/register")
-	public void registerGet(){
+	public String registerGet(){
 		log.info(" Get - register");
+		return "todo/register";
 	}
 	@PostMapping("/register")
-	public void registerPost(){
+	public String registerPost(TodoDTO todoDTO){
 		log.info("Post - register");
+		log.info("todoDTO: {}", todoDTO);
+		return "list";
 	}
 }
