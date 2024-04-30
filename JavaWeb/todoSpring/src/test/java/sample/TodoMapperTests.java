@@ -1,8 +1,6 @@
 package sample;
 
 import lombok.extern.log4j.Log4j2;
-import org.bitcprac.todospring.mapper.TimeMapper;
-import org.bitcprac.todospring.mapper.TimeMapper2;
 import org.bitcprac.todospring.mapper.TodoMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
