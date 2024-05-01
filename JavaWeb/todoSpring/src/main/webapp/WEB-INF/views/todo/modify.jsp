@@ -75,20 +75,23 @@
 								</label>
 							</div>
 							<div class="my-4">
-								<div class="float-end">
+								<div class="float-start">
 									<button type="button" class="btn btn-danger">Remove</button>
+								</div>
+								<div class="float-end">
 									<button type="submit" class="btn btn-primary">Modify</button>
 									<button type="button" class="btn btn-secondary">Back</button>
 								</div>
 							</div>
 						</form>
 						<script>
+							// Validation Check
                             const serverValidResult = {}
                             <c:forEach items="${errors}" var="error">
                             serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
                             </c:forEach>
                             console.log(serverValidResult);
-
+							// Click Remove Btn
                             const formDelete = document.querySelector("form");
                             document.querySelector(".btn-danger").addEventListener("click",function(e){
                                 e.preventDefault();
@@ -97,7 +100,7 @@
                                 formDelete.method="post";
                                 formDelete.submit();
                             }, false);
-                            const formList = document.querySelector("form");
+                            // Click Back Btn
                             document.querySelector(".btn-secondary").addEventListener("click", function(e){
                                 self.location="read?tno="+${dto.tno};
                             }, false);
