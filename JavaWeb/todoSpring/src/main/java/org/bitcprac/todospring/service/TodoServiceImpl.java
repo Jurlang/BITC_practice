@@ -54,4 +54,9 @@ public class TodoServiceImpl implements TodoService {
 		log.info(vo);
 		todoMapper.update(vo);
 	}
+
+	@Override
+	public void delete(long tno) {
+		todoMapper.delete(tno);
+	}
 }

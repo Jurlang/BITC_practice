@@ -26,4 +26,7 @@
         update tbl_todo set title=#{title}, dueDate=#{dueDate}, writer=#{writer}, finished=#{finished} where tno=#{tno};
     </update>
 
+    <delete id="delete">
+        delete from tbl_todo where tno=#{tno}
+    </delete>
 </mapper>

@@ -50,4 +50,9 @@ public class TodoServiceTests {
 				.build();
 		todoService.modify(dto);
 	}
+	@Test
+	public void testDelete(){
+		Long tno = 6L;
+		todoService.delete(tno);
+	}
 }

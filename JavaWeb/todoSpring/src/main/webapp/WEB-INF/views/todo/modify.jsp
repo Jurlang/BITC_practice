@@ -66,7 +66,7 @@
 							</div>
 							<div class="input-group mb-3">
 								<span class="input-group-text">Writer</span>
-								<input type="text" name="writer" class="form-control" value="${dto.writer}">
+								<input type="text" name="writer" class="form-control" value="${dto.writer}" readonly>
 							</div>
 							<div class="form-check">
 								<label for="finished" class="form-check-label">
@@ -76,8 +76,9 @@
 							</div>
 							<div class="my-4">
 								<div class="float-end">
-									<button type="submit" class="btn btn-primary">Submit</button>
-									<button type="reset" class="btn btn-secondary">Reset</button>
+									<button type="button" class="btn btn-danger">Remove</button>
+									<button type="submit" class="btn btn-primary">Modify</button>
+									<button type="button" class="btn btn-secondary">Back</button>
 								</div>
 							</div>
 						</form>
@@ -87,6 +88,19 @@
                             serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
                             </c:forEach>
                             console.log(serverValidResult);
+
+                            const formDelete = document.querySelector("form");
+                            document.querySelector(".btn-danger").addEventListener("click",function(e){
+                                e.preventDefault();
+                                e.stopPropagation();
+                                formDelete.action="remove";
+                                formDelete.method="post";
+                                formDelete.submit();
+                            }, false);
+                            const formList = document.querySelector("form");
+                            document.querySelector(".btn-secondary").addEventListener("click", function(e){
+                                self.location="read?tno="+${dto.tno};
+                            }, false);
 						</script>
 					</div>
 				</div>

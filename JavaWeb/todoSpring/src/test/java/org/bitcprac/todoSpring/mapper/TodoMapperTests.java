@@ -61,4 +61,9 @@ public class TodoMapperTests {
 				.build();
 		todoMapper.update(vo);
 	}
+	@Test
+	public void testDeleteTodo(){
+		Long tno = 7L;
+		todoMapper.delete(tno);
+	}
 }
