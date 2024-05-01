@@ -103,6 +103,8 @@
                             }, false);
                             // Click Back Btn
                             document.querySelector(".btn-secondary").addEventListener("click", function(e){
+                                e.preventDefault();
+                                e.stopPropagation();
                                 self.location="read?tno="+${dto.tno};
                             }, false);
 						</script>

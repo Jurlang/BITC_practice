@@ -68,7 +68,8 @@ public class TodoController {
 		if(bindingResult.hasErrors()){
 			log.info("has errors.....");
 			redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-			return "redirect:/todo/modify?tno="+dto.getTno();
+			redirectAttributes.addAttribute("tno", dto.getTno());
+			return "redirect:/todo/modify";
 		}
 		log.info("todoDTO: {}", dto);
 		todoService.modify(dto);
