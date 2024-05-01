@@ -14,5 +14,5 @@ public class TodoDTO {
 	private String title;
 	private LocalDate dueDate;
 	private boolean finished;
-	private String writter;
+	private String writer;
 }

@@ -9,10 +9,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class todoVO {
+public class TodoVO {
 	private Long tno;
 	private String title;
 	private LocalDate dueDate;
 	private boolean finished;
-	private String writter;
+	private String writer;
 }
