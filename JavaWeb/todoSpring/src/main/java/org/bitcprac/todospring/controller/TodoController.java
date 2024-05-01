@@ -22,12 +22,12 @@ public class TodoController {
 
 	private final TodoService todoService;
 
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public void list(Model model){
 		log.info("list");
 		model.addAttribute("dtoList", todoService.getAll());
 	}
-	@RequestMapping("/read")
+	@GetMapping("/read")
 	public void read(Long tno, Model model){
 		TodoDTO dto = todoService.getOne(tno);
 		log.info(dto);
@@ -76,7 +76,7 @@ public class TodoController {
 	}
 	@PostMapping("/remove")
 	public String removePost(Long tno, RedirectAttributes redirectAttributes){
-		log.info("Remove - remove");
+		log.info("Post - remove");
 		todoService.remove(tno);
 		return "redirect:/todo/list";
 	}

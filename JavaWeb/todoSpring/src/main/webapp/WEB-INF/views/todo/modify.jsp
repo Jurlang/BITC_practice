@@ -27,7 +27,7 @@
 						<div class="collapse navbar-collapse" id="navbarNav">
 							<ul class="navbar-nav">
 								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="#">Home</a>
+									<a class="nav-link active" aria-current="page" href="/todoSpring">Home</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#">Features</a>
@@ -87,6 +87,7 @@
 						<script>
 							// Validation Check
                             const serverValidResult = {}
+							<c:if test="${errors != null}">alert("다시 작성해주세요.")</c:if>
                             <c:forEach items="${errors}" var="error">
                             serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
                             </c:forEach>
