@@ -57,7 +57,7 @@
 							</div>
 							<div class="input-group mb-3">
 								<span class="input-group-text">DueDate</span>
-								<input type="date" name="dueDate" class="form-control">
+								<input type="date" name="dueDate" class="form-control" value="2024-05-01">
 							</div>
 							<div class="input-group mb-3">
 								<span class="input-group-text">Writer</span>
