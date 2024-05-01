@@ -6,7 +6,17 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="info">
+        <logger name="org.springframework" level="INFO" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.bitcprac" level="INFO" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.bitcprac.todospring.mapper" level="TRACE" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <Root level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
