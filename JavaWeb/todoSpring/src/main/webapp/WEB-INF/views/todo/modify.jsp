@@ -68,17 +68,17 @@
 								<span class="input-group-text">Writer</span>
 								<input type="text" name="writer" class="form-control" value="${dto.writer}">
 							</div>
+							<div class="form-check">
+								<label for="finished" class="form-check-label">
+									<input id="finished" class="form-check-input" type="checkbox" name="finished" ${dto.finished?"checked":""}>
+									Finished
+								</label>
+							</div>
 							<div class="my-4">
 								<div class="float-end">
 									<button type="submit" class="btn btn-primary">Submit</button>
 									<button type="reset" class="btn btn-secondary">Reset</button>
 								</div>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label">
-									Finished &nbsp
-								</label>
-								<input class="form-check-input" type="checkbox" name="finished" ${dto.finished?"checked":""}>
 							</div>
 						</form>
 						<script>
