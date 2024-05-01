@@ -77,7 +77,7 @@ public class TodoController {
 	@PostMapping("/remove")
 	public String removePost(Long tno, RedirectAttributes redirectAttributes){
 		log.info("Remove - remove");
-		todoService.delete(tno);
+		todoService.remove(tno);
 		return "redirect:/todo/list";
 	}
 }

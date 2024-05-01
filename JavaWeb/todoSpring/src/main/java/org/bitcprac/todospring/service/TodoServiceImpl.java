@@ -27,7 +27,6 @@ public class TodoServiceImpl implements TodoService {
 
 		todoMapper.insert(vo);
 	}
-
 	@Override
 	public List<TodoDTO> getAll() {
 //		List<TodoDTO> dtoList = todoMapper.selectAll().stream()
@@ -41,22 +40,19 @@ public class TodoServiceImpl implements TodoService {
 
 		return dtoList;
 	}
-
 	@Override
 	public TodoDTO getOne(long tno) {
 		TodoDTO dto = modelMapper.map(todoMapper.selectOne(tno), TodoDTO.class);
 		return dto;
 	}
-
 	@Override
 	public void modify(TodoDTO todoDTO) {
 		TodoVO vo = modelMapper.map(todoDTO, TodoVO.class);
 		log.info(vo);
 		todoMapper.update(vo);
 	}
-
 	@Override
-	public void delete(long tno) {
+	public void remove(long tno) {
 		todoMapper.delete(tno);
 	}
 }
