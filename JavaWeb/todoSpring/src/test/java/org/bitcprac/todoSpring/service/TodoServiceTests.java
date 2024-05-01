@@ -39,4 +39,15 @@ public class TodoServiceTests {
 		TodoDTO dto = todoService.getOne(1L);
 		log.info(dto);
 	}
+	@Test
+	public void testUpdate(){
+		TodoDTO dto = TodoDTO.builder()
+				.tno(7L)
+				.title("bbbb")
+				.dueDate(LocalDate.now())
+				.writer("cccc")
+				.finished(false)
+				.build();
+		todoService.modify(dto);
+	}
 }

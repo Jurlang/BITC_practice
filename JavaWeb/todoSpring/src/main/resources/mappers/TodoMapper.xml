@@ -22,4 +22,8 @@
         select * from tbl_todo where tno=#{tno}
     </select>
 
+    <update id="update">
+        update tbl_todo set title=#{title}, dueDate=#{dueDate}, writer=#{writer}, finished=#{finished} where tno=#{tno};
+    </update>
+
 </mapper>

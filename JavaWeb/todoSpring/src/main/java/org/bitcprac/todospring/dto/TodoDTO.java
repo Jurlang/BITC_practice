@@ -3,6 +3,7 @@ package org.bitcprac.todospring.dto;
 import lombok.*;
 
 import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
@@ -18,7 +19,7 @@ public class TodoDTO {
 	@NotEmpty
 	private String title;
 
-	@Future
+	@FutureOrPresent
 	private LocalDate dueDate;
 
 	private boolean finished;

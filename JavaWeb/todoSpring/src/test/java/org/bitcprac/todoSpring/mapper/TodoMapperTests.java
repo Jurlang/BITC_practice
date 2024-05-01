@@ -50,4 +50,15 @@ public class TodoMapperTests {
 
 		log.info(vo);
 	}
+	@Test
+	public void testUpdateTodo(){
+		TodoVO vo = TodoVO.builder()
+				.tno(7L)
+				.title("bbb")
+				.dueDate(LocalDate.now())
+				.writer("ccc")
+				.finished(true)
+				.build();
+		todoMapper.update(vo);
+	}
 }
