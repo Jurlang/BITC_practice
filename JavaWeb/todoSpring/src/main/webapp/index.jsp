@@ -9,6 +9,7 @@
 </h1>
 <br/>
 <a href="todo/register">todo_register</a>
+<a href="todo/list">todo_list</a>
 
 </body>
 </html>

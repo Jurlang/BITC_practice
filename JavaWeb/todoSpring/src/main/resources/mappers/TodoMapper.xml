@@ -14,12 +14,12 @@
         values(#{title}, #{dueDate}, #{writer})
     </insert>
 
-    <select id="selectOne" resultType="org.bitcprac.todospring.domain.TodoVO">
-        select * from tbl_todo where tno=#{tno}
-    </select>
-
     <select id="selectAll" resultType="org.bitcprac.todospring.domain.TodoVO">
         select * from tbl_todo
+    </select>
+
+    <select id="selectOne" resultType="org.bitcprac.todospring.domain.TodoVO">
+        select * from tbl_todo where tno=#{tno}
     </select>
 
 </mapper>

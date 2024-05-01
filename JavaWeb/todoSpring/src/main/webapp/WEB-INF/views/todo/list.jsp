@@ -1,5 +1,12 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: it
+  Date: 24. 5. 1.
+  Time: 오전 11:36
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,33 +58,29 @@
 						Featured
 					</div>
 					<div class="card-body">
-						<form action="register" method="post">
-							<div class="input-group mb-3">
-								<span class="input-group-text">Title</span>
-								<input type="text" name="title" class="form-control" placeholder="Title">
-							</div>
-							<div class="input-group mb-3">
-								<span class="input-group-text">DueDate</span>
-								<input type="date" name="dueDate" class="form-control" value="2024-05-01">
-							</div>
-							<div class="input-group mb-3">
-								<span class="input-group-text">Writer</span>
-								<input type="text" name="writer" class="form-control" placeholder="Writer">
-							</div>
-							<div class="my-4">
-								<div class="float-end">
-									<button type="submit" class="btn btn-primary">Submit</button>
-									<button type="reset" class="btn btn-secondary">Reset</button>
-								</div>
-							</div>
-						</form>
-						<script>
-							const serverValidResult = {}
-							<c:forEach items="${errors}" var="error">
-								serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
+						<h5 class="card-title">Special title treatment</h5>
+						<table class="table">
+							<thead>
+							<tr>
+								<th scope="col">TNO</th>
+								<th scope="col">Title</th>
+								<th scope="col">Writer</th>
+								<th scope="col">DueDate</th>
+								<th scope="col">Finished</th>
+							</tr>
+							</thead>
+							<tbody>
+							<c:forEach items="${dtoList}" var="dto">
+								<tr>
+									<th scope="row"><c:out value="${dto.tno}"/></th>
+									<td><a href="read?tno=${dto.tno}" class="text-decoration-none"><c:out value="${dto.title}"/></a></td>
+									<td><c:out value="${dto.writer}"/></td>
+									<td><c:out value="${dto.dueDate}"/></td>
+									<td><c:out value="${dto.finished}"/></td>
+								</tr>
 							</c:forEach>
-							console.log(serverValidResult);
-						</script>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

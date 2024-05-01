@@ -9,6 +9,6 @@ public interface TodoMapper {
 	String getNow();
 
 	void insert(TodoVO todo);
-	TodoVO selectOne(Long tno);
 	List<TodoVO> selectAll();
+	TodoVO selectOne(Long tno);
 }
