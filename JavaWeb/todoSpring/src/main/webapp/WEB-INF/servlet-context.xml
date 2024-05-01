@@ -19,9 +19,9 @@
         <property name="formatters">
             <set>
                 <bean class="org.bitcprac.todospring.controller.formatter.LocalDateFormatter"/>
+                <bean class="org.bitcprac.todospring.controller.formatter.CheckboxFormatter"/>
             </set>
         </property>
     </bean>
-
     <mvc:annotation-driven conversion-service="conversionService"/>
 </beans>
