@@ -51,9 +51,9 @@
 						Featured
 					</div>
 					<div class="card-body">
-						<form action="modify" method="post">
+						<form action="modify?${pageRequestDTO.link}" method="post">
 							<div class="input-group mb-3">
-								<span class="input-group-text">Title</span>
+								<span class="input-group-text">TNO</span>
 								<input type="text" name="tno" class="form-control" value="${dto.tno}" readonly>
 							</div>
 							<div class="input-group mb-3">
@@ -97,7 +97,7 @@
                             document.querySelector(".btn-danger").addEventListener("click",function(e){
                                 e.preventDefault();
                                 e.stopPropagation();
-                                formDelete.action="remove";
+                                formDelete.action=`remove`;
                                 formDelete.method="post";
                                 formDelete.submit();
                             }, false);
@@ -105,7 +105,7 @@
                             document.querySelector(".btn-secondary").addEventListener("click", function(e){
                                 e.preventDefault();
                                 e.stopPropagation();
-                                self.location="read?tno="+${dto.tno};
+                                self.location=`read?tno=${dto.tno}&${pageRequestDTO.link}`;
                             }, false);
 						</script>
 					</div>

@@ -88,11 +88,11 @@
 						</div>
 						<script>
 							document.querySelector(".btn-primary").addEventListener("click", function(e){
-                                self.location="modify?tno="+${dto.tno}
+                                self.location=`modify?tno=${dto.tno}&${pageRequestDTO.link}`
 							}, false);
 
                             document.querySelector(".btn-secondary").addEventListener("click", function(e){
-                                self.location="list";
+                                self.location="list?${pageRequestDTO.link}";
                             }, false);
 						</script>
 					</div>
