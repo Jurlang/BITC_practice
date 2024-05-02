@@ -10,7 +10,7 @@
 	<br/>
 	<ul>
 		<li><a href="todo/register">todo_register</a></li>
-		<li><a href="todo/list">todo_list</a></li>s
+		<li><a href="todo/list">todo_list</a></li>
 	</ul>
 </body>
 </html>
