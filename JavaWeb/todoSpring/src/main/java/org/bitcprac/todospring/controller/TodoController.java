@@ -2,6 +2,7 @@ package org.bitcprac.todospring.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.bitcprac.todospring.dto.PageRequestDTO;
 import org.bitcprac.todospring.service.TodoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +24,12 @@ public class TodoController {
 	private final TodoService todoService;
 
 	@GetMapping("/list")
-	public void list(Model model){
-		log.info("list");
-		model.addAttribute("dtoList", todoService.getAll());
+	public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult,Model model){
+		log.info("Get - list");
+		log.info(pageRequestDTO);
+		if(bindingResult.hasErrors())
+			pageRequestDTO = PageRequestDTO.builder().build();
+		model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
 	}
 	@GetMapping("/read")
 	public void read(Long tno, Model model){

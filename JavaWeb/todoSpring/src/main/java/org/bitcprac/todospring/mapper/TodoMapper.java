@@ -1,6 +1,7 @@
 package org.bitcprac.todospring.mapper;
 
 import org.bitcprac.todospring.domain.TodoVO;
+import org.bitcprac.todospring.dto.PageRequestDTO;
 import org.bitcprac.todospring.dto.TodoDTO;
 
 import java.util.List;
@@ -13,4 +14,7 @@ public interface TodoMapper {
 	TodoVO selectOne(Long tno);
 	void update(TodoVO todo);
 	void delete(Long tno);
+
+	List<TodoVO> selectPage(PageRequestDTO pageRequestDTO);
+	int getCount(PageRequestDTO requestDTO);
 }

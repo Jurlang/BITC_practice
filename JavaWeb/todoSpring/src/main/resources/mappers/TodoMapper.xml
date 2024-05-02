@@ -15,7 +15,7 @@
     </insert>
 
     <select id="selectAll" resultType="org.bitcprac.todospring.domain.TodoVO">
-        select * from tbl_todo
+        select * from tbl_todo order by tno desc
     </select>
 
     <select id="selectOne" resultType="org.bitcprac.todospring.domain.TodoVO">
@@ -29,4 +29,11 @@
     <delete id="delete">
         delete from tbl_todo where tno=#{tno}
     </delete>
+
+    <select id="selectPage" resultType="org.bitcprac.todospring.domain.TodoVO">
+        select * from tbl_todo order by tno desc limit #{skip}, #{size}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(tno) from tbl_todo
+    </select>
 </mapper>

@@ -2,6 +2,7 @@ package org.bitcprac.todoSpring.mapper;
 
 import lombok.extern.log4j.Log4j2;
 import org.bitcprac.todospring.domain.TodoVO;
+import org.bitcprac.todospring.dto.PageRequestDTO;
 import org.bitcprac.todospring.mapper.TodoMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -65,5 +66,11 @@ public class TodoMapperTests {
 	public void testDeleteTodo(){
 		Long tno = 7L;
 		todoMapper.delete(tno);
+	}
+	@Test
+	public void testSelectPage(){
+		PageRequestDTO dto = PageRequestDTO.builder()
+						.page(26).size(10).build();
+		todoMapper.selectPage(dto);
 	}
 }

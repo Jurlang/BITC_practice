@@ -2,6 +2,8 @@ package org.bitcprac.todoSpring.service;
 
 import lombok.extern.log4j.Log4j2;
 import org.bitcprac.todospring.domain.TodoVO;
+import org.bitcprac.todospring.dto.PageRequestDTO;
+import org.bitcprac.todospring.dto.PageResponseDTO;
 import org.bitcprac.todospring.dto.TodoDTO;
 import org.bitcprac.todospring.service.TodoService;
 import org.junit.jupiter.api.Test;
@@ -53,6 +55,16 @@ public class TodoServiceTests {
 	@Test
 	public void testDelete(){
 		Long tno = 6L;
-		todoService.delete(tno);
+		todoService.remove(tno);
+	}
+	@Test
+	public void testGetList(){
+		PageRequestDTO dto = PageRequestDTO.builder()
+				.size(10)
+				.page(1)
+				.build();
+		PageResponseDTO<TodoDTO> responseDTO = todoService.getList(dto);
+		log.info(responseDTO);
+		responseDTO.getDtoList().forEach(log::info);
 	}
 }

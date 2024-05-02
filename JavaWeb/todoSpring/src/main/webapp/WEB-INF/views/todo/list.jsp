@@ -16,8 +16,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<title>Hello,world!</title>
 </head>
 <body>
@@ -70,7 +69,7 @@
 							</tr>
 							</thead>
 							<tbody>
-							<c:forEach items="${dtoList}" var="dto">
+							<c:forEach items="${responseDTO.dtoList}" var="dto">
 								<tr>
 									<th scope="row"><c:out value="${dto.tno}"/></th>
 									<td><a href="read?tno=${dto.tno}" class="text-decoration-none"><c:out value="${dto.title}"/></a></td>
@@ -81,6 +80,26 @@
 							</c:forEach>
 							</tbody>
 						</table>
+						<div class="float-start">
+							<button class="btn btn-primary" onclick="self.location='register'">Register</button>
+						</div>
+						<div class="float-end">
+							<ul class="pagination flex-wrap">
+								<c:if test="${responseDTO.prev}">
+									<li class="page-item">
+										<a class="page-link" data-num="${responseDTO.start-1}">Prev</a>
+									</li>
+								</c:if>
+								<c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
+									<li class="page-item ${responseDTO.page==num?"active":""}"><a class="page-link" data-num="${num}">${num}</a></li>
+								</c:forEach>
+								<c:if test="${responseDTO.next}">
+									<li class="page-item">
+										<a class="page-link" data-num="${responseDTO.end+1}">Next</a>
+									</li>
+								</c:if>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -99,6 +118,22 @@
 </div>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script></body>
+<script>
+	// Pagination
+	document.querySelector(".pagination").addEventListener("click",function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        const target = e.target;
+
+        if(target.tagName !== 'A'){
+            return;
+        }
+
+        const num = target.getAttribute("data-num");
+
+        self.location=`list?page=\${num}`;
+	}, false);
+</script>
 </html>
