@@ -73,4 +73,15 @@ public class TodoMapperTests {
 						.page(26).size(10).build();
 		todoMapper.selectPage(dto);
 	}
+	@Test
+	public void testSelectSearch(){
+		PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+				.page(1)
+				.size(10)
+				.types(new String[]{"t", "w"})
+				.keywords("AAAA")
+				.build();
+		List<TodoVO> voList = todoMapper.selectPage(pageRequestDTO);
+		voList.forEach(log::info);
+	}
 }
