@@ -66,7 +66,7 @@ public class TodoController {
 		return "todo/modify";
 	}
 	@PostMapping("/modify")
-	public String modifyPost(@Valid TodoDTO dto, PageRequestDTO pageRequestDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+	public String modifyPost(@Valid TodoDTO dto, BindingResult bindingResult,PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes){
 		log.info("Post - modify");
 		log.info(pageRequestDTO);
 		if(bindingResult.hasErrors()){
