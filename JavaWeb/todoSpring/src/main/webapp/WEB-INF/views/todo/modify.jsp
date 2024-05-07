@@ -50,7 +50,7 @@
 						Featured
 					</div>
 					<div class="card-body">
-						<form action="modify?${pageRequestDTO.link}" method="post">
+						<form action="modify" method="post">
 							<div class="input-group mb-3">
 								<span class="input-group-text">TNO</span>
 								<input type="text" name="tno" class="form-control" value="${dto.tno}" readonly>
@@ -78,7 +78,7 @@
 									<button type="button" class="btn btn-danger">Remove</button>
 								</div>
 								<div class="float-end">
-									<button type="submit" class="btn btn-primary">Modify</button>
+									<button type="button" class="btn btn-primary">Modify</button>
 									<button type="button" class="btn btn-secondary">Back</button>
 								</div>
 							</div>
@@ -91,14 +91,22 @@
                             serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
                             </c:forEach>
                             console.log(serverValidResult);
+                            const form = document.querySelector("form");
+                            // Click Modify Btn
+							document.querySelector(".btn-primary").addEventListener("click", function(e){
+                                e.preventDefault();
+                                e.stopPropagation();
+                                form.action=`modify?${pageRequestDTO.link}`;
+                                form.method="post";
+                                form.submit();
+							})
 							// Click Remove Btn
-                            const formDelete = document.querySelector("form");
                             document.querySelector(".btn-danger").addEventListener("click",function(e){
                                 e.preventDefault();
                                 e.stopPropagation();
-                                formDelete.action=`remove`;
-                                formDelete.method="post";
-                                formDelete.submit();
+                                form.action=`remove?${pageRequestDTO.link}`;
+                                form.method="post";
+                                form.submit();
                             }, false);
                             // Click Back Btn
                             document.querySelector(".btn-secondary").addEventListener("click", function(e){

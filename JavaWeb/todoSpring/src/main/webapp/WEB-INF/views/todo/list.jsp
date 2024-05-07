@@ -53,6 +53,36 @@
 		<div class="row content">
 			<div class="col">
 				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Search</h5>
+						<form action="list" method="get">
+							<input type="hidden" name="size" value="${pageRequestDTO.size}">
+							<div class="mb-3">
+								<label for="chkFinish"><input type="checkbox" name="finished" id="chkFinish" ${pageRequestDTO.finished?"checked":""}>완료여부</label>
+							</div>
+							<div class="mb-3">
+								<label for="inputTypeT"><input type="checkbox" name="types" id="inputTypeT" value="t" ${pageRequestDTO.checkType("t")?"checked":""}>제목</label>
+								<label for="inputTypeW"><input type="checkbox" name="types" id="inputTypeW" value="w" ${pageRequestDTO.checkType("w")?"checked":""}>작성자</label>
+								<input type="text" name="keyword" class="form-control" value='<c:out value="${pageRequestDTO.keyword}"/>'>
+							</div>
+							<div class="input-group mb-3 dueDateDiv">
+								<input type="date" name="from" class="form-control" value="${pageRequestDTO.from}">
+								<input type="date" name="to" class="form-control" value="${pageRequestDTO.to}">
+							</div>
+							<div class="input-group mb-3">
+								<div class="float-end">
+									<button class="btn btn-primary" type="submit">Search</button>
+									<button class="btn btn-info clearBtn" type="reset">Clear</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row content">
+			<div class="col">
+				<div class="card">
 					<div class="card-header">
 						Featured
 					</div>
@@ -133,7 +163,18 @@
 
         const num = target.getAttribute("data-num");
 
-        self.location=`list?page=\${num}`;
+        const formObj = document.querySelector("form");
+
+        formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
+
+        formObj.submit();
 	}, false);
+
+    document.querySelector(".clearBtn").addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        self.location="list";
+    }, false);
 </script>
 </html>

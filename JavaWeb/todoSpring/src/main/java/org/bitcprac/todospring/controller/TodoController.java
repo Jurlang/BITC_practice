@@ -76,16 +76,13 @@ public class TodoController {
 			return "redirect:/todo/modify";
 		}
 		todoService.modify(dto);
-		return "redirect:/todo/read?tno=" + dto.getTno() + "&" + pageRequestDTO.getLink();
+		redirectAttributes.addAttribute("tno", dto.getTno());
+		return "redirect:/todo/read";
 	}
 	@PostMapping("/remove")
 	public String removePost(Long tno, PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes){
 		log.info("Post - remove");
 		todoService.remove(tno);
-		pageRequestDTO = PageRequestDTO.builder()
-				.page(1)
-				.size(pageRequestDTO.getSize())
-				.build();
 		return "redirect:/todo/list?"+pageRequestDTO.getLink();
 	}
 }

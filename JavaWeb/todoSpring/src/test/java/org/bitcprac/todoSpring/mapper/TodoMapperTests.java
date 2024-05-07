@@ -79,9 +79,13 @@ public class TodoMapperTests {
 				.page(1)
 				.size(10)
 				.types(new String[]{"t", "w"})
-				.keywords("AAAA")
+				.keyword("user")
+				.finished(true)
+				.from(LocalDate.of(2022,1,1))
+				.to(LocalDate.of(2024,5,31))
 				.build();
 		List<TodoVO> voList = todoMapper.selectPage(pageRequestDTO);
 		voList.forEach(log::info);
+		log.info(todoMapper.getCount(pageRequestDTO));
 	}
 }

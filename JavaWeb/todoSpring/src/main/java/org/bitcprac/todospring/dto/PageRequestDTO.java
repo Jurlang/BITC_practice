@@ -10,7 +10,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 @Builder
 @Data
@@ -30,7 +33,7 @@ public class PageRequestDTO {
 	private String link;
 
 	private String[] types;
-	private String keywords;
+	private String keyword;
 	private boolean finished;
 	private LocalDate from;
 	private LocalDate to;
@@ -44,8 +47,36 @@ public class PageRequestDTO {
 			StringBuilder builder = new StringBuilder();
 			builder.append("page="+this.page);
 			builder.append("&size="+this.size);
+			if(finished){
+				builder.append("&finished=on");
+			}
+			if(types != null && types.length > 0){
+				for(int i = 0 ; i < types.length; i++){
+					builder.append("&types=" + types[i]);
+				}
+			}
+			if(keyword != null){
+				try{
+					builder.append("&keyword=" + URLEncoder.encode(keyword, "UTF-8"));
+				}catch (UnsupportedEncodingException e){
+					e.printStackTrace();
+				}
+			}
+			if(from != null){
+				builder.append("&from="+from);
+			}
+			if(to != null){
+				builder.append("&to="+to);
+			}
 			link = builder.toString();
 		}
 		return link;
+	}
+
+	public boolean checkType(String type){
+		if(types == null || types.length == 0){
+			return false;
+		}
+		return Arrays.asList(types).contains(type);
 	}
 }

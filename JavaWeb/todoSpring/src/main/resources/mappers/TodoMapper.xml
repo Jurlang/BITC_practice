@@ -32,14 +32,27 @@
 
     <select id="selectPage" resultType="org.bitcprac.todospring.domain.TodoVO">
         select * from tbl_todo
+
+        <include refid="search"></include>
+
+        order by tno desc limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(tno) from tbl_todo
+
+        <include refid="search"></include>
+    </select>
+
+    <sql id="search">
         <where>
             <if test="types != null and types.length > 0">
                 <foreach collection="types" item="type" open="(" close=")" separator=" OR ">
                     <if test="type == 't'.toString()">
-                        title = like concat('%', #{keyword}, '%')
+                        title like concat('%', #{keyword}, '%')
                     </if>
                     <if test="type == 'w'.toString()">
-                        writer = like concat('%', #{keyword}, '%')
+                        writer like concat('%', #{keyword}, '%')
                     </if>
                 </foreach>
             </if>
@@ -54,9 +67,5 @@
                 </trim>
             </if>
         </where>
-        order by tno desc limit #{skip}, #{size}
-    </select>
-    <select id="getCount" resultType="int">
-        select count(tno) from tbl_todo
-    </select>
+    </sql>
 </mapper>
