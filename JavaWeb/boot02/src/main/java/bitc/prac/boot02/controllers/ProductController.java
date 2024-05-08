@@ -34,16 +34,19 @@ public class ProductController {
 	// 아무 주소가 없거나, 기본 주소만 들어왔을 경우 2개의 경우일땐 {} 로 작성
 	@GetMapping({"", "/"})
 	public String showProductList(Model model){
-		List<Product> pList = repo.findAll();
 
+		List<Product> pList = repo.findAll();
 		model.addAttribute("products", pList);
+
 		return "products/index";
 	}
 
 	@GetMapping("create")
 	public String showCreateForm(Model model){
+
 		ProductDTO productDto = new ProductDTO();
 		model.addAttribute("productDto", productDto);
+
 		return "/products/create";
 	}
 
@@ -53,7 +56,6 @@ public class ProductController {
 		// 이미지가 없으면 에러 ( 원래 dto 에 사진 파일은 없기 때문에 에러를 추가로 수정 )
 		if(productDto.getImageFile().isEmpty()){
 			bindingResult.addError(new FieldError("productDto", "imageFile", "Image file is required"));
-
 			return "/products/create";
 		}
 
@@ -65,6 +67,7 @@ public class ProductController {
 		MultipartFile image = productDto.getImageFile();
 		Date createDate = new Date();
 		String storeFileName = createDate.getTime() + "_" + image.getOriginalFilename();
+
 		try{
 			String uploadDir = "public/images/";
 			Path uploadPath = Paths.get(uploadDir);
@@ -76,6 +79,7 @@ public class ProductController {
 			try (InputStream inputStream = image.getInputStream()){
 				Files.copy(inputStream, Paths.get(uploadDir + storeFileName), StandardCopyOption.REPLACE_EXISTING);
 			}
+
 		}catch(Exception ex){
 			System.out.println("Error: " + ex.getMessage());
 		}
