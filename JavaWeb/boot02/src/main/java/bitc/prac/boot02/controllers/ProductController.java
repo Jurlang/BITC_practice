@@ -10,10 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -47,7 +44,7 @@ public class ProductController {
 		ProductDTO productDto = new ProductDTO();
 		model.addAttribute("productDto", productDto);
 
-		return "/products/create";
+		return "/products/createProduct";
 	}
 
 	@PostMapping("create")
@@ -56,12 +53,12 @@ public class ProductController {
 		// 이미지가 없으면 에러 ( 원래 dto 에 사진 파일은 없기 때문에 에러를 추가로 수정 )
 		if(productDto.getImageFile().isEmpty()){
 			bindingResult.addError(new FieldError("productDto", "imageFile", "Image file is required"));
-			return "/products/create";
+			return "/products/createProduct";
 		}
 
 		// Valid 에 의해 발견되는 에러
 		if(bindingResult.hasErrors()){
-			return "/products/create";
+			return "/products/createProduct";
 		}
 
 		MultipartFile image = productDto.getImageFile();
@@ -95,5 +92,28 @@ public class ProductController {
 		repo.save(product);
 
 		return "redirect:/products";
+	}
+
+	@GetMapping("edit")
+	public String showEditForm(Model model, @RequestParam int id){
+		try {
+
+			Product product = repo.findById(id).get();
+			model.addAttribute("product", product);
+
+			ProductDTO productDto = new ProductDTO();
+			productDto.setName(product.getName());
+			productDto.setBrand(product.getBrand());
+			productDto.setCategory(product.getCategory());
+			productDto.setPrice(product.getPrice());
+			productDto.setDescription(product.getDescription());
+
+			model.addAttribute("productDto", productDto);
+
+		}catch(Exception ex){
+			System.err.println("Error : " + ex.getMessage());
+		}
+
+		return "/products/editProduct";
 	}
 }
