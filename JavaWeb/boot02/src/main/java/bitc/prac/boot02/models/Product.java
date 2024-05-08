@@ -3,6 +3,7 @@ package bitc.prac.boot02.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Table(name = "product")
 @Getter
 @Setter
+@ToString
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +25,7 @@ public class Product {
 
 	@Column(columnDefinition = "TEXT")
 	private String description;
+
 	@CreationTimestamp
 	private Date createAt;
 
