@@ -16,9 +16,11 @@ class Boot03ApplicationTests {
 
 	@Autowired
 	private QuestionRepository qRepo;
+	@Autowired
+	private AnswerRepository aRepo;
 
 	@Test
-	void testJpa(){
+	void testQuestionJpa(){
 //		<< Insert Test >>
 //		Question q1 = new Question();
 //		q1.setSubject("SBB가 무엇인가요?");
@@ -70,5 +72,18 @@ class Boot03ApplicationTests {
 //		Question q1 = q.get();
 //		qRepo.delete(q1);
 //		assertEquals(1, qRepo.findAll().size());
+	}
+
+	@Test
+	void testAnswerJpa(){
+		Optional<Question> oq = qRepo.findById(1);
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
+
+		Answer a = new Answer();
+		a.setContent("sbb는 질문 답변 게시판 입니다.");
+		a.setQuestion(q);
+		a.setCreateDate(LocalDateTime.now());
+		aRepo.save(a);
 	}
 }
