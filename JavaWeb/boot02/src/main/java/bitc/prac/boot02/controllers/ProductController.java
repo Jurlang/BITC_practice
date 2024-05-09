@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.DefaultMessageCodesResolver;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -76,7 +81,6 @@ public class ProductController {
 			try (InputStream inputStream = image.getInputStream()){
 				Files.copy(inputStream, Paths.get(uploadDir + storeFileName), StandardCopyOption.REPLACE_EXISTING);
 			}
-
 		}catch(Exception ex){
 			System.out.println("Error: " + ex.getMessage());
 		}
@@ -95,7 +99,7 @@ public class ProductController {
 	}
 
 	@GetMapping("edit")
-	public String showEditForm(Model model, @RequestParam int id){
+	public String showEditForm(Model model, int id){
 		try {
 
 			Product product = repo.findById(id).get();
@@ -115,5 +119,64 @@ public class ProductController {
 		}
 
 		return "/products/editProduct";
+	}
+
+	@PostMapping("edit")
+	public String processEditForm(@Valid @ModelAttribute("productDto") ProductDTO productDto, BindingResult bindingResult,
+								  int id, Model model) throws ParseException {
+
+		Product product = repo.findById(id).get();
+		model.addAttribute("product", product);
+
+		// 이미지 파일이 있을 경우
+		if(!productDto.getImageFile().isEmpty()){
+			String uploadDir = "public/images/";
+			Path oldImagePath = Paths.get(uploadDir + product.getImageFileName());
+			try{
+				Files.delete(oldImagePath);
+			}catch(Exception e) {
+				System.out.println("processEditForm 1 - Error: " + e.getMessage());
+			}
+
+			MultipartFile image= productDto.getImageFile();
+			Date createDate = new Date();
+			String storeFileName = createDate.getTime() + "_" + image.getOriginalFilename();
+			try(InputStream inputStream = image.getInputStream()){
+				Files.copy(inputStream, Paths.get(uploadDir+storeFileName), StandardCopyOption.REPLACE_EXISTING);
+
+			}catch(Exception e){
+				System.out.println("processEditForm 2 - Error: " + e.getMessage());
+			}
+			product.setImageFileName(storeFileName);
+		}
+
+		if(bindingResult.hasErrors()){
+			return "/products/editProduct";
+		}
+
+		product.setName(productDto.getName());
+		product.setBrand(productDto.getBrand());
+		product.setCategory(productDto.getCategory());
+		product.setPrice(productDto.getPrice());
+		product.setDescription(productDto.getDescription());
+
+		repo.save(product);
+
+		return "redirect:/products";
+	}
+
+	@GetMapping("/delete")
+	public String showDelete(int id){
+		try{
+			Product product = repo.findById(id).get();
+
+			String uploadDir = "public/images/";
+			Path imagePath = Paths.get(uploadDir + product.getImageFileName());
+			Files.delete(imagePath);
+			repo.delete(product);
+		}catch(Exception e){
+			System.out.println("showDelete : " + e.getMessage());
+		}
+		return "redirect:/products";
 	}
 }
