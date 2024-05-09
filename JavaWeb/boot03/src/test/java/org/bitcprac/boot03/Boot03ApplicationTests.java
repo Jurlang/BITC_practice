@@ -58,10 +58,17 @@ class Boot03ApplicationTests {
 //		assertEquals(q.getSubject(), "SBB가 무엇인가요?");
 
 //		<< Update Data >>
-		Optional<Question> oq1 = qRepo.findById(1);
-		assertTrue(oq1.isPresent());
-		Question q1 = oq1.get();
-		q1.setSubject("수정된 제목");
-		qRepo.save(q1);
+//		Optional<Question> oq1 = qRepo.findById(1);
+//		assertTrue(oq1.isPresent());
+//		Question q1 = oq1.get();
+//		q1.setSubject("수정된 제목");
+//		qRepo.save(q1);
+
+//		<< Delete Data >>
+//		Optional<Question> q = qRepo.findById(2);
+//		assertTrue(q.isPresent());
+//		Question q1 = q.get();
+//		qRepo.delete(q1);
+//		assertEquals(1, qRepo.findAll().size());
 	}
 }
