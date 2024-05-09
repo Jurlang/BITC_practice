@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class Boot03ApplicationTests {
@@ -14,15 +17,27 @@ class Boot03ApplicationTests {
 
 	@Test
 	void testJpa(){
-		Question q1 = new Question();
-		q1.setSubject("SBB가 무엇인가요?");
-		q1.setContent("SBB에 대해서 알고 싶습니다.");
-		q1.setCreateDate(LocalDateTime.now());
-		qRepo.save(q1);
-		Question q2 = new Question();
-		q2.setSubject("스프링부트 모델 질문입니다.");
-		q2.setContent("id는 자동으로 생성되나요?");
-		q2.setCreateDate(LocalDateTime.now());
-		qRepo.save(q2);
+//		<< Insert Test >>
+//		Question q1 = new Question();
+//		q1.setSubject("SBB가 무엇인가요?");
+//		q1.setContent("SBB에 대해서 알고 싶습니다.");
+//		q1.setCreateDate(LocalDateTime.now());
+//		qRepo.save(q1);
+//		Question q2 = new Question();
+//		q2.setSubject("스프링부트 모델 질문입니다.");
+//		q2.setContent("id는 자동으로 생성되나요?");
+//		q2.setCreateDate(LocalDateTime.now());
+//		qRepo.save(q2);
+
+//		<< SelectAll Test >>
+//		List<Question> qList = qRepo.findAll();
+//		assertEquals(2, qList.size());
+//		Question q = qList.get(0);
+//		assertEquals("SBB가 무엇인가요?", q.getSubject());
+
+//		<< SelectOne Test >>
+//		Question q = qRepo.findById(1).get();
+//		assertEquals("SBB가 무엇인가요?", q.getSubject());
+
 	}
 }
