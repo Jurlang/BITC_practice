@@ -1,11 +1,14 @@
 package org.bitcprac.boot03;
 
+import org.bitcprac.boot03.answer.Answer;
+import org.bitcprac.boot03.answer.AnswerRepository;
+import org.bitcprac.boot03.question.Question;
+import org.bitcprac.boot03.question.QuestionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

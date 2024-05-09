@@ -1,10 +1,11 @@
-package org.bitcprac.boot03;
+package org.bitcprac.boot03.question;
 
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.bitcprac.boot03.answer.Answer;
 
 import java.time.LocalDateTime;
 import java.util.List;

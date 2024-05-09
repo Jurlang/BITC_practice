@@ -1,4 +1,4 @@
-package org.bitcprac.boot03;
+package org.bitcprac.boot03.question;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
