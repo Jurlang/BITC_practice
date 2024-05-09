@@ -42,5 +42,18 @@ class Boot03ApplicationTests {
 //			Question q = oq.get();
 //			assertEquals("SBB가 무엇인가요?", q.getSubject());
 //		}
+
+//		<< Select Subject Test >>
+//		Question q = qRepo.findBySubject("SBB가 무엇인가요?");
+//		assertEquals(1, q.getId());
+
+//		<< Select SubjectAndContent Test >>
+//		Question q = qRepo.findBySubjectAndContent("SBB가 무엇인가요?", "SBB에 대해서 알고 싶습니다.");
+//		assertEquals(1, q.getId());
+
+//		<< Select SubjectLike Test >>
+//		List<Question> qList = qRepo.findBySubjectLike("SBB%");
+//		Question q = qList.get(0);
+//		assertEquals(q.getSubject(), "SBB가 무엇인가요?");
 	}
 }
