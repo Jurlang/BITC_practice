@@ -5,9 +5,9 @@ import org.bitcprac.boot03.answer.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -31,5 +31,16 @@ public class QuestionController {
 		Question q = qService.getQuestionById(id);
 		model.addAttribute("q", q);
 		return "question_detail";
+	}
+
+	@GetMapping("/create")
+	public String questionCreate(){
+		return "question_create";
+	}
+
+	@PostMapping("/create")
+	public String questionCreate(String subject, String content){
+		qService.addQuestion(subject, content);
+		return "redirect:/question/list";
 	}
 }
