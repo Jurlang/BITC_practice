@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Service
 public class QuestionService {
+
 	@Autowired
 	private QuestionRepository qRepo;
 
@@ -17,6 +18,10 @@ public class QuestionService {
 
 	public Question getQuestionById(int id){
 		Optional<Question> oq = qRepo.findById(id);
-		return oq.orElse(null);
+		if(oq.isPresent()){
+			return oq.get();
+		} else {
+			throw new DataNotFoundException("Question not Found");
+		}
 	}
 }
