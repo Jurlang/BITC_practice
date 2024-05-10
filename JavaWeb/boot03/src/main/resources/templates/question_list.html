@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Question List</title>
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
 </head>
+
 <body>
-<div class="container">
+<div class="container my-3">
     <h1 class="text-center">SBB 게시판</h1>
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table">
         <thead class="table-dark">
         <tr>
-            <th class="col">번호</th>
-            <th class="col">제목</th>
-            <th class="col">작성일시</th>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
         </tr>
         </thead>
-        <tbody class="table-group-divider">
-            <tr th:each="q, loop : ${qList}" th:onclick="|location.href='@{detail/__${q.id}__}'|">
-                <td th:text="${loop.count}"></td>
-                <td>
-                    <a th:href="@{detail/__${q.id}__}" th:text="${q.subject}"></a>
-                </td>
-                <td th:text="${#temporals.format(q.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-            </tr>
+        <tbody>
+        <tr th:each="question, loop : ${qList}">
+            <td th:text="${loop.count}"></td>
+            <td>
+                <a th:href="@{/question/detail/__${question.id}__}" th:text="${question.subject}"></a>
+            </td>
+            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
         </tbody>
     </table>
 </div>
 </body>
+
 </html>
