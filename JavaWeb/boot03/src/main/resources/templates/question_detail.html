@@ -8,12 +8,27 @@
 <body>
 <div class="container mt-5">
     <div class="card">
-        <h5 class="card-header" th:text="${q.getSubject()}"></h5>
+        <h5 class="card-header" th:text="${q.subject}"></h5>
         <div class="card-body">
-            <p class="card-text" th:text="${q.getContent()}"></p>
+            <p class="card-text" th:text="${q.content}"></p>
             <a th:href="@{/question/list}" class="btn btn-primary float-end ms-3">List</a>
-            <a th:href="@{/question/edit/__${q.getId()}__}" class="btn btn-success float-end">Edit</a>
+            <a th:href="@{/question/edit/__${q.id}__}" class="btn btn-success float-end">Edit</a>
         </div>
+    </div>
+
+    <div class="card mt-2">
+        <div class="card-header">
+            <form th:action="@{/answer/create/__${q.id}__}" method="post" >
+                <div class="d-flex">
+                    <textarea name="content" id="content" rows="3" class="form-control"></textarea>
+                    <label for="content"></label>
+                    <input type="submit" class="float-end btn btn-warning ms-2" value="답변등록">
+                </div>
+            </form>
+        </div>
+        <ul class="list-group list-group-flush" th:each="a : ${aList}">
+            <li class="list-group-item" th:text="${a.content}"></li>
+        </ul>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
