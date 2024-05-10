@@ -29,9 +29,7 @@ public class QuestionController {
 	@RequestMapping("/detail/{id}")
 	public String questionDetail(@PathVariable("id") int id, Model model){
 		Question q = qService.getQuestionById(id);
-		List<Answer> aList = aService.getList(q);
 		model.addAttribute("q", q);
-		model.addAttribute("aList", aList);
 		return "question_detail";
 	}
 }
