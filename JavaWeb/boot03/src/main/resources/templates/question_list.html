@@ -4,17 +4,18 @@
 <head th:replace="layout::head"></head>
 
 <body>
+<nav th:replace="layout::nav"></nav>
 <div class="container my-3">
     <h1 class="text-center">SBB 게시판</h1>
     <table class="table">
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
         <tr>
             <th>번호</th>
             <th>제목</th>
             <th>작성일시</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
         <tr th:each="question, loop : ${qList}" th:onclick="|location.href='@{detail/__${question.id}__}'|">
             <td th:text="${loop.count}"></td>
             <td>
