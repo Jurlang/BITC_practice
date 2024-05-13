@@ -1,10 +1,13 @@
 package org.bitcprac.boot03.question;
 
+import jakarta.validation.Valid;
 import org.bitcprac.boot03.answer.Answer;
+import org.bitcprac.boot03.answer.AnswerForm;
 import org.bitcprac.boot03.answer.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -27,20 +30,23 @@ public class QuestionController {
 	}
 
 	@RequestMapping("/detail/{id}")
-	public String questionDetail(@PathVariable("id") int id, Model model){
+	public String questionDetail(@PathVariable("id") int id, AnswerForm answerForm, Model model){
 		Question q = qService.getQuestionById(id);
 		model.addAttribute("q", q);
 		return "question_detail";
 	}
 
 	@GetMapping("/create")
-	public String questionCreate(){
+	public String questionCreate(QuestionForm questionForm){
 		return "question_create";
 	}
 
 	@PostMapping("/create")
-	public String questionCreate(String subject, String content){
-		qService.addQuestion(subject, content);
+	public String questionCreate(@Valid @ModelAttribute("questionForm") QuestionForm questionForm, BindingResult result){
+		if(result.hasErrors()){
+			return "question_create";
+		}
+		qService.addQuestion(questionForm.getSubject(), questionForm.getContent());
 		return "redirect:/question/list";
 	}
 }
