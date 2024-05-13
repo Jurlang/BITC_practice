@@ -18,6 +18,8 @@ public class UserService {
 		BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 		siteUser.setPassword(pwEncoder.encode(password));
 
-		return uRepo.save(siteUser);
+		uRepo.save(siteUser);
+
+		return siteUser;
 	}
 }
