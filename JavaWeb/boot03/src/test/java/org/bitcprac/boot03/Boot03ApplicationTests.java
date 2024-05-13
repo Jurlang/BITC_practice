@@ -4,6 +4,7 @@ import org.bitcprac.boot03.answer.Answer;
 import org.bitcprac.boot03.answer.AnswerRepository;
 import org.bitcprac.boot03.question.Question;
 import org.bitcprac.boot03.question.QuestionRepository;
+import org.bitcprac.boot03.question.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,8 @@ class Boot03ApplicationTests {
 	private QuestionRepository qRepo;
 	@Autowired
 	private AnswerRepository aRepo;
+	@Autowired
+	private QuestionService qService;
 
 	@Test
 	void testQuestionJpa(){
@@ -75,6 +78,14 @@ class Boot03ApplicationTests {
 //		Question q1 = q.get();
 //		qRepo.delete(q1);
 //		assertEquals(1, qRepo.findAll().size());
+
+//		<< input data 300 >>
+//		for(int i = 0 ; i < 300 ; i++){
+//			String subject = String.format("테스트데이터" + i);
+//			String content = String.format("테스트 컨텐츠 넘버는 " + i);
+//
+//			qService.addQuestion(subject, content);
+// 		}
 	}
 
 	@Test
