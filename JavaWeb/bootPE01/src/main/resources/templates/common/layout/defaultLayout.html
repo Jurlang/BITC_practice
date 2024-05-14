@@ -5,8 +5,23 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <!--공통 JS / CSS 영역을 관리하는 환경 영역-->
-<head th:replace="common/fragments/config :: ConfigFragment">
-    <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">공통 타이틀</title>
+<head>
+
+    <!--Common Head-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+
+    <!--Common JS-->
+    <script th:inline="javascript" type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+    <!--Common CSS -->
+    <link th:inline="css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <title layout:title-pattern="$LAYOUT_TITLE :: $CONTENT_TITLE">sample</title>
+
 </head>
 
 <body>
