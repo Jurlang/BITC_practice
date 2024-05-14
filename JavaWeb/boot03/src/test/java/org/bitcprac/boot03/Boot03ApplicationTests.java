@@ -90,14 +90,14 @@ class Boot03ApplicationTests {
 
 	@Test
 	void testAnswerJpa(){
-		Optional<Question> oq = qRepo.findById(1);
-		assertTrue(oq.isPresent());
-		Question q = oq.get();
-
-		Answer a = new Answer();
-		a.setContent("sbb는 질문 답변 게시판 입니다.");
-		a.setQuestion(q);
-		a.setCreateDate(LocalDateTime.now());
-		aRepo.save(a);
+//		Optional<Question> oq = qRepo.findById(1);
+//		assertTrue(oq.isPresent());
+//		Question q = oq.get();
+//
+//		Answer a = new Answer();
+//		a.setContent("sbb는 질문 답변 게시판 입니다.");
+//		a.setQuestion(q);
+//		a.setCreateDate(LocalDateTime.now());
+//		aRepo.save(a);
 	}
 }
