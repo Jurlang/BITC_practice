@@ -11,11 +11,12 @@
     <a class="btn bg-success border-success text-white float-end mb-2 mt-3" th:href="@{/question/create}">질문등록</a>
     <h1 class="text-center ms-5">SBB 게시판</h1>
     <!--/*  게시글 리스트 보이기 시작  */-->
-    <table class="table">
+    <table class="table border-dark table-striped">
         <thead class="table-dark text-center">
         <tr>
             <th>번호</th>
-            <th>제목</th>
+            <th style="width:50%">제목</th>
+            <th>글쓴이</th>
             <th>작성일시</th>
         </tr>
         </thead>
@@ -29,6 +30,7 @@
                       th:text="${#lists.size(question.answerList)}">
                 </span>
             </td>
+            <td><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>
             <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
