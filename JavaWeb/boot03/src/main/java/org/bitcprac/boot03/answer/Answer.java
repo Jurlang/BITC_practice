@@ -8,6 +8,7 @@ import org.bitcprac.boot03.question.Question;
 import org.bitcprac.boot03.user.SiteUser;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,6 +24,7 @@ public class Answer {
 	private String content;
 
 	private LocalDateTime createDate;
+	private LocalDateTime modifyDate;
 
 	@ManyToOne
 	private Question question;
@@ -30,4 +32,6 @@ public class Answer {
 	@ManyToOne
 	private SiteUser author;
 
+	@ManyToMany
+	private Set<SiteUser> voter;
 }

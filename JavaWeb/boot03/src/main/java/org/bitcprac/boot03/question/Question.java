@@ -10,6 +10,7 @@ import org.bitcprac.boot03.user.SiteUser;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,10 +27,14 @@ public class Question {
 	private String content;
 
 	private LocalDateTime createDate;
+	private LocalDateTime modifyDate;
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answerList;
 
 	@ManyToOne
 	private SiteUser author;
+
+	@ManyToMany
+	private Set<SiteUser> voter;
 }

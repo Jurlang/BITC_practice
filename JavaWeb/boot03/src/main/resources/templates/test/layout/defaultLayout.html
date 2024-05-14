@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--라이브러리 참조 : Thymeleaf & Thymeleaf Layout -->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--공통 JS / CSS 영역을 관리하는 환경 영역-->
+<head>
+
+    <!--Common Head-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+
+    <!--Common JS-->
+    <script th:inline="javascript" type="text/javascript" th:src="@{/bootstrap.bundle.min.js}"></script>
+
+    <!--Common CSS -->
+    <link th:inline="css" th:href="@{/bootstrap.min.css}" rel="stylesheet"/>
+
+    <title layout:title-pattern="$LAYOUT_TITLE :: $CONTENT_TITLE">SBB</title>
+
+</head>
+
+<body>
+<div>
+    <div class="d-flex justify-content-start">
+        <div>
+        <!--Aside 영역을 참조합니다.-->
+        <aside th:replace="test/fragments/aside :: AsideFragment"></aside>
+        </div>
+
+        <div class="flex-fill">
+        <!--Header 영역을 참조합니다.-->
+            <header th:replace="test/fragments/header :: HeaderFragment"></header>
+            <!--Content 내용 영역을 참조합니다-->
+            <th:block layout:fragment="Content"></th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

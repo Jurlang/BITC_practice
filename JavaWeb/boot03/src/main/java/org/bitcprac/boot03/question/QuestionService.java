@@ -44,4 +44,22 @@ public class QuestionService {
 		q.setAuthor(user);
 		qRepo.save(q);
 	}
+
+	public void modifyQuestion(Question question, String subject, String content) {
+		question.setSubject(subject);
+		question.setContent(content);
+		question.setModifyDate(LocalDateTime.now());
+		this.qRepo.save(question);
+	}
+
+	public void deleteQuestion(int id){
+		qRepo.deleteById(id);
+	}
+
+	public void vote(Question question, SiteUser siteUser) {
+		question.getVoter().add(siteUser);
+		this.qRepo.save(question);
+	}
+
+
 }
