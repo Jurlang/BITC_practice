@@ -1,5 +1,6 @@
 package org.bitcprac.boot03.question;
 
+import org.bitcprac.boot03.user.SiteUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,11 +36,12 @@ public class QuestionService {
 		}
 	}
 
-	public void addQuestion(String subject, String content){
+	public void addQuestion(String subject, String content, SiteUser user){
 		Question q = new Question();
 		q.setSubject(subject);
 		q.setContent(content);
 		q.setCreateDate(LocalDateTime.now());
+		q.setAuthor(user);
 		qRepo.save(q);
 	}
 }

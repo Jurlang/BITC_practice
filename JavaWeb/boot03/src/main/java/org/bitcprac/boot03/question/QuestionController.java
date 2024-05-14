@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import org.bitcprac.boot03.answer.Answer;
 import org.bitcprac.boot03.answer.AnswerForm;
 import org.bitcprac.boot03.answer.AnswerService;
+import org.bitcprac.boot03.user.SiteUser;
+import org.bitcprac.boot03.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class QuestionController {
 	private QuestionService qService;
 	@Autowired
 	private AnswerService aService;
+	@Autowired
+	private UserService uService;
 
 	@RequestMapping("/list1")
 	public String questionList(Model model){
@@ -50,11 +55,12 @@ public class QuestionController {
 	}
 
 	@PostMapping("/create")
-	public String questionCreate(@Valid @ModelAttribute("questionForm") QuestionForm questionForm, BindingResult result){
+	public String questionCreate(@Valid @ModelAttribute("questionForm") QuestionForm questionForm, BindingResult result, Principal principal){
 		if(result.hasErrors()){
 			return "question_create";
 		}
-		qService.addQuestion(questionForm.getSubject(), questionForm.getContent());
+		SiteUser siteUser = uService.getUser(principal.getName());
+		qService.addQuestion(questionForm.getSubject(), questionForm.getContent(),siteUser);
 		return "redirect:/question/list";
 	}
 }

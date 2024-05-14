@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.bitcprac.boot03.question.Question;
+import org.bitcprac.boot03.user.SiteUser;
 
 import java.time.LocalDateTime;
 
@@ -25,5 +26,8 @@ public class Answer {
 
 	@ManyToOne
 	private Question question;
+
+	@ManyToOne
+	private SiteUser author;
 
 }
