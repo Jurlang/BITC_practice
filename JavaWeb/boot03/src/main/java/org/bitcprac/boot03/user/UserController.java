@@ -33,7 +33,7 @@ public class UserController {
 		}
 
 		try {
-			uService.createUser(ucf.getUsername(), ucf.getEmail(), ucf.getPassword1());
+			uService.createUser(ucf.getUsername(), ucf.getPassword1(), ucf.getEmail());
 		} catch (DataIntegrityViolationException e) {
 			e.printStackTrace();
 			result.reject("signupFailed", "이미 등록된 사용자입니다.");

@@ -505,3 +505,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/it/Desk
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 146 more
+2024-05-16 09:30:36.350613+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select q.id [*]'qid', a.id aid, u.id, u.username from question q, answer a, site_user u, answer_voter v\000d\000awhere q.id = a.question_id and v.answer_id = a.id and v.voter_id = u.id"; SQL statement:
+select q.id 'qid', a.id aid, u.id, u.username from question q, answer a, site_user u, answer_voter v
+where q.id = a.question_id and v.answer_id = a.id and v.voter_id = u.id [42000-224]

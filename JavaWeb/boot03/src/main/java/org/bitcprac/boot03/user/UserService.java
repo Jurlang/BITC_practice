@@ -22,13 +22,15 @@ public class UserService {
 		SiteUser siteUser = new SiteUser();
 		siteUser.setUsername(username);
 		siteUser.setEmail(email);
-
-		siteUser.setPassword(pwEncoder.encode(password));
+		String encodedPassword = pwEncoder.encode(password);
+		System.out.println("------------------------------------------------------------------------------------------------------------"+encodedPassword);
+		siteUser.setPassword(encodedPassword);
 
 		uRepo.save(siteUser);
 
 		return siteUser;
 	}
+
 	public SiteUser getUser(String username){
 		Optional<SiteUser> su = this.uRepo.findByUsername(username);
 		if(su.isPresent()){
