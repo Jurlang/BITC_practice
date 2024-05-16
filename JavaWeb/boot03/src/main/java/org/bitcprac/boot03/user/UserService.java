@@ -22,9 +22,7 @@ public class UserService {
 		SiteUser siteUser = new SiteUser();
 		siteUser.setUsername(username);
 		siteUser.setEmail(email);
-		String encodedPassword = pwEncoder.encode(password);
-		System.out.println("------------------------------------------------------------------------------------------------------------"+encodedPassword);
-		siteUser.setPassword(encodedPassword);
+		siteUser.setPassword(pwEncoder.encode(password));
 
 		uRepo.save(siteUser);
 
