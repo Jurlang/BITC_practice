@@ -1,6 +1,7 @@
 package org.bitcprac.boot04.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.bitcprac.boot04.dto.ExpenseDTO;
 import org.bitcprac.boot04.entity.Expense;
 import org.bitcprac.boot04.repository.ExpenseRepository;
@@ -12,11 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ExpenseService {
 
 	private final ModelMapper modelMapper;
-	private ExpenseRepository eRepo;
+	private final ExpenseRepository eRepo;
 
 	private ExpenseDTO mapToDTO(Expense expense){
 		ExpenseDTO expenseDTO = modelMapper.map(expense, ExpenseDTO.class);
