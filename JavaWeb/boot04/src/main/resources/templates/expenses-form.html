@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/config :: config}"></th:block>
+    <title>Create Expense</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="position-relative">
+            <h1>새 비용 만들기</h1>
+            <div class="position-absolute bottom-0 end-0">
+                <a class="btn btn-primary" th:href="@{/createExpense}">비용등록</a>
+                <a class="btn btn-dark" th:href="@{/}">뒤로가기</a>
+            </div>
+        </div>
+        <form class="mt-5" th:object="${expenseDto}" th:action="@{/createExpense}" th:method="post">
+            <label for="name" class="d-block mt-2">이름
+                <input type="text" class="form-control mt-2" th:field="*{name}" placeholder="이름입력">
+            </label>
+            <label for="amount" class="d-block mt-2">비용
+                <input type="number" class="form-control mt-2" th:field="*{amount}" placeholder="비용입력">
+            </label>
+            <label for="date" class="d-block mt-2">날짜
+                <input type="date" class="form-control mt-2" th:field="*{date}">
+            </label>
+            <label for="description" class="d-block mt-2">설명
+                <textarea class="w-100 mt-2 form-control" th:field="*{description}" rows="5"></textarea>
+            </label>
+        </form>
+    </div>
+</body>
+</html>
