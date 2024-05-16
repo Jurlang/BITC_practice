@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:fragment="configFragment">
+
+    <!--Common Head-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0"/>
+
+    <!--Common JS-->
+    <script th:inline="javascript" type="text/javascript" th:src="@{/bootstrap.bundle.min.js}"></script>
+
+    <!--Common CSS -->
+    <link th:inline="css" th:href="@{/bootstrap.min.css}" rel="stylesheet"/>
+
+</th:block>
+</head>
+
+</html>

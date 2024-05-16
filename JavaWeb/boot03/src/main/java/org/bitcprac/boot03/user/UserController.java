@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,4 +52,18 @@ public class UserController {
 	public String login(){
 		return "login_form";
 	}
+
+	//	--------------------------- thymeleaf-layout 적용 url --------------------------------------
+	@GetMapping("/signup1")
+	public String signup1(UserCreateForm ucf, Model model){
+		model.addAttribute("title", "signup");
+		return "test/page";
+	}
+
+	@GetMapping("/login1")
+	public String login1(Model model){
+		model.addAttribute("title", "login");
+		return "test/page";
+	}
+
 }

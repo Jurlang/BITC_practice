@@ -32,14 +32,6 @@ public class QuestionController {
 	@Autowired
 	private UserService uService;
 
-	@RequestMapping("/list1")
-	public String questionList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
-		Page<Question> paging = this.qService.getPageQuestion(page);
-		model.addAttribute("title", "list");
-		model.addAttribute("paging", paging);
-		return "test/main";
-	}
-
 	@RequestMapping("/list")
 	public String questionPageList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
 		Page<Question> paging = this.qService.getPageQuestion(page);
@@ -129,6 +121,16 @@ public class QuestionController {
 		this.qService.vote(question, siteUser);
 		return String.format("redirect:/question/detail/%s", id);
 	}
+
+//	--------------------------- thymeleaf-layout 적용 url --------------------------------------
+	@RequestMapping("/list1")
+	public String questionList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+		Page<Question> paging = this.qService.getPageQuestion(page);
+		model.addAttribute("title", "list");
+		model.addAttribute("paging", paging);
+		return "test/page";
+	}
+
 
 }
 

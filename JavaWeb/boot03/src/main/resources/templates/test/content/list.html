@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<!-- Default Layout Import-->
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{test/layout/defaultLayout}"
-      layout:fragment="Content"
->
+      xmlns:th="http://www.thymeleaf.org">
 
-<head><title th:text="${title}"></title></head>
-<body>
+<th:block th:fragment="signup">
+    <head><title th:text="${title}"></title></head>
     <div class="mx-3">
         <a class="btn bg-success border-success text-white float-end mb-2 mt-3" th:href="@{/question/create}">질문등록</a>
 
@@ -69,5 +64,6 @@
         </div>
         <!--/* 페이징처리 끝 */-->
     </div>
-</body>
+</th:block>
+
 </html>
