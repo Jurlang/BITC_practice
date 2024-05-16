@@ -18,15 +18,11 @@ public class ExpenseService {
 	private ExpenseRepository eRepo;
 
 	private ExpenseDTO mapToDTO(Expense expense){
-//		ExpenseDTO expenseDTO = modelMapper.map(expense, ExpenseDTO.class);
-//		return expenseDTO;
 		return modelMapper.map(expense, ExpenseDTO.class);
 	}
 
 	public List<ExpenseDTO> getAllExpenses(){
 		List<Expense> list = eRepo.findAll();
-//		List<ExpenseDTO> listDto = list.stream().map(this::mapToDTO).collect(Collectors.toList());
-//		return listDto;
 		return list.stream().map(this::mapToDTO).collect(Collectors.toList());
 	}
 
