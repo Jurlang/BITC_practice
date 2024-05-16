@@ -22,6 +22,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 	@Autowired
 	private UserSecurityService uss;
+//
+//	.csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
+//			.headers((headers) -> headers.addHeaderWriter(new XFrameOptionsHeaderWriter(
+//			XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
