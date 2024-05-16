@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.bitcprac.boot04.dto.ExpenseDTO;
 import org.bitcprac.boot04.entity.Expense;
 import org.bitcprac.boot04.repository.ExpenseRepository;
+import org.bitcprac.boot04.util.DateTimeUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,9 @@ public class ExpenseService {
 	private ExpenseRepository eRepo;
 
 	private ExpenseDTO mapToDTO(Expense expense){
-		return modelMapper.map(expense, ExpenseDTO.class);
+		ExpenseDTO expenseDTO = modelMapper.map(expense, ExpenseDTO.class);
+		expenseDTO.setDateString(DateTimeUtil.convertDateToString(expenseDTO.getDate()));
+		return expenseDTO;
 	}
 
 	public List<ExpenseDTO> getAllExpenses(){
