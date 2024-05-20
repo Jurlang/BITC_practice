@@ -8,13 +8,16 @@
 <body>
     <div class="container mt-5">
         <div class="position-relative">
-            <h1>새 비용 만들기</h1>
+            <h1 th:if="${expense.id == 0}">새 비용 만들기</h1>
+            <h1 th:if="${expense.id != 0}">비용 수정하기</h1>
             <div class="position-absolute bottom-0 end-0">
                 <a class="btn btn-dark" th:href="@{/}">뒤로가기</a>
             </div>
         </div>
-        <form class="mt-5" th:object="${expenseDto}" th:action="@{/createExpense}" method="post">
+        <form class="mt-5" th:object="${expense}" th:action="@{/saveOrUpdateExpense}" method="post">
             <div th:replace="fragments/config::formErrors"></div>
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{expenseId}">
             <label for="name" class="d-block mt-2">이름
                 <input type="text" class="form-control mt-2" th:field="*{name}" placeholder="이름입력">
             </label>
@@ -27,8 +30,9 @@
             <label for="description" class="d-block mt-2">설명
                 <textarea class="w-100 mt-2 form-control" th:field="*{description}" rows="5"></textarea>
             </label>
-            <button type="submit" class="btn btn-primary float-end mt-3">비용 등록</button>
+            <button type="submit" class="btn btn-primary float-end mt-3" th:text="${expense.id}==0?'비용등록':'비용수정'"></button>
         </form>
+        <a class="btn btn-success mt-3" th:href="@{/expenses}">리스트</a>
     </div>
 </body>
 </html>
