@@ -19,12 +19,13 @@ public class ExpenseDTO {
 	private String expenseId;
 
 	@NotBlank(message = "이름은 필수 항목 입니다.")
+	@Size(min=3,message="이름을 3자 이상 적어주세요.")
 	private String name;
 
 	private String description;
 
-	@Min(value = 100, message = "100원 이상 등록 가능합니다.")
-	@NotNull(message = "비용은 필수 항목 입니다.")
+	@Min(value = 10, message = "100원 이상 등록 가능합니다.")
+	@NotBlank(message = "비용은 필수 항목 입니다.")
 	private long amount;
 
 
