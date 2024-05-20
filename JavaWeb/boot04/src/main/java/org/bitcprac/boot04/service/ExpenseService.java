@@ -62,8 +62,8 @@ public class ExpenseService {
 	}
 
 	public List<ExpenseDTO> getFilterExpenses(ExpenseFilterDTO dto) throws ParseException {
-		Date startDay = DateTimeUtil.convertStringToDate(dto.getStartDate());
-		Date endDay = DateTimeUtil.convertStringToDate(dto.getEndDate());
+		Date startDay = dto.getStartDate().isEmpty() ? new Date(0) : DateTimeUtil.convertStringToDate(dto.getStartDate());
+		Date endDay = dto.getEndDate().isEmpty() ? new Date(System.currentTimeMillis()) : DateTimeUtil.convertStringToDate(dto.getEndDate());
 
 		List<Expense> list = eRepo.findByNameContainingAndDateBetween(dto.getKeyword(), startDay, endDay);
 		List<ExpenseDTO> filterlist = list.stream().map(this::mapToDTO).collect(Collectors.toList());
