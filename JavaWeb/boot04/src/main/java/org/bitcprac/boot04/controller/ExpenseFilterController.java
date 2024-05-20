@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.bitcprac.boot04.dto.ExpenseDTO;
 import org.bitcprac.boot04.dto.ExpenseFilterDTO;
 import org.bitcprac.boot04.service.ExpenseService;
+import org.bitcprac.boot04.util.DateTimeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -21,9 +23,16 @@ public class ExpenseFilterController {
 	@GetMapping("/filterExpenses")
 	public String filterExpenses(@ModelAttribute("filter") ExpenseFilterDTO expenseFilterDTO, Model model) throws ParseException {
 		System.out.println(expenseFilterDTO);
+
+		if(expenseFilterDTO.getStartDate().isEmpty())
+			expenseFilterDTO.setStartDate(DateTimeUtil.convertDateToString(new Date(System.currentTimeMillis())));
+		if(expenseFilterDTO.getEndDate().isEmpty())
+			expenseFilterDTO.setEndDate(DateTimeUtil.convertDateToString(new Date(System.currentTimeMillis())));
+
 		List<ExpenseDTO> list = expService.getFilterExpenses(expenseFilterDTO);
 		model.addAttribute("expList", list);
 		model.addAttribute("total", expService.totalExpenses(list));
+		model.addAttribute("filter", expenseFilterDTO);
 		return "expenses-list";
 	}
 
