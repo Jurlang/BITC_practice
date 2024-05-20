@@ -22,7 +22,7 @@ public class ExpenseController {
 
 	private final ExpenseService expService;
 
-	@GetMapping({"/expenses", "/"})
+	@GetMapping("/expenses")
 	public String showExpenseList(Model model){
 		List<ExpenseDTO> expList = expService.getAllExpenses();
 		model.addAttribute("expList", expList);
