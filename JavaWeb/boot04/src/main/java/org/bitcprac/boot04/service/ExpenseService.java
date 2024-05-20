@@ -2,6 +2,7 @@ package org.bitcprac.boot04.service;
 
 import lombok.RequiredArgsConstructor;
 import org.bitcprac.boot04.dto.ExpenseDTO;
+import org.bitcprac.boot04.dto.ExpenseFilterDTO;
 import org.bitcprac.boot04.entity.Expense;
 import org.bitcprac.boot04.repository.ExpenseRepository;
 import org.bitcprac.boot04.util.DateTimeUtil;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -59,15 +61,25 @@ public class ExpenseService {
 		return dto;
 	}
 
-	public List<ExpenseDTO> getFilterExpenses(String keyword, String sortBy){
-		List<Expense> list = eRepo.findByNameContaining(keyword);
+	public List<ExpenseDTO> getFilterExpenses(ExpenseFilterDTO dto) throws ParseException {
+		Date startDay = DateTimeUtil.convertStringToDate(dto.getStartDate());
+		Date endDay = DateTimeUtil.convertStringToDate(dto.getEndDate());
+
+		List<Expense> list = eRepo.findByNameContainingAndDateBetween(dto.getKeyword(), startDay, endDay);
 		List<ExpenseDTO> filterlist = list.stream().map(this::mapToDTO).collect(Collectors.toList());
-		if(sortBy.equals("date")){
-			filterlist.sort((o1,o2) -> o1.getDate().compareTo(o2.getDate()));
+
+		if(dto.getSortBy().equals("date")){
+			filterlist.sort(Comparator.comparing(ExpenseDTO::getDate));
 		} else {
 			filterlist.sort(Comparator.comparingLong(ExpenseDTO::getAmount));
 		}
+
 		return filterlist;
+	}
+
+	public Long totalExpenses(List<ExpenseDTO> expenses){
+		Long sum = expenses.stream().map(ExpenseDTO::getAmount).reduce(0L, Long::sum);
+		return sum;
 	}
 
 }
