@@ -40,7 +40,7 @@ public class CustomSecurityConfig {
 						.logoutUrl("/logout")
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
-						.logoutSuccessUrl("login?logout=true")
+						.logoutSuccessUrl("/login?logout=true")
 						.permitAll()
 				);
 
