@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
@@ -18,8 +20,9 @@ public class AuthController {
 	private final UserService userService;
 
 	@GetMapping({"/login", "/"})
-	public String showLoginPage(){
-		return "login";
+	public String showLoginPage(Principal principal){
+		if(principal == null){ return "login"; }
+		return "redirect:/expenses";
 	}
 
 	@GetMapping("/register")
@@ -37,6 +40,6 @@ public class AuthController {
 		userService.save(userDto);
 
 		model.addAttribute("successMSG", true);
-		return "login";
+		return "response";
 	}
 }

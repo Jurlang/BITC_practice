@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 	Optional<Expense> findByExpenseId(String expenseId);
-	List<Expense> findByNameContainingAndDateBetween(String keyword, Date start, Date end);
+	List<Expense> findByNameContainingAndDateBetweenAndUserId(String keyword, Date start, Date end, Long userId);
+	List<Expense> findByUserId(Long id);
 }

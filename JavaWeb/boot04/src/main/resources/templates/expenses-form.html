@@ -34,5 +34,8 @@
         </form>
         <a class="btn btn-success mt-3" th:href="@{/expenses}">리스트</a>
     </div>
+    <script>
+        dateString.max = new Date().toISOString().split('T')[0];
+    </script>
 </body>
 </html>

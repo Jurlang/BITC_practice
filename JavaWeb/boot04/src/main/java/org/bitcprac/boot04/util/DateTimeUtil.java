@@ -2,6 +2,8 @@ package org.bitcprac.boot04.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateTimeUtil {
@@ -16,5 +18,17 @@ public class DateTimeUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date utilDate = sdf.parse(dateString);
 		return new Date(utilDate.getTime());
+	}
+
+	public static String getCurrentMonthStartDate(){
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate today = LocalDate.now();
+		return today.withDayOfMonth(1).format(dtf);
+	}
+
+	public static String getCurrentMonthDate(){
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate today = LocalDate.now();
+		return today.format(dtf);
 	}
 }

@@ -4,7 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.bitcprac.boot04.dto.ExpenseDTO;
 import org.bitcprac.boot04.dto.ExpenseFilterDTO;
+import org.bitcprac.boot04.dto.UserDTO;
 import org.bitcprac.boot04.service.ExpenseService;
+import org.bitcprac.boot04.util.DateTimeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +28,7 @@ public class ExpenseController {
 	public String showExpenseList(Model model){
 		List<ExpenseDTO> expList = expService.getAllExpenses();
 		model.addAttribute("expList", expList);
-		model.addAttribute("filter", new ExpenseFilterDTO());
+		model.addAttribute("filter", new ExpenseFilterDTO(DateTimeUtil.getCurrentMonthStartDate(), DateTimeUtil.getCurrentMonthDate()));
 		model.addAttribute("total", expService.totalExpenses(expList));
 		return "expenses-list";
 	}

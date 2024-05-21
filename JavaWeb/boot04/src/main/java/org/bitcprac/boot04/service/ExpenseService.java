@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.bitcprac.boot04.dto.ExpenseDTO;
 import org.bitcprac.boot04.dto.ExpenseFilterDTO;
 import org.bitcprac.boot04.entity.Expense;
+import org.bitcprac.boot04.entity.User;
+import org.bitcprac.boot04.exception.ExpenseNotFoundException;
 import org.bitcprac.boot04.repository.ExpenseRepository;
 import org.bitcprac.boot04.util.DateTimeUtil;
 import org.modelmapper.ModelMapper;
@@ -22,6 +24,7 @@ public class ExpenseService {
 
 	private final ModelMapper modelMapper;
 	private final ExpenseRepository eRepo;
+	private final UserService uService;
 
 	private ExpenseDTO mapToDTO(Expense expense){
 		ExpenseDTO expenseDTO = modelMapper.map(expense, ExpenseDTO.class);
@@ -39,33 +42,34 @@ public class ExpenseService {
 	}
 
 	public List<ExpenseDTO> getAllExpenses(){
-		List<Expense> list = eRepo.findAll();
-		return list.stream().map(this::mapToDTO).collect(Collectors.toList());
+		User user = uService.getLoggedInUser();
+		List<Expense> list = eRepo.findByUserId(user.getId());
+		List<ExpenseDTO> dtoList = list.stream().map(this::mapToDTO).collect(Collectors.toList());
+		return dtoList;
 	}
-
 	public ExpenseDTO saveExpenseDetails(ExpenseDTO expenseDTO) throws ParseException {
 		Expense expense = mapToEntity(expenseDTO);
+		expense.setUser(uService.getLoggedInUser());
+
 		expense = eRepo.save(expense);
 		return mapToDTO(expense);
 	}
-
 	public void deleteExpense(String id){
 	Expense expense = eRepo.findByExpenseId(id).orElseThrow(()->new RuntimeException("해당 ID의 아이템을 찾을 수 없습니다."));
 	eRepo.delete(expense);
 	}
-
 	public ExpenseDTO getExpenseById(String id){
-		Expense expense = eRepo.findByExpenseId(id).orElseThrow(()-> new RuntimeException("해당 ID의 아이템을 찾을 수 없습니다."));
+		Expense expense = eRepo.findByExpenseId(id).orElseThrow(()-> new ExpenseNotFoundException("해당 "+id+"의 아이템을 찾을 수 없습니다."));
 		ExpenseDTO dto = mapToDTO(expense);
 		dto.setDateString(DateTimeUtil.convertDateToString(expense.getDate()));
 		return dto;
 	}
-
 	public List<ExpenseDTO> getFilterExpenses(ExpenseFilterDTO dto) throws ParseException {
 		Date startDay = dto.getStartDate().isEmpty() ? new Date(0) : DateTimeUtil.convertStringToDate(dto.getStartDate());
 		Date endDay = dto.getEndDate().isEmpty() ? new Date(System.currentTimeMillis()) : DateTimeUtil.convertStringToDate(dto.getEndDate());
 
-		List<Expense> list = eRepo.findByNameContainingAndDateBetween(dto.getKeyword(), startDay, endDay);
+		User user = uService.getLoggedInUser();
+		List<Expense> list = eRepo.findByNameContainingAndDateBetweenAndUserId(dto.getKeyword(), startDay, endDay, user.getId());
 		List<ExpenseDTO> filterlist = list.stream().map(this::mapToDTO).collect(Collectors.toList());
 
 		if(dto.getSortBy().equals("date")){
@@ -76,10 +80,8 @@ public class ExpenseService {
 
 		return filterlist;
 	}
-
 	public Long totalExpenses(List<ExpenseDTO> expenses){
 		Long sum = expenses.stream().map(ExpenseDTO::getAmount).reduce(0L, Long::sum);
 		return sum;
 	}
-
 }

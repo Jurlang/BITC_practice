@@ -52,5 +52,10 @@
             </tbody>
         </table>
     </div>
+<script>
+    startDate.value = new Date().toISOString().split('T')[0].substring(0,7).concat("-01");
+    endDate.value = new Date().toISOString().split('T')[0];
+
+</script>
 </body>
 </html>

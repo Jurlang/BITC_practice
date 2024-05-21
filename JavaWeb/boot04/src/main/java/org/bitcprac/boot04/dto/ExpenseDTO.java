@@ -25,7 +25,7 @@ public class ExpenseDTO {
 	private String description;
 
 	@Min(value = 10, message = "100원 이상 등록 가능합니다.")
-	@NotBlank(message = "비용은 필수 항목 입니다.")
+	@NotNull(message = "비용은 필수 항목 입니다.")
 	private long amount;
 
 
