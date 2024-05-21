@@ -36,6 +36,12 @@ public class CustomSecurityConfig {
 						.defaultSuccessUrl("/expenses")
 						.usernameParameter("email")
 						.passwordParameter("password")
+				).logout((logout)-> logout
+						.logoutUrl("/logout")
+						.invalidateHttpSession(true)
+						.clearAuthentication(true)
+						.logoutSuccessUrl("login?logout=true")
+						.permitAll()
 				);
 
 		return http.build();
