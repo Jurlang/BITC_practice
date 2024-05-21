@@ -28,10 +28,11 @@ public class CustomSecurityConfig {
 				.authorizeHttpRequests(
 						(authz)->authz
 								.requestMatchers("/","/login","/register").permitAll()
+								.anyRequest().authenticated()
 				)
 				.formLogin((formLogin) -> formLogin
 						.loginPage("/login")
-						.failureUrl("/login")
+						.failureUrl("/login?error=true")
 						.defaultSuccessUrl("/expenses")
 						.usernameParameter("email")
 						.passwordParameter("password")
