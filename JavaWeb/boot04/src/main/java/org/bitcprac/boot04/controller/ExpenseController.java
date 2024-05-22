@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -25,11 +26,12 @@ public class ExpenseController {
 	private final ExpenseService expService;
 
 	@GetMapping("/expenses")
-	public String showExpenseList(Model model){
+	public String showExpenseList(Model model, Principal principal){
 		List<ExpenseDTO> expList = expService.getAllExpenses();
 		model.addAttribute("expList", expList);
 		model.addAttribute("filter", new ExpenseFilterDTO(DateTimeUtil.getCurrentMonthStartDate(), DateTimeUtil.getCurrentMonthDate()));
 		model.addAttribute("total", expService.totalExpenses(expList));
+		model.addAttribute("principal", principal);
 		return "expenses-list";
 	}
 

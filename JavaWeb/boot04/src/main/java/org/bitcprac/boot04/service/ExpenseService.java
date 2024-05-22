@@ -11,9 +11,10 @@ import org.bitcprac.boot04.util.DateTimeUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -43,7 +44,11 @@ public class ExpenseService {
 
 	public List<ExpenseDTO> getAllExpenses(){
 		User user = uService.getLoggedInUser();
-		List<Expense> list = eRepo.findByUserId(user.getId());
+		List<Expense> list = eRepo.findByDateBetweenAndUserId(
+				Date.valueOf(LocalDate.now().withDayOfMonth(1)),
+				Date.valueOf(LocalDate.now()),
+				user.getId()
+		);
 		List<ExpenseDTO> dtoList = list.stream().map(this::mapToDTO).collect(Collectors.toList());
 		return dtoList;
 	}
@@ -65,8 +70,8 @@ public class ExpenseService {
 		return dto;
 	}
 	public List<ExpenseDTO> getFilterExpenses(ExpenseFilterDTO dto) throws ParseException {
-		Date startDay = dto.getStartDate().isEmpty() ? new Date(0) : DateTimeUtil.convertStringToDate(dto.getStartDate());
-		Date endDay = dto.getEndDate().isEmpty() ? new Date(System.currentTimeMillis()) : DateTimeUtil.convertStringToDate(dto.getEndDate());
+		java.util.Date startDay = dto.getStartDate().isEmpty() ? new Date(0) : DateTimeUtil.convertStringToDate(dto.getStartDate());
+		java.util.Date endDay = dto.getEndDate().isEmpty() ? new Date(System.currentTimeMillis()) : DateTimeUtil.convertStringToDate(dto.getEndDate());
 
 		User user = uService.getLoggedInUser();
 		List<Expense> list = eRepo.findByNameContainingAndDateBetweenAndUserId(dto.getKeyword(), startDay, endDay, user.getId());

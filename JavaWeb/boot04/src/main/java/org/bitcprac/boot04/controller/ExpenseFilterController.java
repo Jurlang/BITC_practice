@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,7 @@ public class ExpenseFilterController {
 	private final ExpenseService expService;
 
 	@GetMapping("/filterExpenses")
-	public String filterExpenses(@ModelAttribute("filter") ExpenseFilterDTO expenseFilterDTO, Model model) throws ParseException {
+	public String filterExpenses(@ModelAttribute("filter") ExpenseFilterDTO expenseFilterDTO, Model model, Principal principal) throws ParseException {
 		System.out.println(expenseFilterDTO);
 
 		if(expenseFilterDTO.getStartDate().isEmpty())
@@ -33,6 +34,7 @@ public class ExpenseFilterController {
 		model.addAttribute("expList", list);
 		model.addAttribute("total", expService.totalExpenses(list));
 		model.addAttribute("filter", expenseFilterDTO);
+		model.addAttribute("principal", principal);
 		return "expenses-list";
 	}
 

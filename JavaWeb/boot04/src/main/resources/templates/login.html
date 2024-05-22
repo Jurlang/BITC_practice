@@ -4,22 +4,37 @@
 <head>
     <th:block th:replace="~{fragments/config :: config}"></th:block>
     <script src="/js/login.js"></script>
+    <link rel="stylesheet" href="/css/login.css">
     <title>Login</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>로그인</h1>
-        <hr/>
-        <div>
-            <form th:action="@{/login}" method="post" id="loginForm">
-                <div th:if="${param.error}">잘못된 이메일 또는 패스워드 입니다.</div>
-                <div th:if="${param.logout}">로그아웃 되었습니다.</div>
-                <label for="email" class="d-block">이메일<br><input type="email" id="email" name="email" placeholder="이메일 입력"/></label>
-                <label for="password" class="d-block mt-3">패스워드<br><input type="password" id="password" name="password" placeholder="비밀번호 입력"/></label>
-                <button type="submit" class="mt-3">로그인</button>
-                <button type="button" class="mt-3" onclick="location.href='/register'">회원가입</button>
+<div class="box-layout justify-content-center">
+    <div class="card box-layout__box text-center">
+        <div class="card-header border-bottom-0 pb-0 bg-white">
+            <h1 class="box-layout__title">비용 매니저</h1>
+            <p class="box-layout__title">당신의 비용들을 관리하세요</p>
+        </div>
+
+        <div class="card-body pt-0">
+            <form id="loginForm" th:action="@{/login}" method="post">
+                <div th:if="${param.error}">
+                    <div class="alert help-block mt-1">잘못된 이메일 또는 패스워드 입니다</div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert help-block">로그아웃 되었습니다</div>
+                </div>
+                <input type="text" name="email" placeholder="이메일 입력" class="form-control mb-1" autofocus="autofocus" />
+
+                <input type="password" name="password" placeholder="패스워드 입력" class="form-control mb-1 mt-1" />
+
+                <button type="submit" class="btn form-control button_default text mt-2">Login</button>
             </form>
         </div>
+
+        <div class="card-footer bg-white border-top-0">
+            <span class="float-right"> New User? - <a th:href="@{/register}" class="base-color font-weight-bold">가입하기</a> </span>
+        </div>
     </div>
+</div>
 </body>
 </html>

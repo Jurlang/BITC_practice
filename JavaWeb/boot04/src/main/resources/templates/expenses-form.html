@@ -3,37 +3,54 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="~{fragments/config :: config}"></th:block>
+    <link rel="stylesheet" href="/css/expense-form.css">
     <title>Create Expense</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="position-relative">
-            <h1 th:if="${expense.id == 0}">새 비용 만들기</h1>
-            <h1 th:if="${expense.id != 0}">비용 수정하기</h1>
-            <div class="position-absolute bottom-0 end-0">
-                <a class="btn btn-dark" th:href="@{/}">뒤로가기</a>
+<nav class="fixed-top bg-header-color py-4">
+    <div class="app-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <a th:href="@{/expenses}" class="text-white">
+                <span class="font-size-medium font-weight-bold"> Expense Manager </span>
+            </a>
+            <div>
+                <a th:href="@{/logout}" class="text-white font-size-small">로그아웃</a>
             </div>
         </div>
-        <form class="mt-5" th:object="${expense}" th:action="@{/saveOrUpdateExpense}" method="post">
-            <div th:replace="fragments/config::formErrors"></div>
-            <input type="hidden" th:field="*{id}">
-            <input type="hidden" th:field="*{expenseId}">
-            <label for="name" class="d-block mt-2">이름
-                <input type="text" class="form-control mt-2" th:field="*{name}" placeholder="이름입력">
-            </label>
-            <label for="amount" class="d-block mt-2">비용
-                <input type="number" class="form-control mt-2" th:field="*{amount}" placeholder="비용입력">
-            </label>
-            <label for="date" class="d-block mt-2">날짜
-                <input type="date" class="form-control mt-2" th:field="*{dateString}" value="2024-05-20">
-            </label>
-            <label for="description" class="d-block mt-2">설명
-                <textarea class="w-100 mt-2 form-control" th:field="*{description}" rows="5"></textarea>
-            </label>
-            <button type="submit" class="btn btn-primary float-end mt-3" th:text="${expense.id}==0?'비용등록':'비용수정'"></button>
-        </form>
-        <a class="btn btn-success mt-3" th:href="@{/expenses}">리스트</a>
     </div>
+</nav>
+<div class="main-content">
+    <div class="container-fluid bg-light py-4 mb-4">
+        <div class="app-header">
+            <h1 th:text="${expense.id} != null ? '비용 수정하기' : '새 비용 만들기'"></h1>
+        </div>
+    </div>
+    <div class="app-header">
+        <form th:action="@{/saveOrUpdateExpense}" th:object="${expense}" method="post">
+            <input type="text" placeholder="이름 입력" th:field="*{name}" class="form-control col-12 col-sm-12 col-md-6 input-width mb-3" autofocus="autofocus" />
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+            <input type="number" placeholder="비용 입력" th:field="*{amount}" class="form-control col-12 col-sm-12 col-md-6 input-width mb-3" />
+            <span th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></span>
+
+            <input type="date" th:field="*{dateString}" class="form-control col-12 col-sm-12 col-md-6 input-width mb-3" />
+            <span th:if="${#fields.hasErrors('dateString')}" th:errors="*{dateString}"></span>
+
+            <textarea rows="5" placeholder="설명 입력" th:field="*{description}" class="form-control col-12 col-sm-12 col-md-6 input-width mb-3"> </textarea>
+
+            <button type="submit" class="btn button_default" th:text="${expense.id} != null ? '수정하기' : '저장하기'"></button>
+
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{expenseId}" />
+        </form>
+        <a th:href="@{/expenses}" class="btn btn-secondary text-white mt-2">Back to Expenses</a>
+    </div>
+</div>
+<footer class="py-5">
+    <div class="container">
+        <p class="m-0 text-center text-dark">Copyright &copy; Expense Manager - 2023</p>
+    </div>
+</footer>
     <script>
         dateString.max = new Date().toISOString().split('T')[0];
     </script>
