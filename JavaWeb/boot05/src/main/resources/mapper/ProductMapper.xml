@@ -28,4 +28,9 @@
     <delete id="deleteProduct">
         Delete from products where prod_id=#{prodId}
     </delete>
+
+    <insert id="hehehehehe" parameterType="productColor">
+        insert into productColor(colorName, productNo)
+        values(#{colorName}, #{productNo})
+    </insert>
 </mapper>

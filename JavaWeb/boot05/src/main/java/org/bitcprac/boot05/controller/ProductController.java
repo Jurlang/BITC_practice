@@ -3,6 +3,8 @@ package org.bitcprac.boot05.controller;
 import lombok.RequiredArgsConstructor;
 import org.bitcprac.boot05.mapper.ProductMapper;
 import org.bitcprac.boot05.model.Product;
+import org.bitcprac.boot05.model.ProductSize;
+import org.bitcprac.boot05.model.productColor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,4 +45,19 @@ public class ProductController {
 		pMapper.deleteProduct(id);
 	}
 
+	@GetMapping("/test")
+	public void hello(){
+		for(int i = 1; i < 128 ; i++) {
+			if(i != 24 && i != 31 && i != 70 && i != 71) {
+				productColor ps1 = new productColor();
+				ps1.setColorName("Navy");
+				ps1.setProductNo(i);
+				pMapper.hehehehehe(ps1);
+				productColor ps2 = new productColor();
+				ps2.setColorName("White");
+				ps2.setProductNo(i);
+				pMapper.hehehehehe(ps2);
+			}
+		}
+	}
 }
