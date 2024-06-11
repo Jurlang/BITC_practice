@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Gugudan from './Gugudan';
+import GugudanF from './GugudanF';
 import GugudanC from './GugudanC';
 import GugudanGPT from './GugudanGPT';
 
@@ -9,7 +9,7 @@ root.render(
     <div>
         <GugudanC/>
         <hr/>
-        <Gugudan/>
+        <GugudanF/>
         <hr/>
         <GugudanGPT/>
     </div>
