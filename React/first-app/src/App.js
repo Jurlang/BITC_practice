@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
     // JS 부분
-    const [pets, setPets] = useState([
-        { name: "줄리아", species: "cat", age: "5", id: 123456789 },
-        { name: "라이언", species: "dog", age: "3", id: 987654321 },
-        { name: "플로피", species: "rabbit", age: "2", id: 123123123 },
-        { name: "길동", species: "cat", age: "1", id: 456456456 },
-        { name: "진도", species: "dog", age: "6", id: 789789789 },
-    ]);
+    const [pets, setPets] = useState(JSON.parse(localStorage.getItem("PetData")));
+
+    // useEffect( 실행함수 , [] ); 최초 시기
+    // useEffect( 실행함수 , [pets] ); pets 데이터가 수정될 때마다 실행
+    // useEffect(()=>{
+    //     if(localStorage.getItem("PetData")){
+    //         setPets(JSON.parse(localStorage.getItem("PetData")));
+    //     }
+    // }, []);
+    useEffect(()=>{
+        localStorage.setItem("PetData", JSON.stringify(pets));
+    }, [pets]);
 
     return (
         <div>
@@ -26,7 +31,7 @@ function App() {
             <h1>배열 만들어 데이터 가져오기</h1>
             <ul>
                 {pets.map((pet) => {
-                    return <Pet key={pet.id} name={pet.name} species={pet.species} age={pet.age} />;
+                    return <Pet setPets={setPets} key={pet.id} id={pet.id} name={pet.name} species={pet.species} age={pet.age} />;
                 })}
             </ul>
             <hr />
@@ -36,6 +41,8 @@ function App() {
             <hr/>
             <h1>Form 추가 이벤트</h1>
             <AddPetForm setPets={setPets}/>
+            <hr/>
+
         </div>
     );
 }
@@ -60,15 +67,22 @@ function Footer(props) {
     return <small>@카피라이트 : {props.name}</small>;
 }
 function Pet(props) {
+    function handleDelete(){
+        // alert("삭제 버튼 클릭" + props.id);
+        props.setPets((prev) => prev.filter((pet) => pet.id !== props.id));
+    }
     return (
         <li>
             {props.name}은 {props.species} 이고, {props.age} 살 이다.
+            <button onClick={handleDelete}>삭제</button>
         </li>
     );
 }
 function LikeArea() {
-    const [likeCount, setLikeCount] = useState(0);
-
+    const [likeCount, setLikeCount] = useState(JSON.parse(localStorage.getItem("LikeCountData")));
+    useEffect(()=>{
+        localStorage.setItem("LikeCountData", JSON.stringify(likeCount));
+    }, [likeCount]);
     function upLike() {
         setLikeCount((prev) => prev + 1);
     }
