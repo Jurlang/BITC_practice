@@ -1,24 +1,32 @@
+import { useState, useEffect } from "react";
 import "./App.css";
+import ImageCard from "./component/ImageCard";
+import ImageSearch from "./component/ImageSearch";
 
 function App() {
+    const [images, setImages] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [term, setTerm] = useState("puppy");
+
+    useEffect(() => {
+        // fetch(api_url) 에서 데이터를 받고 .then() 에서 처리, catch() 는 에러 발생시
+        fetch(`https://pixabay.com/api/?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${term}&image_type=photo&orientation=horizontal`)
+            .then((res) => res.json())
+            .then((data) => setImages(data.hits))
+            .catch((err) => console.log(err));
+    }, [term]);
+
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="w-full" />
-            <div className="px-6 py-4">
-                <div className="font-bold text-purple-500 text-xl mb-2">Photo by John Doe</div>
-                <ul>
-                    <li>
-                        <strong>Views: </strong> 4000
-                    </li>
-                    <li><strong>Downloads: </strong> 300 </li>
-                    <li><strong>Likes: </strong>400</li>
-                </ul>
-            </div>
-            <div className="px-6 py-4">
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#tag1</span>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#tag2</span>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#tag3</span>
-            </div>
+        <div className="container mx-auto my-7">
+            <ImageSearch setTerm={setTerm} />
+            {images.length === 0 && <h1 className="text-5xl text-center mt-32">이미지가 없습니다.</h1>}
+            {images.length > 0 && (
+                <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                    {images.map((img) => (
+                        <ImageCard key={img.id} image={img} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
