@@ -1,7 +1,8 @@
-import React from "react";
+import { useState } from "react";
 import { pageLinks, socialLinks } from "../data";
 
 const Navbar = () => {
+
     return (
         <div>
             <nav className="navbar">
@@ -12,7 +13,7 @@ const Navbar = () => {
                             <i className="fas fa-bars"></i>
                         </button>
                     </div>
-                    <ul className="nav-links" id="nav-links">
+                    <ul className='nav-links' id="nav-links">
                         {pageLinks.map((link) => {
 							return (
 								<li key={link.id}>
