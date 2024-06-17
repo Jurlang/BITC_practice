@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import './RecipeList.css';
 const RecipeList = ({recipes}) => {
-    return (
+    if(recipes.length===0) return <div className='error'>검색된 레시피가 없습니다.</div>
+    else return (
         <div className="recipe-list">
             {recipes.map((recipe) => (
                 <div key={recipe.id} className="card">
