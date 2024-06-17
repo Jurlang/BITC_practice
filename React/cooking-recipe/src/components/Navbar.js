@@ -5,7 +5,7 @@ import Searchbar from "./Searchbar";
 import { ThemeContext } from "../context/ThemeContext";
 
 const Navbar = () => {
-    const {color} = useContext( ThemeContext );
+    const {color, changeColor} = useContext( ThemeContext );
     return (
       <div className='navbar' style={{backgroundColor: color}}>
         <nav>

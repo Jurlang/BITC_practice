@@ -5,14 +5,19 @@ import Create from './pages/create/Create';
 import Search from './pages/search/Search';
 import Recipe from './pages/recipe/Recipe';
 import Navbar from './components/Navbar';
+import ThemeSelector from './components/ThemeSelector';
+import { ThemeContext } from './context/ThemeContext';
+import { useContext } from 'react';
 
 
 
 function App() {
+    const { mode } = useContext(ThemeContext);
     return (
-    <div className="App">
+    <div className={`App ${mode}`}>
         <BrowserRouter>
         <Navbar/>
+        <ThemeSelector/>
             <Routes>
 
                 <Route path='/' element={ <Home /> } />
