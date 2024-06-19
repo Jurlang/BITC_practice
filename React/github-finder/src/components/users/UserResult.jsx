@@ -6,10 +6,6 @@ import GithubContext from "../../context/github/GithubContext";
 function UserResults() {
     const {users, loading} = useContext(GithubContext);
 
-    // useEffect(() => {
-    //     fetchUsers();
-    // }); //앱 시작시 실행됨
-
     if (!loading) {
         return (
             <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
