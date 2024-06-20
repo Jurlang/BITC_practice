@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
+import { useLogin } from "../../hooks/useLogin";
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const {login, error, isPending} = useLogin();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email, password);
+        login(email, password);
     };
 
     return (
@@ -21,7 +23,9 @@ export default function Login() {
                 <span>password : </span>
                 <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} />
             </label>
-            <button className='btn'>로그인</button>
+            {!isPending && <button className='btn'>로그인</button>}
+            {isPending && <button className='btn' disabled>Loading</button>}
+            {error && <p>{error}</p>}
         </form>
     );
 }
