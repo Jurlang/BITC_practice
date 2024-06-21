@@ -1,4 +1,4 @@
-import { createRef, useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { firedb, timestamp } from "../firebase/config";
 
 let initialState = {
@@ -46,11 +46,6 @@ export const useFirestore = ( collection) => {
 			dispatchIfNotCancelled({type: 'ERROR', payload: err.message});
 		}
 	};
-
-	useEffect(() => {
-		setIsCancelled(false);
-		return () => setIsCancelled(true);
-	}, []);
 
 	const deleteDocument = async (id) => {
         dispatch({type: 'IS_PENDING'});

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { firedb } from "../firebase/config";
 
-export const useCollection = (collection, query, order) => {
+export const useCollection = (collection, query) => {
     const [documents, setDocuments] = useState(null);
     const [error, setError] = useState(null);
 
@@ -11,10 +11,6 @@ export const useCollection = (collection, query, order) => {
 		if(query){
 			ref = ref.where(...query);
 		}
-        if(order) {
-            ref = ref.orderBy(...order);
-        }
-
         const unsub = ref.onSnapshot(
             (snapshot) => {
                 let results = [];
