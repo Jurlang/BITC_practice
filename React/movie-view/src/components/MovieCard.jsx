@@ -2,7 +2,6 @@
 import Star from "../assets/star.png";
 import "../css/MovieCard.css";
 
-import React from "react";
 
 const MovieCard = ({ movie }) => {
   return (

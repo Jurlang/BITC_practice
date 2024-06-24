@@ -3,7 +3,6 @@ import Star from '../assets/glowing-star.png';
 import Party from '../assets/partying-face.png';
 import '../css/Navbar.css';
 
-import React from 'react'
 
 const Navbar = () => {
 	return (
