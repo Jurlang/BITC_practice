@@ -1,11 +1,13 @@
 import './App.css'
+import MovieList from './components/MovieList'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
     <div className='app'>
-      <nav className='navbar'>Navbar content</nav>
+      <Navbar />
 
-      <main>Main content</main>
+      <MovieList />
     </div>
   )
 }
