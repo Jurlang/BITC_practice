@@ -1,6 +1,8 @@
 @font-face {
-  font-family: 'KyoboHand';
-	src: url(./assets/fonts/KyoboHandwriting2019);
+    font-family: 'ryuttung';
+    src: url('/src/assets/fonts/온글잎\ 류뚱체.ttf');
+    font-weight: normal;
+    font-style: normal;
 }
 
 :root {
@@ -28,7 +30,7 @@ html{
 body {
 	background-color: var(--body_backgroud);
 	color: var(--body_color);
-	font-family: 'Pretendard-Regular', sans-serif;
+	font-family: 'ryuttung', sans-serif;
 }
 
 .align_center {

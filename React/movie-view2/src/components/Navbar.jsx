@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Fire from '../assets/fire.png';
 import Star from '../assets/glowing-star.png';
 import Party from '../assets/partying-face.png';
@@ -9,9 +9,9 @@ import DarkMode from './DarkMode';
 const Navbar = () => {
 	return (
 		<nav className='navbar'>
-			<h1>MovieApp</h1>
+			<Link to='/' className='h1 text-decoration-none ms-5'>MovieApp</Link>
 
-			<div className='navbar_links'>
+			<div className='navbar_links me-5'>
 				<DarkMode />
 				<NavLink to='/'>
 					인기작품
