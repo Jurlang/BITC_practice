@@ -1,11 +1,11 @@
-import Fire from "../assets/fire.png";
+/* eslint-disable react/prop-types */
 import "../css/MovieList.css";
 
 import { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import _ from "lodash";
 
-const MovieList = () => {
+const MovieList = ({type, title, emoji}) => {
   const [movies, setMovies] = useState([]);
   const [filterMovies, setFilterMovies] = useState([]);
   const [minRating, setMinRating] = useState(0);
@@ -19,7 +19,7 @@ const MovieList = () => {
   }, []);
 
   const fetchMovies = async () => {
-    const response = await fetch("https://api.themoviedb.org/3/movie/popular?api_key=0a38da9c8fce0bc51ca78920fc889a09&language=ko");
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${type}?api_key=0a38da9c8fce0bc51ca78920fc889a09&language=ko`);
     const data = await response.json();
     setMovies(data.results);
     setFilterMovies(data.results);
@@ -49,10 +49,10 @@ const MovieList = () => {
 	}, [sort]);
 
   return (
-    <section className="movie_list">
+    <section className="movie_list" id={`${type}`}>
       <header className="align_center movie_list_header">
         <h2 className="align_center movie_list_heading">
-          인기순 <img src={Fire} alt="fire emoji" className="navbar_emoji" />
+          {title} <img src={emoji} alt="fire emoji" className="navbar_emoji" />
         </h2>
 
         <div className="align_center movie_list_fs">
