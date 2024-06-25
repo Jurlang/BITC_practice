@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'KyoboHand';
+	src: url(./assets/fonts/KyoboHandwriting2019);
+}
+
+:root {
+	--body_backgroud: #101010;
+	--body_color: #fff;
+	--heading_color: #ffe400;
+}
+
+[data-theme='light'] {
+	--body_backgroud: #fff;
+	--body_color: #000;
+	--heading_color: #000;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	transition: all 0.3s ease-in-out;
+}
+
+html{
+	scroll-behavior:smooth;
+}
+body {
+	background-color: var(--body_backgroud);
+	color: var(--body_color);
+	font-family: 'Pretendard-Regular', sans-serif;
+}
+
+.align_center {
+	display: flex;
+	align-items: center;
+}
