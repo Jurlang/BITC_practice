@@ -23,8 +23,6 @@ const SingleMovie = () => {
   };
 
   if (movie !== null) {
-    console.log(tags);
-    console.log(movie);
     return (
       <div className="container">
         <div className="d-flex">
