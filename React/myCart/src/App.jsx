@@ -1,11 +1,27 @@
 import './App.css'
+import LoginPage from './components/Authentication/LoginPage'
+import SignupPage from './components/Authentication/SignupPage'
+import CartPage from './components/Cart/CartPage'
+import HomePage from './components/Home/HomePage'
+import MyOrderPage from './components/MyOrder/MyOrderPage'
+import Navbar from './components/Navbar/Navbar'
+import ProductsPage from './components/Products/ProductsPage'
+import SingleProductPage from './components/SingleProductPage/SingleProductPage'
 
 function App() {
 
   return (
     <div className='app'>
-      <nav>Navbar</nav>
-      <main>라우팅</main>
+      <Navbar />
+      <main>
+        {/* <HomePage/> */}
+        {/* <ProductsPage /> */}
+        {/* <SingleProductPage /> */}
+        {/* <CartPage /> */}
+        {/* <MyOrderPage /> */}
+        {/* <LoginPage/> */}
+        <SignupPage/>
+        </main>
     </div>
   )
 }
