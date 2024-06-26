@@ -1,22 +1,20 @@
-import '../../css/ProductsSidebar.css';
-import rocket from '../../assets/images/rocket.png';
-import LinkWithIcon from '../Navbar/LinkWithIcon';
+import "../../css/ProductsSidebar.css";
+import LinkWithIcon from "../Navbar/LinkWithIcon";
+import useData from "../../Hook/useData";
 
 const ProductsSidebar = () => {
-	return (
-		<aside className='products_sidebar'>
-			<h2>카테고리</h2>
+  const { data: categories, error } = useData("category");
 
-			<div className='category_links'>
-				<LinkWithIcon
-					title='전자제품'
-					link='products?category=electronics'
-					emoji={rocket}
-					sidebar={true}
-				/>
-			</div>
-		</aside>
-	);
+  return (
+    <aside className="products_sidebar">
+      <h2>카테고리</h2>
+
+      <div className="category_links">
+        {error && <em className="form_error">{error}</em>}
+        {categories && categories.map((category) => <LinkWithIcon key={category._id} title={category.name} link={`/products?category=${category.name}`} emoji={`http://localhost:5000/category/${category.image}`} sidebar={true} />)}
+      </div>
+    </aside>
+  );
 };
 
 export default ProductsSidebar;
