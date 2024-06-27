@@ -2,14 +2,15 @@
 import "../../css/ProductCard.css";
 import star from "../../assets/images/white-star.png";
 import basket from "../../assets/images/basket.png";
+import { NavLink } from "react-router-dom";
 
 const ProductCard = ({ id, image, price, title, rating, ratingCounts, stock }) => {
   return (
     <article className="product_card">
       <div className="product_image">
-        <a href="product/1">
+        <NavLink to={`/products/${id}`}>
           <img src={`http://localhost:5000/products/${image}`} alt="product image" />
-        </a>
+        </NavLink>
       </div>
 
       <div className="product_details">
