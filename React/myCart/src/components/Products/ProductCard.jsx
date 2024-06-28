@@ -3,29 +3,35 @@ import "../../css/ProductCard.css";
 import star from "../../assets/images/white-star.png";
 import basket from "../../assets/images/basket.png";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import CartContext from "../../contexts/CartContext";
+import UserContext from "../../contexts/UserContext";
 
-const ProductCard = ({ id, image, price, title, rating, ratingCounts, stock }) => {
+const ProductCard = ({ product }) => {
+  const { addToCart } = useContext(CartContext);
+  const user = useContext(UserContext);
+
   return (
     <article className="product_card">
       <div className="product_image">
-        <NavLink to={`/products/${id}`}>
-          <img src={`http://localhost:5000/products/${image}`} alt="product image" />
+        <NavLink to={`/products/${product?._id}`}>
+          <img src={`http://localhost:5000/products/${product?.images[0]}`} alt="product image" />
         </NavLink>
       </div>
 
       <div className="product_details">
-        <h3 className="product_price">{price?.toLocaleString("ko-KR")}원</h3>
-        <p className="product_title">{title}</p>
+        <h3 className="product_price">{product?.price.toLocaleString("ko-KR")}원</h3>
+        <p className="product_title">{product?.title}</p>
 
         <footer className="align_center product_info_footer">
           <div className="align_center">
             <p className="align_center product_rating">
-              <img src={star} alt="star" /> {rating}
+              <img src={star} alt="star" /> {product?.reviews.rate}
             </p>
-            <p className="product_review_count">{ratingCounts}</p>
+            <p className="product_review_count">{product?.reviews.counts}</p>
           </div>
-          {stock > 0 && (
-            <button className="add_to_cart">
+          {product?.stock > 0 && user && (
+            <button className="add_to_cart" onClick={() => addToCart(product, 1)}>
               <img src={basket} alt="basket button" />
             </button>
           )}
