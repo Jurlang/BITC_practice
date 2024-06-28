@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Routing from "./components/Routing/Routing";
 import { jwtDecode } from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { addToCartAPI, getCartAPI, removeFromCartAPI } from "./services/cartServices";
+import { addToCartAPI, decreaseProductAPI, getCartAPI, increaseProductAPI, removeFromCartAPI } from "./services/cartServices";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserContext from "./contexts/UserContext";
@@ -72,9 +72,29 @@ function App() {
 		});
   }
 
+  const updateCart = (type, id) => {
+		const updatedCart = [...cart];
+		const productIndex = updatedCart.findIndex((item) => item.product._id === id);
+
+		if (type === 'increase') {
+			updatedCart[productIndex].quantity += 1;
+			setCart(updatedCart);
+      increaseProductAPI(id).catch((err) => {
+        toast.error('상품 증가 에러');
+      });
+		}
+		if (type === 'decrease') {
+			updatedCart[productIndex].quantity -= 1;
+			setCart(updatedCart);
+      decreaseProductAPI(id).catch((err) => {
+        toast.error('상품 감소 에러');
+      });
+		}
+	};
+
   return (
     <UserContext.Provider value={user}>
-      <CartContext.Provider value={{cart, addToCart, removeFromCart}}>
+      <CartContext.Provider value={{cart, addToCart, removeFromCart, updateCart}}>
         <div className="app">
           <Navbar user={user} cartCount={cart.length} />
           <main>

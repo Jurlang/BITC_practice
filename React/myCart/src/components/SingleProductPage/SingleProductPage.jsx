@@ -11,11 +11,6 @@ const SingleProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const {addToCart} = useContext(CartContext);
-
-  const handleClick = (id) => {
-    if(id === "increase") setQuantity((prev) => (prev + 1 ));
-    if(id === "decrease") setQuantity((prev) => (prev - 1 ));
-  }
   
   const { id } = useParams();
   const { data: product, error, isLoading } = useData(`/products/${id}`);
@@ -42,7 +37,7 @@ const SingleProductPage = () => {
 
             <h2 className="quantity_title">구매개수:</h2>
             <div className="align_center quantity_input">
-              <QuantityInput quantity={quantity} handleClick={handleClick} stock={product.stock} />
+              <QuantityInput quantity={quantity} setQuantity={setQuantity} stock={product.stock} />
             </div>
 
             <button className="search_button add_cart" onClick={()=>addToCart(product,quantity)}>장바구니 추가</button>
