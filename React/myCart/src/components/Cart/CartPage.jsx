@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import "../../css/CartPage.css";
 import remove from "../../assets/images/remove.png";
-import user from "../../assets/images/user.webp";
 import Table from "../Common/Table";
 import QuantityInput from "../SingleProductPage/QuantityInput";
 import { useContext, useEffect, useState } from "react";

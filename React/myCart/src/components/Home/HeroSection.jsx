@@ -1,7 +1,5 @@
+/* eslint-disable react/prop-types */
 import '../../css/HeroSection.css'
-
-import React from 'react'
-
 
 const HeroSection = ({title, subtitle, link, image}) => {
 	return (

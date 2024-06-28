@@ -1,6 +1,4 @@
 import "../../css/FeaturedProducts.css";
-
-import React from "react";
 import ProductCard from "../Products/ProductCard";
 
 const FeaturedProducts = () => {

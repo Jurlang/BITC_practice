@@ -1,7 +1,6 @@
 import iphone from '../../assets/images/iphone-14-pro.webp';
 import mac from '../../assets/images/mac-system-cut.jfif';
 
-import React from 'react'
 import HeroSection from './HeroSection'
 import FeaturedProducts from './FeaturedProducts';
 
