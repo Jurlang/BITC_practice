@@ -8,11 +8,12 @@ import Loader from "../Common/Loader";
 const SingleProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+
   const handleClick = (id) => {
-    console.log(id);
     if(id === "increase") setQuantity((prev) => (prev + 1 ));
     if(id === "decrease") setQuantity((prev) => (prev - 1 ));
   }
+  
   const { id } = useParams();
   const { data: product, error, isLoading } = useData(`/products/${id}`);
 
