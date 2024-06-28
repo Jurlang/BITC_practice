@@ -1,13 +1,16 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useContext, useState } from "react";
 import "../../css/SingleProductPage.css";
 import QuantityInput from "./QuantityInput";
 import { useParams } from "react-router-dom";
 import useData from "../../Hook/useData";
 import Loader from "../Common/Loader";
+import CartContext from "../../contexts/CartContext";
 
 const SingleProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const {addToCart} = useContext(CartContext);
 
   const handleClick = (id) => {
     if(id === "increase") setQuantity((prev) => (prev + 1 ));
@@ -42,7 +45,7 @@ const SingleProductPage = () => {
               <QuantityInput quantity={quantity} handleClick={handleClick} stock={product.stock} />
             </div>
 
-            <button className="search_button add_cart">장바구니 추가</button>
+            <button className="search_button add_cart" onClick={()=>addToCart(product,quantity)}>장바구니 추가</button>
           </div>
         </>
       )}

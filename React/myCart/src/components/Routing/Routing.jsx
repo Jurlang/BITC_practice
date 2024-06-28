@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import HomePage from '../Home/HomePage';
 import ProductsPage from '../Products/ProductsPage';
 import CartPage from '../Cart/CartPage';
@@ -17,7 +18,7 @@ const Routing = () => {
 			<Route path='/products/:id' element={<SingleProductPage/>}/>
 			<Route path='/signup' element={<SignupPage/>}/>
 			<Route path='/login' element={<LoginPage/>}/>
-			<Route path='/cart' element={<CartPage/>}/>
+			<Route path='/cart' element={<CartPage />}/>
 			<Route path='/myorders' element={<MyOrderPage/>}/>
 			<Route path='/logout' element={<Logout />} />
 		</Routes>

@@ -4,9 +4,18 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Routing from "./components/Routing/Routing";
 import { jwtDecode } from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { addToCartAPI, getCartAPI, removeFromCartAPI } from "./services/cartServices";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import UserContext from "./contexts/UserContext";
+import CartContext from "./contexts/CartContext";
+
+setAuthToken(localStorage.getItem("token"));
 
 function App() {
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     try {
@@ -21,13 +30,60 @@ function App() {
     } catch (error) {}
   }, []);
 
+  const addToCart = (product, quantity) => {
+    const updatedCart = [...cart];
+    const productIndex = updatedCart.findIndex((item) => item.product._id === product._id);
+    if (productIndex === -1) {
+      updatedCart.push({ product: product, quantity: quantity });
+    } else {
+      updatedCart[productIndex].quantity += quantity;
+    }
+    setCart(updatedCart);
+
+    addToCartAPI(product._id, quantity)
+      .then((res) => {
+        toast.success("상품 추가 성공!");
+      })
+      .catch((err) => {
+        toast.error("상품 추가 실패!");
+      });
+  };
+  const getCart = () => {
+    getCartAPI()
+      .then((res) => {
+        setCart(res.data);
+      })
+      .catch((err) => {
+        toast.error("카트 가져오기에 실패했습니다.");
+      });
+  };
+
+  useEffect(() => {
+    getCart();
+  }, [user]);
+
+  const removeFromCart = (id) => {
+    const oldCart = [...cart];
+    const newCart = oldCart.filter((item) => item.product._id !== id);
+    setCart(newCart);
+
+    removeFromCartAPI(id).catch((err) => {
+			toast.error('장바구니 상품 삭제 에러');
+		});
+  }
+
   return (
-    <div className="app">
-      <Navbar user={user} />
-      <main>
-        <Routing />
-      </main>
-    </div>
+    <UserContext.Provider value={user}>
+      <CartContext.Provider value={{cart, addToCart, removeFromCart}}>
+        <div className="app">
+          <Navbar user={user} cartCount={cart.length} />
+          <main>
+            <ToastContainer position="bottom-right" />
+            <Routing />
+          </main>
+        </div>
+      </CartContext.Provider>
+    </UserContext.Provider>
   );
 }
 
