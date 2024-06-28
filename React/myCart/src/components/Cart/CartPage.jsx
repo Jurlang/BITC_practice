@@ -6,10 +6,12 @@ import QuantityInput from "../SingleProductPage/QuantityInput";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import CartContext from "../../contexts/CartContext";
+import { toast } from "react-toastify";
+import { checkoutAPI } from "../../services/orderServices";
 
 const CartPage = () => {
   const [subTotal, setSubTotal] = useState(0);
-  const { cart, removeFromCart, updateCart } = useContext(CartContext);
+  const { cart, removeFromCart, updateCart, setCart } = useContext(CartContext);
   const userObj = useContext(UserContext);
   console.log(userObj);
 
@@ -20,6 +22,20 @@ const CartPage = () => {
     });
     setSubTotal(total);
   }, [cart]);
+
+  const checkout = () => {
+    const oldCart = [...cart];
+    setCart([]);
+    checkoutAPI()
+      .then(() => {
+        toast.success('주문성공');
+      })
+      .catch(()=>{
+        toast.error('checkout 중 에러 발생');
+        setCart(oldCart);
+      })
+  }
+
   return (
     <section className="align_center cart_page">
       <div className="align_center user_info">
@@ -65,7 +81,7 @@ const CartPage = () => {
         </tbody>
       </table>
 
-      <button className="search_button checkout_button">결재하기</button>
+      <button className="search_button checkout_button" onClick={checkout}>결재하기</button>
     </section>
   );
 };
