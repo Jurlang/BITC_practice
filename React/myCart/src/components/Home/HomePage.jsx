@@ -9,7 +9,7 @@ const HomePage = () => {
 		<div>
 			<HeroSection title='아이폰 14 프로 그 이상'
 				subtitle='Experience the power of the latest iPhone 14 with our most Pro camera ever.'
-				link='/'
+				link='/products/667ba2a470e0087948d7d8a9'
 				image={iphone} />
 			
 			<FeaturedProducts />

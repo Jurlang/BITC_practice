@@ -7,15 +7,27 @@ import memo from "../../assets/images/memo.png";
 import order from "../../assets/images/package.png";
 import lock from "../../assets/images/locked.png";
 import LinkWithIcon from "./LinkWithIcon";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Navbar = ({ user, cartCount }) => {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (search.trim() !== '') {
+      navigate(`/products?search=${search.trim()}`);
+      setSearch('');
+    }
+  };
+
   return (
     <nav className="align_center navbar">
       <div className="align_center">
         <h1 className="navbar_heading">myCart</h1>
-        <form className="align_center navbar_form">
-          <input type="text" className="navbar_search" placeholder="제품찾기...." />
+        <form className="align_center navbar_form" onSubmit={handleSubmit}>
+          <input type="text" className="navbar_search" onChange={(e) => setSearch(e.target.value)} placeholder="제품찾기...." value={search}/>
           <button type="submit" className="search_button">
             검색하기
           </button>

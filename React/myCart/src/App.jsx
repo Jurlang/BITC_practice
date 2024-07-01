@@ -59,7 +59,7 @@ function App() {
   };
 
   useEffect(() => {
-    getCart();
+    if(user) getCart();
   }, [user]);
 
   const removeFromCart = (id) => {
