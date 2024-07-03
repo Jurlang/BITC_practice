@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
+    console.log(token);
     if (token) {
       setIsAuthenticated(true);
     }

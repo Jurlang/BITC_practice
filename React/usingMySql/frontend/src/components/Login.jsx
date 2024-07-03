@@ -27,6 +27,7 @@ const Login = ({ setIsAuthenticated }) => {
 
         if (res.status === 200) {
           localStorage.setItem("token", data.token); // 예: 서버에서 받은 토큰 저장
+          console.log(data.token);
           setIsAuthenticated(true);
           navigate("/main");
         } else {
@@ -47,7 +48,7 @@ const Login = ({ setIsAuthenticated }) => {
 
   return (
     <>
-      <div className="container">
+      <div className="container_login">
         <div className="login-box">
           <h1 className="title">로그인</h1>
           <div>

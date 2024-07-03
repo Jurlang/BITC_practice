@@ -42,7 +42,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container_signup">
       <div className="signup-box">
         <h1 className="title">회원가입</h1>
         <div>

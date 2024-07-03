@@ -1,9 +1,13 @@
 import React from 'react';
+import Calendar from '../components/Calendar/Calendar';
+import Navbar from '../components/Navbar/Navbar';
 
 const Main = () => {
   return (
     <div>
-      메인화면진입성공!
+      <Navbar />
+      
+      <Calendar />
     </div>
   )
 }
