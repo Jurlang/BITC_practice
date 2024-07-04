@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
@@ -26,16 +27,16 @@ const Home = () => {
           </tr>
         </thead>
         <tbody className="table-group-divider">
-          {users.map((user) => (
+          {users.map((user, index) => (
             <tr key={user.id}>
-              <th scope="row">{user.id}</th>
+              <th scope="row">{index}</th>
               <td>{user.username}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                <button className="btn btn-outline-secondary mx-2">보기</button>
-                <button className="btn btn-outline-warning mx-2">수정</button>
-                <button className="btn btn-outline-danger mx-2">삭제</button>
+                <Link to={`/readuser/${user.id}`} className="btn btn-outline-secondary mx-2">보기</Link>
+                <Link to={`/edituser/${user.id}`} className="btn btn-outline-warning mx-2">수정</Link>
+                <Link to={`/deleteuser/${user.id}`} className="btn btn-outline-danger mx-2">삭제</Link>
               </td>
             </tr>
           ))}
