@@ -1,5 +1,6 @@
 package com.mysite.backend.controller;
 
+import com.mysite.backend.exception.UserNotFoundException;
 import com.mysite.backend.model.User;
 import com.mysite.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class UserController {
         return userRepository.findAll();
     }
 
-
+    @GetMapping("/users/{id}")
+    User getUsers(@PathVariable Long id){
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    }
 
 }
