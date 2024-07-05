@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, addMonths } from 'date-fns';
-import CalendarHeader from './CalendarHeader';
-import CalendarBody from './CalendarBody';
-import Modal from './Modal';
-import './Calendar.css';
+import React, { useEffect, useState } from "react";
+import {
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+  addDays,
+  addMonths,
+} from "date-fns";
+import CalendarHeader from "./CalendarHeader";
+import CalendarBody from "./CalendarBody";
+import Modal from "./Modal";
+import "./Calendar.css";
 
-const Calendar = () => {
-  const [task, setTask] = useState([]);
+const Calendar = ({todo, setTodo, todoList, setTodoList}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    if(todo.task.trim()){
+    setTodoList((prev) => {
+        return [ ...prev, todo ];
+    });
+  }
+  }, [todo]);
 
   const nextMonth = () => {
     setCurrentDate(addMonths(currentDate, 1));
@@ -28,8 +42,12 @@ const Calendar = () => {
     setModalOpen(false);
   };
 
-  const saveTask = (task) => {
-    console.log(`${selectedDate}: ${task}`);
+  const saveTask = (selectedDate, task) => {
+
+    setTodo((prev) => {
+      return { ...prev, selectedDate: selectedDate, task: task };
+    });
+
     closeModal();
   };
 
@@ -45,9 +63,19 @@ const Calendar = () => {
 
   return (
     <div className="calendar-container">
-      <CalendarHeader currentDate={currentDate} nextMonth={nextMonth} prevMonth={prevMonth} />
-      <CalendarBody days={days} openModal={openModal} task={task} />
-      <Modal isOpen={modalOpen} onClose={closeModal} onSave={saveTask} selectedDate={selectedDate} task={task} setTask={setTask}/>
+      <CalendarHeader
+        currentDate={currentDate}
+        nextMonth={nextMonth}
+        prevMonth={prevMonth}
+      />
+      <CalendarBody days={days} openModal={openModal} todoList={todoList}/>
+      <Modal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        onSave={saveTask}
+        selectedDate={selectedDate}
+        todoList = {todoList}
+      />
     </div>
   );
 };

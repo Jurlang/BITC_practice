@@ -19,7 +19,7 @@ const SignupPage = () => {
     try {
       await signup(formData, profilePic);
     } catch (err) {
-      setFormError(err.reaponse.data.message);
+      setFormError(err.response.data.message);
     }
   };
 

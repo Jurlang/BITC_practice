@@ -1,7 +1,6 @@
-// backend/server.js
-
 const express = require('express');  // Express 프레임워크 불러오기
-const cors = require("cors");        // CORS(Cross-Origin Resource Sharing) 미들웨어 불러오기
+const cors = require("cors");   // CORS(Cross-Origin Resource Sharing) 미들웨어 불러오기
+
 const userRoutes = require('./routes/userRoutes'); // 사용자 라우트 모듈 불러오기
 
 const app = express();               // Express 애플리케이션 인스턴스 생성

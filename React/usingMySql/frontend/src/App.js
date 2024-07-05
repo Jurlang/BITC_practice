@@ -1,42 +1,24 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Main from "./pages/Main";
-
 import "./App.css";
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import Routing from "./components/Routing";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (token) {
+    const token = localStorage.getItem("token");
+    if (token !== null) {
+      const jwtUser = jwtDecode(token);
+      setUser(jwtUser);
       setIsAuthenticated(true);
     }
   }, []);
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<Login setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/login"
-          element={<Login setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route path="/signup" element={<Signup />}></Route>
-        <Route
-          path="/main"
-          element={isAuthenticated ? <Main /> : <Navigate to="/login" />}
-        />{" "}
-      </Routes>
-    </BrowserRouter>
-  );
+  return <Routing user={user}/>;
 }
 
 export default App;
