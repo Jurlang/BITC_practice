@@ -81,7 +81,13 @@ public class BoardRepositoryTests {
 	@Test
 	public void testSearch1(){
 		Pageable pageable = PageRequest.of(1,10, Sort.by("bno").descending());
+		String[] types = {"t","c","w"};
+		String keyword = "1";
+		Page<Board> result = boardRepository.searchAll(types,keyword,pageable);
 
-		boardRepository.search1(pageable);
+		log.info(result.getTotalPages());
+		log.info(result.getNumber());
+		log.info(result.hasPrevious());
+		result.getContent().forEach(log::info);
 	}
 }

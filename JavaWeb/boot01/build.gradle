@@ -43,6 +43,8 @@ dependencies {
 	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+	// model mapper
+	implementation 'org.modelmapper:modelmapper:3.1.0'
 }
 tasks.named('test') {
 	useJUnitPlatform()
@@ -51,7 +53,7 @@ tasks.named('test') {
 /**
  *  QueryDSL Build Option // 쿼리DSL은 Q 파일이 필요한데 그 Q 파일을 만들어준다.
  */
-def querydslDir = "src/main/java"
+def querydslDir = "src/main/generated"
 
 sourceSets{
 	main.java.srcDirs += [ querydslDir ]
@@ -60,3 +62,8 @@ sourceSets{
 tasks.withType(JavaCompile) {
 	options.getGeneratedSourceOutputDirectory().set(file(querydslDir))
 }
+
+clean {
+	delete file(querydslDir)
+}
+
