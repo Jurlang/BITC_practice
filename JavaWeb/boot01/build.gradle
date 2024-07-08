@@ -48,20 +48,45 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// Querydsl 설정부
-def generated = 'src/main/generated'
+///**
+// *  QueryDSL Build Option // 쿼리DSL은 Q 파일이 필요한데 그 Q 파일을 만들어준다.
+// */
+//def querydslDir = "src/main/java"
+//
+//sourceSets{
+//	main.java.srcDirs += [ querydslDir ]
+//}
+//
+//tasks.withType(JavaCompile) {
+//	options.getGeneratedSourceOutputDirectory().set(file(querydslDir))
+//}
 
-// querydsl QClass 파일 생성 위치를 지정
-tasks.withType(JavaCompile) {
-	options.getGeneratedSourceOutputDirectory().set(file(generated))
+// 추가
+// querydsl 설정 추가
+
+// querydsl에서 사용할 경로를 설정한다.
+def querydslDir = "$buildDir/generated/querydsl"
+
+// JPA 사용 여부와 사용할 경로를 설정
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
 }
 
-// java source set 에 querydsl QClass 위치 추가
+// build 시 사용할 sourceSet 추가한다.
 sourceSets {
-	main.java.srcDirs += [ generated ]
+	main.java.srcDir querydslDir
 }
 
-// gradle clean 시에 QClass 디렉토리 삭제
-clean {
-	delete file(generated)
+// querydsl이 compileClassPath를 상속하도록 설정
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath
+}
+
+// querydsl 컴파일 시 사용할 옵션 설정
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
 }

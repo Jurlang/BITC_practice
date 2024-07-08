@@ -77,4 +77,11 @@ public class BoardRepositoryTests {
 
 		boards.forEach(log::info);
 	}
+
+	@Test
+	public void testSearch1(){
+		Pageable pageable = PageRequest.of(1,10, Sort.by("bno").descending());
+
+		boardRepository.search1(pageable);
+	}
 }
