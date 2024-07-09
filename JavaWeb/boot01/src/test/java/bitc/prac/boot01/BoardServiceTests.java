@@ -1,6 +1,8 @@
 package bitc.prac.boot01;
 
 import bitc.prac.boot01.dto.BoardDTO;
+import bitc.prac.boot01.dto.PageRequestDTO;
+import bitc.prac.boot01.dto.PageResponseDTO;
 import bitc.prac.boot01.service.BoardService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -50,5 +52,17 @@ public class BoardServiceTests {
                 .bno(703L)
                 .build();
         boardService.delete(dto.getBno());
+    }
+    @Test
+    public void testList(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .type("tcw")
+                .keyword("1")
+                .page(1)
+                .size(10)
+                .build();
+
+        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+        log.info("responseDTO : {}", responseDTO);
     }
 }
