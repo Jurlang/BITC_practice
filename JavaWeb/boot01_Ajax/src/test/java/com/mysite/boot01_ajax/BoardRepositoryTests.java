@@ -21,18 +21,18 @@ public class BoardRepositoryTests {
 	@Autowired
 	private BoardRepository boardRepository;
 
-	@Test
-	public void testInsert(){
-		for(int i = 0 ; i < 100 ; i++){
-			Board board = Board.builder()
-					.title("title" + i)
-					.content("This is Content in title("+i+")")
-					.writer("user"+(i%10))
-					.build();
-			Board result = boardRepository.save(board);
-			log.info("BNO : " + result.getBno());
-		}
-	}
+//	@Test
+//	public void testInsert(){
+//		for(int i = 0 ; i < 100 ; i++){
+//			Board board = Board.builder()
+//					.title("title" + i)
+//					.content("This is Content in title("+i+")")
+//					.writer("user"+(i%10))
+//					.build();
+//			Board result = boardRepository.save(board);
+//			log.info("BNO : " + result.getBno());
+//		}
+//	}
 
 	@Test
 	public void testSelect(){

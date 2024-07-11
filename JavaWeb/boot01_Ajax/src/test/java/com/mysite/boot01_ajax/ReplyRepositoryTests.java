@@ -2,6 +2,8 @@ package com.mysite.boot01_ajax;
 
 import com.mysite.boot01_ajax.domain.Board;
 import com.mysite.boot01_ajax.domain.Reply;
+import com.mysite.boot01_ajax.dto.BoardListReplyCountDTO;
+import com.mysite.boot01_ajax.repository.BoardRepository;
 import com.mysite.boot01_ajax.repository.ReplyRepository;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -18,9 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReplyRepositoryTests {
     @Autowired
     private ReplyRepository replyRepository;
+    @Autowired
+    private BoardRepository boardRepository;
 
     @Test
-    public void testInsert(){
+    public void testInsert() {
         Long bno = 816L;
 
         Board board = Board.builder().bno(bno).build();
@@ -36,7 +40,7 @@ public class ReplyRepositoryTests {
 
     @Transactional
     @Test
-    public void testBoardReplies(){
+    public void testBoardReplies() {
         Long bno = 816L;
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by("rno").descending());
@@ -46,5 +50,21 @@ public class ReplyRepositoryTests {
         result.getContent().forEach(reply -> {
             log.info(reply);
         });
+    }
+
+    @Test
+    public void testSearchReplyCount() {
+        String[] types = {"t", "c", "w"};
+        String keyword = "1";
+        Pageable pageable = PageRequest.of(0,10,Sort.by("bno").descending());
+
+        Page<BoardListReplyCountDTO> result = boardRepository.searchWithReplyCount(types,keyword,pageable);
+
+        log.info(result.getTotalPages());
+        log.info(result.getSize());
+        log.info(result.getNumber());
+        log.info(result.hasPrevious() + ": " + result.hasNext());
+        result.getContent().forEach(board -> log.info(board));
+
     }
 }

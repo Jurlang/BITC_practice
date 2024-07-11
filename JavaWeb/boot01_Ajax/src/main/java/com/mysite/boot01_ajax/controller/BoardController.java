@@ -1,6 +1,7 @@
 package com.mysite.boot01_ajax.controller;
 
 import com.mysite.boot01_ajax.dto.BoardDTO;
+import com.mysite.boot01_ajax.dto.BoardListReplyCountDTO;
 import com.mysite.boot01_ajax.dto.PageRequestDTO;
 import com.mysite.boot01_ajax.dto.PageResponseDTO;
 import com.mysite.boot01_ajax.service.BoardService;
@@ -24,7 +25,8 @@ public class BoardController {
 
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model) {
-        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+//        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+        PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
         log.info(responseDTO);
         model.addAttribute("responseDTO", responseDTO);
     }

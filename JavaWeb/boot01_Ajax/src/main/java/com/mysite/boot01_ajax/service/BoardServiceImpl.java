@@ -2,6 +2,7 @@ package com.mysite.boot01_ajax.service;
 
 import com.mysite.boot01_ajax.domain.Board;
 import com.mysite.boot01_ajax.dto.BoardDTO;
+import com.mysite.boot01_ajax.dto.BoardListReplyCountDTO;
 import com.mysite.boot01_ajax.dto.PageRequestDTO;
 import com.mysite.boot01_ajax.dto.PageResponseDTO;
 import com.mysite.boot01_ajax.repository.BoardRepository;
@@ -76,6 +77,21 @@ public class BoardServiceImpl implements BoardService{
         return PageResponseDTO.<BoardDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
+                .total((int)result.getTotalElements())
+                .build();
+    }
+
+    @Override
+    public PageResponseDTO<BoardListReplyCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO) {
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("bno");
+
+        Page<BoardListReplyCountDTO> result = boardRepository.searchWithReplyCount(types, keyword, pageable);
+
+        return PageResponseDTO.<BoardListReplyCountDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(result.getContent())
                 .total((int)result.getTotalElements())
                 .build();
     }
