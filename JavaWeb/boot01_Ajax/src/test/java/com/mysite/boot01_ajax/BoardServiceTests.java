@@ -39,10 +39,12 @@ public class BoardServiceTests {
     @Test
     public void testUpdate(){
         BoardDTO dto = BoardDTO.builder()
-                .bno(703L)
-                .title("타이틀123")
-                .content("내용123")
+                .bno(103L)
+                .title("Update Tests")
+                .content("Update Tests _ Update Tests")
                 .build();
+
+        dto.setFileNames(Arrays.asList(UUID.randomUUID() + "_zzz.jpg"));
 
         boardService.update(dto);
     }
