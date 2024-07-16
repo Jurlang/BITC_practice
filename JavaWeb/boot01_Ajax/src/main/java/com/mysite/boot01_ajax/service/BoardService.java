@@ -3,6 +3,9 @@ package com.mysite.boot01_ajax.service;
 import com.mysite.boot01_ajax.domain.Board;
 import com.mysite.boot01_ajax.dto.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public interface BoardService {
     Long register(BoardDTO boardDTO);
     BoardDTO readOne(Long bno);
@@ -28,4 +31,23 @@ public interface BoardService {
         }
         return board;
     }
+
+    default BoardDTO entityToDto(Board board){
+        BoardDTO boardDTO = BoardDTO.builder()
+                .bno(board.getBno())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .writer(board.getWriter())
+                .regDate(board.getRegDate())
+                .modDate(board.getModDate())
+                .build();
+
+        List<String> fileNames = board.getImageSet().stream().sorted()
+                .map(boardImage -> boardImage.getUuid()+"_"+boardImage.getFileName()).collect(Collectors.toList());
+
+        boardDTO.setFileNames(fileNames);
+
+        return boardDTO;
+    }
 }
+
