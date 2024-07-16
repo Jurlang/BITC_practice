@@ -51,7 +51,7 @@ public class BoardServiceTests {
     @Test
     public void testDelete(){
         BoardDTO dto = BoardDTO.builder()
-                .bno(703L)
+                .bno(3L)
                 .build();
         boardService.delete(dto.getBno());
     }
