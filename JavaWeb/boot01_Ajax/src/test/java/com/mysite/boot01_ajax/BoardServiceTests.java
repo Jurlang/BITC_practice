@@ -1,8 +1,6 @@
 package com.mysite.boot01_ajax;
 
-import com.mysite.boot01_ajax.dto.BoardDTO;
-import com.mysite.boot01_ajax.dto.PageRequestDTO;
-import com.mysite.boot01_ajax.dto.PageResponseDTO;
+import com.mysite.boot01_ajax.dto.*;
 import com.mysite.boot01_ajax.service.BoardService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -10,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
@@ -93,5 +92,27 @@ public class BoardServiceTests {
         for(String fileName : boardDTO.getFileNames()) {
             log.info(fileName);
         }
+    }
+    @Test
+    public void testListWithAll(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
+
+        PageResponseDTO<BoardListAllDTO> responseDTO = boardService.listWithAll(pageRequestDTO);
+
+        List<BoardListAllDTO> dtoList = responseDTO.getDtoList();
+
+        dtoList.forEach(boardListAllDTO -> {
+            log.info(boardListAllDTO.getBno()+ " : " + boardListAllDTO.getTitle());
+
+            if(boardListAllDTO.getBoardImages() != null) {
+                for(BoardImageDTO boardImage : boardListAllDTO.getBoardImages()){
+                    log.info(boardImage);
+                }
+            }
+            log.info("------------------------------------");
+        });
     }
 }

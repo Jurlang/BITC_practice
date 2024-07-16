@@ -33,7 +33,6 @@ public class BoardServiceImpl implements BoardService{
 
         return bno;
     }
-
     @Override
     public BoardDTO readOne(Long bno) {
 
@@ -45,7 +44,6 @@ public class BoardServiceImpl implements BoardService{
 
         return dto;
     }
-
     @Override
     public void update(BoardDTO boardDTO){
         Optional<Board> result = boardRepository.findById(boardDTO.getBno());
@@ -65,14 +63,12 @@ public class BoardServiceImpl implements BoardService{
 
         boardRepository.save(board);
     }
-
     @Override
     public void delete(Long bno) {
         Optional<Board> result = boardRepository.findById(bno);
         Board board = result.orElseThrow();
         boardRepository.delete(board);
     }
-
     @Override
     public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO){
         String[] types = pageRequestDTO.getTypes();
@@ -89,7 +85,6 @@ public class BoardServiceImpl implements BoardService{
                 .total((int)result.getTotalElements())
                 .build();
     }
-
     @Override
     public PageResponseDTO<BoardListReplyCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO) {
         String[] types = pageRequestDTO.getTypes();
@@ -104,9 +99,18 @@ public class BoardServiceImpl implements BoardService{
                 .total((int)result.getTotalElements())
                 .build();
     }
-
     @Override
     public PageResponseDTO<BoardListAllDTO> listWithAll(PageRequestDTO pageRequestDTO) {
-        return null;
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("bno");
+
+        Page<BoardListAllDTO> result = boardRepository.searchWithAll(types, keyword, pageable);
+
+        return PageResponseDTO.<BoardListAllDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(result.getContent())
+                .total((int)result.getTotalElements())
+                .build();
     }
 }
