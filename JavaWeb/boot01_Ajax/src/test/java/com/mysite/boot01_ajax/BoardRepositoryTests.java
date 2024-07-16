@@ -2,6 +2,7 @@ package com.mysite.boot01_ajax;
 
 import com.mysite.boot01_ajax.domain.Board;
 import com.mysite.boot01_ajax.domain.BoardImage;
+import com.mysite.boot01_ajax.dto.BoardListAllDTO;
 import com.mysite.boot01_ajax.repository.BoardRepository;
 import com.mysite.boot01_ajax.repository.ReplyRepository;
 import lombok.extern.log4j.Log4j2;
@@ -171,6 +172,13 @@ public class BoardRepositoryTests {
 	@Test
 	public void testSearchImageReplyCount(){
 		Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
-		boardRepository.searchWithAll(null, null, pageable);
+//		boardRepository.searchWithAll(null, null, pageable);
+
+		Page<BoardListAllDTO> result = boardRepository.searchWithAll(null,null,pageable);
+
+		log.info("--------------------------");
+		log.info(result.getTotalElements());
+
+		result.getContent().forEach(boardListAllDTO -> log.info(boardListAllDTO));
 	}
 }

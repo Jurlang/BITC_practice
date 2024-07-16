@@ -1,10 +1,7 @@
 package com.mysite.boot01_ajax.service;
 
 import com.mysite.boot01_ajax.domain.Board;
-import com.mysite.boot01_ajax.dto.BoardDTO;
-import com.mysite.boot01_ajax.dto.BoardListReplyCountDTO;
-import com.mysite.boot01_ajax.dto.PageRequestDTO;
-import com.mysite.boot01_ajax.dto.PageResponseDTO;
+import com.mysite.boot01_ajax.dto.*;
 import com.mysite.boot01_ajax.repository.BoardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -94,5 +91,10 @@ public class BoardServiceImpl implements BoardService{
                 .dtoList(result.getContent())
                 .total((int)result.getTotalElements())
                 .build();
+    }
+
+    @Override
+    public PageResponseDTO<BoardListAllDTO> listWithAll(PageRequestDTO pageRequestDTO) {
+        return null;
     }
 }
