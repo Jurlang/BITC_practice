@@ -12,6 +12,11 @@ import java.util.List;
 @Log4j2
 public class SampleController {
 
+	@GetMapping("/")
+	public String main(){
+		return "redirect:/board/list";
+	}
+
 	@GetMapping("/hello")
 	public String hello(Model model){
 		model.addAttribute("msg", "Spring Boot - Hello");
