@@ -22,7 +22,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping({"/board"})
 @Log4j2
 @RequiredArgsConstructor
 public class BoardController {
@@ -32,7 +32,7 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/list")
+    @GetMapping({"/list"})
     public void list(PageRequestDTO pageRequestDTO, Model model) {
 //        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
         PageResponseDTO<BoardListAllDTO> responseDTO = boardService.listWithAll(pageRequestDTO);
