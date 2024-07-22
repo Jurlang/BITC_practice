@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -33,7 +34,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping({"/list"})
-    public void list(PageRequestDTO pageRequestDTO, Model model) {
+    public void list(PageRequestDTO pageRequestDTO, Model model, Principal principal) {
 //        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
         PageResponseDTO<BoardListAllDTO> responseDTO = boardService.listWithAll(pageRequestDTO);
         log.info(responseDTO);
@@ -42,15 +43,15 @@ public class BoardController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/register")
-    public void registerGet(){
+    public void registerGet() {
 
     }
 
     @PostMapping("/register")
-    public String registerPost(@Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String registerPost(@Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         log.info("board POST register.........");
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("has Errors........");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/board/register";
@@ -59,29 +60,30 @@ public class BoardController {
         log.info(boardDTO);
 
         Long bno = boardService.register(boardDTO);
-        redirectAttributes.addFlashAttribute("result",bno);
+        redirectAttributes.addFlashAttribute("result", bno);
         return "redirect:/board/list";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping({"/read", "/modify"})
-    public void read(Long bno, PageRequestDTO pageRequestDTO, Model model){
+    public void read(Long bno, PageRequestDTO pageRequestDTO, Model model) {
         BoardDTO boardDTO = boardService.readOne(bno);
         log.info(boardDTO);
 
         model.addAttribute("dto", boardDTO);
     }
 
+    @PreAuthorize("principal.username == #boardDTO.writer")
     @PostMapping("/modify")
-    public String modify( PageRequestDTO pageRequestDTO, @Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String modify(PageRequestDTO pageRequestDTO, @Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         log.info("board modify post........" + boardDTO);
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("has Errors.......");
             String link = pageRequestDTO.getLink();
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addAttribute("bno", boardDTO.getBno());
 
-            return "redirect:/board/modify?"+link;
+            return "redirect:/board/modify?" + link;
         }
         boardService.update(boardDTO);
         redirectAttributes.addFlashAttribute("result", "modified");
@@ -89,8 +91,9 @@ public class BoardController {
         return "redirect:/board/read";
     }
 
+    @PreAuthorize("principal.username == #boardDTO.writer")
     @PostMapping("/remove")
-    public String remove(BoardDTO boardDTO, RedirectAttributes redirectAttributes){
+    public String remove(BoardDTO boardDTO, RedirectAttributes redirectAttributes) {
 
         Long bno = boardDTO.getBno();
         log.info("remove post......" + bno);
@@ -99,7 +102,7 @@ public class BoardController {
 
         log.info(boardDTO.getFileNames());
         List<String> fileNames = boardDTO.getFileNames();
-        if(fileNames != null && fileNames.size() > 0){
+        if (fileNames != null && fileNames.size() > 0) {
             removeFiles(fileNames);
         }
 
@@ -108,19 +111,19 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-    public void removeFiles(List<String> files){
-        for(String fileName : files){
+    public void removeFiles(List<String> files) {
+        for (String fileName : files) {
             Resource resource = new FileSystemResource(uploadPath + File.separator + fileName);
             String resourceName = resource.getFilename();
 
-            try{
+            try {
                 String contentType = Files.probeContentType(resource.getFile().toPath());
                 resource.getFile().delete();
-                if(contentType.startsWith("image")){
+                if (contentType.startsWith("image")) {
                     File thumbnailFile = new File(uploadPath + File.separator + "s_" + fileName);
                     thumbnailFile.delete();
                 }
-            } catch(Exception e){
+            } catch (Exception e) {
                 log.error(e.getMessage());
             }
         }

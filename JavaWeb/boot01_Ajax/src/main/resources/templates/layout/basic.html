@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -37,20 +38,13 @@
                         aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0" th:with="user=${#authentication.principal}">
                         <li class="nav-item active"><a class="nav-link" th:href="@{/board/list}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/board/register}">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#!">Action</a>
-                                <a class="dropdown-item" href="#!">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#!">Something else here</a>
-                            </div>
-                        </li>
+
+                        <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/member/login}">LogIn</a></li>
+                        <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/member/join}">Join</a></li>
+
+                        <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/logout}">LogOut</a></li>
                     </ul>
                 </div>
             </div>
@@ -77,3 +71,4 @@
 </th:block>
 </body>
 </html>
+

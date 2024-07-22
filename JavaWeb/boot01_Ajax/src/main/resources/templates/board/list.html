@@ -1,5 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
 
@@ -31,6 +32,9 @@
             <div class="card">
                 <div class="card-header">
                     Board List
+                    <div class="float-end" sec:authorize="isAuthenticated()">
+                        <button type="button" class="btn btn-primary" th:onclick="|window.location='@{/board/register}'|">등록</button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Board List</h5>

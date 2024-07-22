@@ -1,6 +1,5 @@
-package com.mysite.boot01_ajax;
+package com.mysite.boot01_ajax.RepositoryTests;
 
-import com.mysite.boot01_ajax.domain.Board;
 import com.mysite.boot01_ajax.domain.Reply;
 import com.mysite.boot01_ajax.dto.BoardListReplyCountDTO;
 import com.mysite.boot01_ajax.repository.BoardRepository;

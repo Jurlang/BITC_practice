@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Simple Sidebar - Login</title>
+    <title>Login</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -39,7 +39,9 @@
                 </div>
                 <div class="my-4">
                     <div class="float-end">
+                        <button type="button" class="btn btn-warning homeBtn" th:onclick="|window.location='@{/board/list}'|">HOME</button>
                         <button type="submit" class="btn btn-primary submitBtn">LOGIN</button>
+                        <button type="button" class="btn btn-secondary joinBtn" th:onclick="|window.location='@{/member/join}'|">JOIN</button>
                     </div>
                 </div>
             </form>

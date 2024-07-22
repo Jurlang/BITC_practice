@@ -1,4 +1,4 @@
-package com.mysite.boot01_ajax;
+package com.mysite.boot01_ajax.ServiceTests;
 
 import com.mysite.boot01_ajax.dto.*;
 import com.mysite.boot01_ajax.service.BoardService;

@@ -1,4 +1,4 @@
-package com.mysite.boot01_ajax;
+package com.mysite.boot01_ajax.RepositoryTests;
 
 import com.mysite.boot01_ajax.domain.Board;
 import com.mysite.boot01_ajax.domain.BoardImage;
