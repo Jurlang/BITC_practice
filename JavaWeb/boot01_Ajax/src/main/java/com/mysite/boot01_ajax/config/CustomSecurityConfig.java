@@ -2,6 +2,7 @@ package com.mysite.boot01_ajax.config;
 
 import com.mysite.boot01_ajax.security.CustomUserDetailsService;
 import com.mysite.boot01_ajax.security.handler.Custom403Handler;
+import com.mysite.boot01_ajax.security.handler.CustomSocialLoginSuccessHandler;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -52,7 +54,8 @@ public class CustomSecurityConfig {
                         .userDetailsService(userDetailsService)
                         .tokenValiditySeconds(60*60*24*30))
                 .exceptionHandling(exceptionHandling -> exceptionHandling.accessDeniedHandler(accessDeniedHandler()))
-                .oauth2Login(oauth2Login -> oauth2Login.loginPage("/member/login"));
+                .oauth2Login(oauth2Login -> oauth2Login.loginPage("/member/login")
+                        .successHandler(authenticationSuccessHandler()));
 
 
         return http.build();
@@ -72,6 +75,11 @@ public class CustomSecurityConfig {
     @Bean
     public AccessDeniedHandler accessDeniedHandler(){
         return new Custom403Handler();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler(){
+        return new CustomSocialLoginSuccessHandler(passwordEncoder());
     }
 
 }

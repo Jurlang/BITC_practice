@@ -1,17 +1,14 @@
 package com.mysite.boot01_ajax.security;
 
 import com.mysite.boot01_ajax.domain.Member;
-import com.mysite.boot01_ajax.dto.MemberSecurityDTO;
 import com.mysite.boot01_ajax.repository.MemberRepository;
+import com.mysite.boot01_ajax.security.dto.MemberSecurityDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
