@@ -61,6 +61,9 @@ public class BoardController {
 
         Long bno = boardService.register(boardDTO);
         redirectAttributes.addFlashAttribute("result", bno);
+        redirectAttributes.addFlashAttribute("resultHeader", "게시물 등록");
+        redirectAttributes.addFlashAttribute("resultMsg", "등록 처리가 완료되었습니다.");
+
         return "redirect:/board/list";
     }
 
@@ -107,6 +110,8 @@ public class BoardController {
         }
 
         redirectAttributes.addFlashAttribute("result", "removed");
+        redirectAttributes.addFlashAttribute("resultHeader", "게시물 삭제");
+        redirectAttributes.addFlashAttribute("resultMsg", "삭제 처리가 완료되었습니다.");
 
         return "redirect:/board/list";
     }

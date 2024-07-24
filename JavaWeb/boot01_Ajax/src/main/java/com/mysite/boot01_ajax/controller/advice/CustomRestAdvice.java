@@ -22,7 +22,7 @@ public class CustomRestAdvice {
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
     public ResponseEntity<Map<String, String>> handleBindException(BindException e){
-
+        log.error("bindingException Error !!!!");
         log.error(e);
 
         Map<String, String> errorMap = new HashMap<>();
@@ -30,7 +30,7 @@ public class CustomRestAdvice {
         if(e.hasErrors()){
             BindingResult bindingResult = e.getBindingResult();
             bindingResult.getFieldErrors().forEach(fieldError -> {
-                errorMap.put(fieldError.getField(), fieldError.getCode());
+                errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
             });
         }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +21,7 @@ public class ReplyDTO {
     private Long rno;
     @NotNull
     private Long bno;
-    @NotEmpty
+    @NotEmpty(message="댓글 내용은 필수로 입력해주세요.")
     private String replyText;
     @NotEmpty
     private String replyer;

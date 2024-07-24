@@ -221,10 +221,10 @@
             alert(result.rno);
             registerModal.hide();
             replyText.value='';
-            replyer.value='';
             printReplies(1,10,true);
         }).catch(e =>{
-            alert("Exception...");
+            console.log(e);
+            alert(e.response.data.replyText);
         })
     }, false);
 

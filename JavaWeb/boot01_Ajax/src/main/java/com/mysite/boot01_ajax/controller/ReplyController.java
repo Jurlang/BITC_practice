@@ -40,9 +40,6 @@ public class ReplyController{
         resultMap.put("rno", rno);
 
         return resultMap;
-//        Map<String, Long> map = Map.of("rno", 111L);
-//
-//        return ResponseEntity.ok(map);
     }
 
     @GetMapping(value = "/list/{bno}")

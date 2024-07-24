@@ -16,15 +16,15 @@
                 <div class="card-body">
                     <form action="/board/register" method="post">
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Title</span>
+                            <span class="input-group-text w-15 text-center d-block">Title</span>
                             <input type="text" name="title" class="form-control" placeholder="Title">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Content</span>
+                            <span class="input-group-text w-15 text-center d-block align-content-center">Content</span>
                             <textarea class="form-control col-sm-5" rows="5" name="content"></textarea>
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Writer</span>
+                            <span class="input-group-text w-15 text-center d-block">Writer</span>
                             <input type="text" name="writer" class="form-control" placeholder="Writer" th:value="${#authentication.principal.username}" readonly>
                         </div>
                         <div class="input-group mb-3">
