@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Login</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body class="align-middle" >
+<div class="container-fluid d-flex justify-content-center" style="height: 100vh">
+
+    <div class="card align-self-center">
+        <div class="card-header">
+            기본 비밀번호 변경 페이지
+        </div>
+        <div class="card-body">
+            <th:block th:if="${param.logout != null}">
+                <h1>Logout........</h1>
+            </th:block>
+
+            <form id="modifyForm" action="/member/modify" method="post">
+                <div class="input-group mb-3" th:with="user=${#authentication.principal}">
+                    <span class="input-group-text">&nbsp;아&nbsp;이&nbsp;디</span>
+                    <input type="text" name="mid" class="form-control" placeholder="USER ID" th:value="${user.mid}" readonly>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">비밀번호</span>
+                    <input type="text" name="mpw" class="form-control" placeholder="PASSWORD">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">비번확인</span>
+                    <input type="text" name="mpw_check" class="form-control" placeholder="PASSWORD">
+                </div>
+                <div class="my-4">
+                    <div class="float-end">
+
+                        <button type="submit" class="btn btn-primary submitBtn">MODIFY</button>
+
+                    </div>
+                </div>
+            </form>
+        </div><!--end card body-->
+    </div><!--end card-->
+
+</div>
+</body>
+</html>

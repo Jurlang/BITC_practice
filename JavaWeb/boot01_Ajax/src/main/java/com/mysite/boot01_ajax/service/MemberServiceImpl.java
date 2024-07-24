@@ -4,11 +4,14 @@ import com.mysite.boot01_ajax.domain.Member;
 import com.mysite.boot01_ajax.domain.MemberRole;
 import com.mysite.boot01_ajax.dto.MemberJoinDTO;
 import com.mysite.boot01_ajax.repository.MemberRepository;
+import com.mysite.boot01_ajax.security.dto.MemberSecurityDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -38,6 +41,19 @@ public class MemberServiceImpl implements MemberService{
         log.info(member);
         log.info(member.getRoleSet());
 
+        memberRepository.save(member);
+    }
+
+    @Override
+    public void modify(MemberJoinDTO dto) throws MidExistException {
+        log.info("MemberServiceImpl--------------------------------");
+        log.info(dto);
+
+        Optional<Member> result = memberRepository.findById(dto.getMid());
+
+        Member member = result.orElseThrow();
+
+        member.changePassword(passwordEncoder.encode(dto.getMpw()));
         memberRepository.save(member);
     }
 }
