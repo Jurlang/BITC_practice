@@ -18,7 +18,6 @@ export default function App() {
   return (
     <div className="app">
       <TaskForm setTasks={setTasks} />
-      <header className="app_header">Header Section</header>
       <main className="app_main">
         <TaskColumn title="할 일" icon={todoIcon} tasks={tasks} status="todo" handleDelete={handleDelete} />
         <TaskColumn title="진행 중" icon={doingIcon} tasks={tasks} status="doing" handleDelete={handleDelete} />

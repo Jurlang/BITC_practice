@@ -1,5 +1,6 @@
 package com.mysite.boot01_ajax.RepositoryTests;
 
+import com.mysite.boot01_ajax.domain.Board;
 import com.mysite.boot01_ajax.domain.Reply;
 import com.mysite.boot01_ajax.dto.BoardListReplyCountDTO;
 import com.mysite.boot01_ajax.repository.BoardRepository;
@@ -22,21 +23,21 @@ public class ReplyRepositoryTests {
     @Autowired
     private BoardRepository boardRepository;
 
-//    @Test
-//    public void testInsert() {
-//        Long bno = 816L;
-//
-//        Board board = Board.builder().bno(bno).build();
-//        for(int i = 100 ; i < 200 ; i++) {
-//            Reply reply = Reply.builder()
-//                    .board(board)
-//                    .replyText("댓글 테스트 중 ( " + i + " )")
-//                    .replyer("댓글테스트 ( " + i + " )")
-//                    .build();
-//
-//            replyRepository.save(reply);
-//        }
-//    }
+    @Test
+    public void testInsert() {
+        Long bno = 121L;
+
+        Board board = Board.builder().bno(bno).build();
+        for(int i = 100 ; i < 200 ; i++) {
+            Reply reply = Reply.builder()
+                    .board(board)
+                    .replyText("댓글 테스트 중 ( " + i + " )")
+                    .replyer("댓글테스트 ( " + i + " )")
+                    .build();
+
+            replyRepository.save(reply);
+        }
+    }
 
     @Transactional
     @Test

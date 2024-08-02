@@ -33,7 +33,7 @@ public class PageRequestDTO {
     }
 
     public Pageable getPageable(String...props) {
-        // String...props - 배열인데 조금 더 편리하다는데 차이점이 뭔지 질문하기.
+        // String...props
         return PageRequest.of(this.page - 1, this.size, Sort.by(props).descending());
     }
 
@@ -42,15 +42,18 @@ public class PageRequestDTO {
             StringBuilder builder = new StringBuilder();
             builder.append("page=" + this.page);
             builder.append("&size=" + this.size);
+
             if (type != null && type.length() > 0) {
                 builder.append("&type=" + type);
             }
+
             if(keyword != null) {
                 try{
                     builder.append("&keyword=" + URLEncoder.encode(keyword, "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                 }
             }
+
             link = builder.toString();
         }
         return link;

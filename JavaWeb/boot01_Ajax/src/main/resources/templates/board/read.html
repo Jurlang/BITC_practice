@@ -81,10 +81,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <span class="input-group-text">Reply Text</span>
                         <input type="text" class="form-control replyText"/>
                     </div>
+                    <span class="d-block mb-3 text-danger text-center errorMSG"></span>
                     <div class="input-group mb-3" th:with="user=${#authentication.principal}">
                         <span class="input-group-text">Replyer</span>
                         <input type="text" class="form-control replyer" th:value="${user.username}" readonly/>
@@ -224,7 +225,7 @@
             printReplies(1,10,true);
         }).catch(e =>{
             console.log(e);
-            alert(e.response.data.replyText);
+            document.querySelector(".errorMSG").innerHTML = e.response.data.replyText;
         })
     }, false);
 
