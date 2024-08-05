@@ -41,6 +41,8 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     //    ------------------------------------------------------------추가
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    // model mapper
+    implementation 'org.modelmapper:modelmapper:3.1.0'
 
 }
 
