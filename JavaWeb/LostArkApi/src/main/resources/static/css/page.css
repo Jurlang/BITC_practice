@@ -1,0 +1,17 @@
+body{
+    background-color:#030406;
+    color: white;
+}
+
+.navbar {
+    border: 3px solid white;
+    border-radius: 3px;
+}
+
+.navFont>a, .navFont>ul>li>a{
+    color: white;
+}
+
+.nav-link:hover, a.navbar-brand:hover {
+    color: skyblue !important;
+}
