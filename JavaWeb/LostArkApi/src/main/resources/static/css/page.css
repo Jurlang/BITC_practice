@@ -15,3 +15,14 @@ body{
 .nav-link:hover, a.navbar-brand:hover {
     color: skyblue !important;
 }
+
+.card-title, .card-text {
+    font-size: 15px;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}

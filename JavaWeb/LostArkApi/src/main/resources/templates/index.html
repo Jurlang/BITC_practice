@@ -8,38 +8,81 @@
 </head>
 
 <div layout:fragment="content">
-    <th:block th:if="${continue != null}">
-        hello
-    </th:block>
-    <div class="container">
-        <div class="events d-flex flex-wrap">
+    <div class="container my-3 d-flex">
+        <div class="notices d-flex my-5 w-50">
+
+        </div>
+        <div class="events d-flex justify-content-evenly my-5 w-50">
 
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src="@{/js/Notices.js}"></script>
     <script th:src="@{/js/Events.js}"></script>
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
+    const noticesDiv = document.querySelector('.notices')
     const eventsDiv = document.querySelector('.events');
 
-    let datas;
+    function printNotices() {
+
+        let str = '';
+
+        getNotices().then(data => {
+            str += `<ul class="list-group" style="width: 95%">`;
+            str += `<li class="d-flex justify-content-between list-group-item list-group-item-secondary">
+                        <h4 class="align-center">로스트아크 공지사항</h4>
+                        <a href="/notice" class="align-center"><img src="/images/icon/moreIcon2.png" alt="moreicon image" style="width: 20px"></a>
+                    </li>`
+            console.log(data)
+            for (let i = 0; i < 10; i++) {
+                str += `<li class="list-group-item list-group-item-action bg-dark ellipsis">`
+                switch (data[i].Type) {
+                    case "공지":
+                        str += `<span class="badge text-bg-primary mx-3">${data[i].Type}</span>`
+                        break;
+                    case "점검":
+                        str += `<span class="badge text-bg-secondary mx-3">${data[i].Type}</span>`
+                        break;
+                    case "상점":
+                        str += `<span class="badge text-bg-warning mx-3">${data[i].Type}</span>`
+                        break;
+                    case "이벤트":
+                        str += `<span class="badge text-bg-success mx-3">${data[i].Type}</span>`
+                        break;
+                }
+                str += `<a href="${data[i].Link}" class="link-offset-2 link-underline link-underline-opacity-0 text-light">${data[i].Title}</a></li>`;
+            }
+            str += `</ul>`;
+            noticesDiv.innerHTML = str;
+        }).catch(e => {
+            console.log(e)
+        });
+    }
 
     function printEvents() {
+
         let str = '';
+
         getEvents().then(data => {
+            str += `<div class="d-flex flex-wrap">`
+            str += `<ul class="list-group">`;
+            str += `<li class="list-group-item list-group-item-secondary">
+                        <h4>진행중인 이벤트</h4>
+                    </li>`
+            str += `<div class="d-flex flex-wrap">`
 
             for (const item of data) {
-
-                str += `<div class="card col-3">
-                            <a href="${item.Link}"><img src="${item.Thumbnail}" class="card-img-top" alt="eventImage"></a>
-                            <div class="card-body">
-                                <h5 class="card-title">${item.Title}</h5>
-                                <p class="card-text">시작날짜 : ${item.StartDate}</p>
-                                <p class="card-text">종료날짜 : ${item.EndDate}</p>
-                            </div>
-                        </div>`
+                str += `<a href="${item.Link}" class="link-offset-2 link-underline link-underline-opacity-0 text-light bg-dark text-light my-3 mx-2 px-2 rounded" style="width: 29.5%">
+                                <img src="${item.Thumbnail}" class="card-img-top img-fluid rounded" alt="eventImage">
+                                <h5 class="card-title my-2 ellipsis">${item.Title}</h5>
+                                <p class="card-text my-0">${`${item.StartDate}`.substring(0, 10)} ~ ${`${item.EndDate}`.substring(0, 10)}</p>
+                            </a>`
             }
+            str += `</div>`;
+            str += `</ul>`;
+            str += `</div>`;
             eventsDiv.innerHTML = str;
 
         }).catch(e => {
@@ -49,6 +92,8 @@
     }
 
     printEvents();
+    printNotices();
+
 </script>
 
 </html>

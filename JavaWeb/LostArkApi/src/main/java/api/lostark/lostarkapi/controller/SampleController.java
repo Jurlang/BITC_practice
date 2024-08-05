@@ -10,6 +10,6 @@ public class SampleController {
     @GetMapping("/")
     @PreAuthorize("hasRole('USER')")
     public String index() {
-        return "/index.html";
+        return "/index";
     }
 }
