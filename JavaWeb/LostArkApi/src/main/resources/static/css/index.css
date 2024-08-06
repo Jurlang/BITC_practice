@@ -11,7 +11,12 @@ body{
 .navFont>a, .navFont>ul>li>a{
     color: white;
 }
-
+.navFont>a:focus, .navFont>ul>li>a:focus{
+    color: white;
+    border: 1px solid white;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
 .nav-link:hover, a.navbar-brand:hover {
     color: skyblue !important;
 }
@@ -25,4 +30,16 @@ body{
     overflow: hidden;
     text-overflow: ellipsis;
     color: white;
+}
+
+.index_content_header{
+    margin-bottom:0 !important;
+}
+
+/* width 지정 */
+.w-15{
+    width: 15% !important;
+}
+.w-83{
+    width: 85% !important;
 }

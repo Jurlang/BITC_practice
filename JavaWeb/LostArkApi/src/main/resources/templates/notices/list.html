@@ -8,13 +8,16 @@
     <title>LostArkAPI</title>
 </head>
 
+<div layout:fragment="backgroundImage">
+</div>
+
 <div layout:fragment="content">
-    <div class="content_container container">
-        <div class="siteHeader my-3">
+    <div class="content_container container mt-5">
+        <div class="siteHeader my-5">
             <h1 class="text-center">공 지 사 항</h1>
         </div>
         <div class="my-3">
-            <nav class="searchBar navbar bg-dark mb-3">
+            <nav class="searchBar navbar bg-dark mb-4">
                 <div class="d-flex w-100 px-2">
                     <input id="searchInput" class="form-control flex-grow-1 mx-2" type="search" name="searchText"
                            placeholder="Search">
@@ -48,14 +51,13 @@
 
     function printList(data, page) {
         let str = '';
-
         if (data && data.length > 0) {
             let start = (page - 1) * 10;
             let end = start + 10;
             if (end > data.length)
                 end = data.length;
             for (let i = start; i < end; i++) {
-                str += `<li class="list-group-item list-group-item-action bg-dark replyItem">`
+                str += `<li class="list-group-item list-group-item-action bg-dark replyItem d-flex justify-content-between"><span class="ellipsis w-85">`
                 switch (data[i].Type) {
                     case "공지":
                         str += `<span class="badge text-bg-primary mx-3">${data[i].Type}</span>`
@@ -70,7 +72,9 @@
                         str += `<span class="badge text-bg-success mx-3">${data[i].Type}</span>`
                         break;
                 }
-                str += `<a href="${data[i].Link}" class="link-offset-2 link-underline link-underline-opacity-0 text-light">${data[i].Title}</a></li>`;
+                str += `<a href="${data[i].Link}" target="_blank" class="link-offset-2 link-underline link-underline-opacity-0 text-light">${data[i].Title}</a></span>
+                        <span class="ellipsis w-15 text-center"><a href="${data[i].Link}" target="_blank" class="link-offset-2 link-underline link-underline-opacity-0 text-light">${`${data[i].Date}`.substring(0,10)}</a></span>
+                        </li>`;
             }
         }
         noticeList.innerHTML = str;

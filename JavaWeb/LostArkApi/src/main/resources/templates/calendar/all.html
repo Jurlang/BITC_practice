@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <title>LostArkAPI</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="container">
+        캘린더
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src="@{/js/Calendar.js}"></script>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    getCalendars();
+</script>
+
+</html>

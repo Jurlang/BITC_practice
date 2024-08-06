@@ -32,8 +32,10 @@
         getNotices().then(data => {
             str += `<ul class="list-group" style="width: 95%">`;
             str += `<li class="d-flex justify-content-between list-group-item list-group-item-secondary">
-                        <h4 class="align-center">로스트아크 공지사항</h4>
-                        <a href="/notice" class="align-center"><img src="/images/icon/moreIcon2.png" alt="moreicon image" style="width: 20px"></a>
+                        <sapn class="index_content_header align-center h4">로스트아크 공지사항</sapn>
+                        <a href="/notice" class="align-center">
+                            <i class="bi bi-three-dots text-dark index_content_header"></i>
+                        </a>
                     </li>`
             console.log(data)
             for (let i = 0; i < 10; i++) {
@@ -52,7 +54,7 @@
                         str += `<span class="badge text-bg-success mx-3">${data[i].Type}</span>`
                         break;
                 }
-                str += `<a href="${data[i].Link}" class="link-offset-2 link-underline link-underline-opacity-0 text-light">${data[i].Title}</a></li>`;
+                str += `<a href="${data[i].Link}" target="_blank" class="link-offset-2 link-underline link-underline-opacity-0 text-light">${data[i].Title}</a></li>`;
             }
             str += `</ul>`;
             noticesDiv.innerHTML = str;
@@ -69,16 +71,16 @@
             str += `<div class="d-flex flex-wrap">`
             str += `<ul class="list-group">`;
             str += `<li class="list-group-item list-group-item-secondary">
-                        <h4>진행중인 이벤트</h4>
+                        <h4 class="index_content_header">진행중인 이벤트</h4>
                     </li>`
             str += `<div class="d-flex flex-wrap">`
 
             for (const item of data) {
-                str += `<a href="${item.Link}" class="link-offset-2 link-underline link-underline-opacity-0 text-light bg-dark text-light my-3 mx-2 px-2 rounded" style="width: 29.5%">
-                                <img src="${item.Thumbnail}" class="card-img-top img-fluid rounded" alt="eventImage">
-                                <h5 class="card-title my-2 ellipsis">${item.Title}</h5>
-                                <p class="card-text my-0">${`${item.StartDate}`.substring(0, 10)} ~ ${`${item.EndDate}`.substring(0, 10)}</p>
-                            </a>`
+                str += `<a href="${item.Link}" target="_blank" class="link-offset-2 link-underline link-underline-opacity-0 text-light bg-dark text-light my-3 mx-2 px-2 rounded" style="width: 29.5%">
+                            <img src="${item.Thumbnail}" class="img-fluid rounded mt-1" alt="eventImage">
+                            <h5 class="card-title my-2 ellipsis">${item.Title}</h5>
+                            <p class="card-text my-0">${`${item.StartDate}`.substring(0, 10)} ~ ${`${item.EndDate}`.substring(0, 10)}</p>
+                        </a>`
             }
             str += `</div>`;
             str += `</ul>`;
