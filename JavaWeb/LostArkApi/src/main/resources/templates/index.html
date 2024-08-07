@@ -8,11 +8,11 @@
 </head>
 
 <div layout:fragment="content">
-    <div class="container my-3 d-flex">
-        <div class="notices d-flex my-5 w-50">
+    <div class="container row my-3 d-flex">
+        <div class="notices col-2 my-5 w-50">
 
         </div>
-        <div class="events d-flex justify-content-evenly my-5 w-50">
+        <div class="events col-2 my-5 w-50">
 
         </div>
     </div>
@@ -34,7 +34,9 @@
             str += `<li class="d-flex justify-content-between list-group-item list-group-item-secondary">
                         <sapn class="index_content_header align-center h4">로스트아크 공지사항</sapn>
                         <a href="/notice" class="align-center">
-                            <i class="bi bi-three-dots text-dark index_content_header"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-three-dots text-light" viewBox="0 0 16 16">
+                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                            </svg>
                         </a>
                     </li>`
             console.log(data)
@@ -68,15 +70,14 @@
         let str = '';
 
         getEvents().then(data => {
-            str += `<div class="d-flex flex-wrap">`
+
             str += `<ul class="list-group">`;
             str += `<li class="list-group-item list-group-item-secondary">
                         <h4 class="index_content_header">진행중인 이벤트</h4>
                     </li>`
-            str += `<div class="d-flex flex-wrap">`
-
+            str += `<div class="row">`
             for (const item of data) {
-                str += `<a href="${item.Link}" target="_blank" class="link-offset-2 link-underline link-underline-opacity-0 text-light bg-dark text-light my-3 mx-2 px-2 rounded" style="width: 29.5%">
+                str += `<a href="${item.Link}" target="_blank" class="col w-30 link-offset-2 link-underline link-underline-opacity-0 text-light bg-dark text-light my-3 mx-2 px-2 rounded">
                             <img src="${item.Thumbnail}" class="img-fluid rounded mt-1" alt="eventImage">
                             <h5 class="card-title my-2 ellipsis">${item.Title}</h5>
                             <p class="card-text my-0">${`${item.StartDate}`.substring(0, 10)} ~ ${`${item.EndDate}`.substring(0, 10)}</p>
@@ -84,7 +85,7 @@
             }
             str += `</div>`;
             str += `</ul>`;
-            str += `</div>`;
+
             eventsDiv.innerHTML = str;
 
         }).catch(e => {

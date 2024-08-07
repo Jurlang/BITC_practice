@@ -7,6 +7,6 @@ async function getCalendars() {
             Authorization: `Bearer ${accessToken}`
         }
     });
-    console.log(result.data);
+
     return result.data;
 }

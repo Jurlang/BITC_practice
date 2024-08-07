@@ -37,9 +37,15 @@ body{
 }
 
 /* width 지정 */
+.w-20{
+    width: 20% !important;
+}
+.w-30{
+    width: 30% !important;
+}
 .w-15{
     width: 15% !important;
 }
-.w-83{
+.w-85{
     width: 85% !important;
 }
