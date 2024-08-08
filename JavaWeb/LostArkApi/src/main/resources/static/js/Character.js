@@ -1,17 +1,158 @@
 const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyIsImtpZCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyJ9.eyJpc3MiOiJodHRwczovL2x1ZHkuZ2FtZS5vbnN0b3ZlLmNvbSIsImF1ZCI6Imh0dHBzOi8vbHVkeS5nYW1lLm9uc3RvdmUuY29tL3Jlc291cmNlcyIsImNsaWVudF9pZCI6IjEwMDAwMDAwMDA1MTM1MDEifQ.QB7_7pNIV2NvmPskoESH-rN5d7UDd0rToWwnyeJIIau6PpixyG1kVFVlmF8uaKz4XS_wLEj0eEs7ZgYkceFdHicYREOmrcjshtZ12diZt45sYSEaWTIe_fVgYew3DBBvamX02T7iLgRn7iJVqunMKM3SkEDzruKPIVVb_kw4L5d-wgp-W-IJD5MZ3OYyDgWI4x4SLNbEIQ_1RrmgWXgZAlCHJS--Y5C0dErPqmabCxwmUSlS0oSGQcSWRvYVhQDYAJIxmetWwkOI8uOSz3bZMuXNiBFH5BXrHWoasxfKQmzU9HrsLLePxsxVPpvqiE1yKO3D-fapHL7lBiohGYieMA"
 
 async function getCharacterList(searchText) {
+    let characterURL = "https://developer-lostark.game.onstove.com/characters/"+ searchText + "/siblings"
+    const result = await axios.get(characterURL,{
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });// 모든 보유 캐릭터 뽑기
 
-    let basicURL = "https://developer-lostark.game.onstove.com/characters/"+ searchText + "/siblings"
+    const resultList = []; // 내가 장비 정보를 받아올 수 있는 애들만 resultList 에 넣을 배열.
 
-    console.log(basicURL);
+    for(let i = 0 ; i < result.data.length ; i++){ // for문 : 모든 보유 캐릭터 돌리기
+        let armoriesURL = "https://developer-lostark.game.onstove.com/armories/characters/" + result.data[i].CharacterName; // 아머리 정보 api
+        const armoResult = await axios.get(armoriesURL, {
+            headers : {Authorization : `Bearer ${accessToken}`}
+        });
+        if(armoResult.data !== null){ // 아머리 정보가 있으면
+            resultList.push(result.data[i]); // resultList 에 하나씩 넣기
+        }
+    }
+    return resultList;
+}
 
-    const result = await axios.get(basicURL,{
+async function getCharacterProfile(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/profiles"
+
+    const result = await axios.get(basicURL, {
 
         headers: {
             Authorization: `Bearer ${accessToken}`
         }
     });
 
+    console.log(result.data)
+    return result.data;
+}
+
+async function getCharacterEquipment(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/equipment"
+
+    const result = await axios.get(basicURL, {
+
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    console.log(result.data)
+    return result.data;
+}
+
+async function getCharacterAvatars(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/avatars"
+
+    const result = await axios.get(basicURL, {
+
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    console.log(result.data)
+    return result.data;
+}
+
+async function getCharacterCombatskills(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/combat-skills"
+
+    const result = await axios.get(basicURL, {
+
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    console.log(result.data)
+    return result.data;
+}
+
+async function getCharacterEngravings(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/engravings"
+
+    const result = await axios.get(basicURL, {
+
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    console.log(result.data)
+    return result.data;
+}
+
+async function getCharacterCards(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/cards"
+
+    const result = await axios.get(basicURL, {
+
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    console.log(result.data)
+    return result.data;
+}
+
+async function getCharacterGems(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/gems"
+
+    const result = await axios.get(basicURL, {
+
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    console.log(result.data)
+    return result.data;
+}
+
+async function getCharacterColosseums(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/colosseums"
+
+    const result = await axios.get(basicURL, {
+
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    console.log(result.data)
+    return result.data;
+}
+
+async function getCharacterCollectibles(characterName) {
+
+    let basicURL = "https://developer-lostark.game.onstove.com/armories/characters/" + characterName + "/collectibles"
+
+    const result = await axios.get(basicURL, {
+
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    console.log(result.data)
     return result.data;
 }

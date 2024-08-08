@@ -40,12 +40,14 @@
     const searchBtn = document.querySelector(".searchBtn");
     const characterListDiv = document.querySelector('.characterList');
 
-    function printCharacterList() {
+    let characterName = new URL(location.href).pathname.substring(16);
+
+    function printCharacterList(searchText) {
 
         let str = '';
         let serverName = '';
 
-        getCharacterList(searchInput.value).then(data => {
+        getCharacterList(searchText).then(data => {
             if (data === null) {
                 console.log("데이터 없음");
             } else {
@@ -55,15 +57,16 @@
 
                     if (serverName !== item.ServerName) {
                         serverName = item.ServerName;
-                        str += `<hr><h3 class="text-danger">${item.ServerName}</h3>`
+                        str += `<hr><h3 class="text-white"><strong>${item.ServerName}</strong></h3>`
                     }
 
-                    str += `<div class="card bg-dark text-white" style="width: 30%; margin: 1%">
+                    str += `<div type="button" class="btn btn-secondary card bg-dark text-white rounded-4" onclick="window.location.href='/character/${item.CharacterName}'" style="width: 30%; margin: 1%">
                                 <div class="card-body col d-flex justify-content-between align-items-center">
                                     <div>
                                         <p style="color: aqua">${item.CharacterClassName}</p>
                                         <p>${item.CharacterName}</p>
-                                        <p>Lv.${item.CharacterLevel} <font color="#ff7f50">${item.ItemAvgLevel}</font></p>
+                                        <p class="d-inline">Lv.${item.CharacterLevel}</p>
+                                        <p class="d-inline" style="color: #ff7f50">${item.ItemAvgLevel}</p>
                                     </div>
                                     <div>
                                         <img src="/images/dog.jpg" width="150" alt="직업 사진">
@@ -84,8 +87,10 @@
         e.preventDefault();
         e.stopPropagation();
         if (searchInput.value === "") alert("사용자명을 입력하세요.");
-        else printCharacterList();
+        else printCharacterList(searchInput.value);
     })
+
+    printCharacterList(characterName);
 
 </script>
 

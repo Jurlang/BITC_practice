@@ -7,15 +7,133 @@
     <title>LostArkAPI</title>
 </head>
 
+<div layout:fragment="backgroundImage">
+    <div class="profile text-white">
+
+    </div>
+</div>
 <div layout:fragment="content">
     <div class="container">
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src="@{/js/Character.js}"></script>
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
+    let characterName = new URL(location.href).pathname.substring(11);
+    const profileDiv = document.querySelector('.profile');
 
+    function printCharacterProfile(characterName) {
+
+        let profileStr = '';
+
+        getCharacterProfile(characterName).then(data => {
+
+            tempTitle = data.Title;
+            tempTownName = data.TownName;
+            tempGuildName = data.GuildName;
+
+            if (tempTitle === null) {
+                tempTitle = "없 음";
+            }
+
+            if (tempTownName === null) {
+                tempTownName = "없 음";
+            }
+
+            if (tempGuildName === null) {
+                tempGuildName = "없 음"
+            }
+
+            profileStr += `<div class="card bg-dark text-white my-5" style="width: 40%">
+                                <div class="card-body col d-flex justify-content-between align-items-center">
+                                    <div class="w-50">
+                                        <p><strong>서 버 : </strong>${data.ServerName}</p>
+                                        <p><strong>길 드 : </strong>${tempGuildName}</p>
+                                        <p><strong>클래스 : </strong>${data.CharacterClassName}</p>
+                                        <p><strong>칭 호 : </strong>${tempTitle}</p>
+                                        <p><strong>전 투 : </strong>${data.CharacterLevel}</p>
+                                        <p><strong>아이템 : </strong>${data.ItemMaxLevel}</p>
+                                        <p><strong>원정대 : </strong>${data.ExpeditionLevel}</p>
+                                        <p><strong>P V P : </strong>${data.PvpGradeName}</p>
+                                        <p><strong>영 지 : </strong>${tempTownName}</p>
+                                    </div>
+                                    <div class="w-50">
+                                        <img src="${data.CharacterImage}" class="img img-fluid border rounded-3" alt="사진정보 없음">
+                                    </div>
+                                </div>
+                           </div>`
+            profileDiv.innerHTML = profileStr;
+        });
+
+    }
+
+    function printCharacterEquipment(characterName) {
+
+        getCharacterEquipment(characterName).then(data => {
+
+        });
+    }
+
+    function printCharacterAvatars(characterName) {
+
+        getCharacterAvatars(characterName).then(data => {
+
+        });
+    }
+
+    function printCharacterCombatskills(characterName) {
+
+        getCharacterCombatskills(characterName).then(data => {
+
+        });
+    }
+
+    function printCharacterEngravings(characterName) {
+
+        getCharacterEngravings(characterName).then(data => {
+
+        });
+    }
+
+    function printCharacterCards(characterName) {
+
+        getCharacterCards(characterName).then(data => {
+
+        });
+    }
+
+    function printCharacterGems(characterName) {
+
+        getCharacterGems(characterName).then(data => {
+
+        });
+    }
+
+    function printCharacterColosseums(characterName) {
+
+        getCharacterColosseums(characterName).then(data => {
+
+        });
+    }
+
+    function printCharacterCollectibles(characterName) {
+
+        getCharacterCollectibles(characterName).then(data => {
+
+        });
+    }
+
+    printCharacterProfile(characterName);
+    printCharacterEquipment(characterName);
+    printCharacterAvatars(characterName);
+    printCharacterCombatskills(characterName);
+    printCharacterEngravings(characterName);
+    printCharacterCards(characterName);
+    printCharacterGems(characterName);
+    printCharacterColosseums(characterName);
+    printCharacterCollectibles(characterName);
 </script>
 
 </html>
