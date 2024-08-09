@@ -19,13 +19,16 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg">
-    <div id="container" class="container">
-        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+    <div class="container" id="container">
+        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarTogglerDemo01"
                 aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse navFont" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="/" style="width:200px;"><img class="img-fluid" th:src="@{/images/main/LostArkLogo.png}" alt="로스트아크 로고 이미지"></a>
+            <a class="navbar-brand" href="/" style="width:200px;"><img class="img-fluid"
+                                                                       th:src="@{/images/main/LostArkLogo.png}"
+                                                                       alt="로스트아크 로고 이미지"></a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="/notice">공지사항</a>
@@ -41,17 +44,23 @@
                 </li>
             </ul>
         </div>
-        <form class="d-flex" role="search">
-            <input class="searchValue form-control me-1" type="search" placeholder="캐릭터 명을 입력하세요." aria-label="Search" style="font-size:14px;">
-            <button class="btn btn-outline-light" type="button" th:onclick="mainSearch()"><i class="bi bi-search"></i></button>
-
-            <button type="button" class="btn btn-success ms-1" sec:authorize="!isAuthenticated()" th:onclick="window.location.href='/auth/login'">Login</button>
-            <button type="button" class="btn btn-danger ms-1" sec:authorize="isAuthenticated()" th:onclick="window.location.href='/logout'">Logout</button>
+        <form class="d-flex" id="searchForm" role="search">
+            <input class="searchValue form-control me-1" type="search" placeholder="캐릭터 명을 입력하세요." aria-label="Search"
+                   style="font-size:14px;">
+            <button class="btn btn-outline-light" form="searchForm" type="submit"><i class="bi bi-search"></i>
+            </button>
         </form>
+        <button type="button" class="btn btn-success ms-1" sec:authorize="!isAuthenticated()"
+                th:onclick="window.location.href='/auth/login'">Login
+        </button>
+        <button type="button" class="btn btn-danger ms-1" sec:authorize="isAuthenticated()"
+                th:onclick="window.location.href='/logout'">Logout
+        </button>
+
     </div>
 </nav>
 <div class="container">
-    <div class="navbar-image"  layout:fragment="backgroundImage">
+    <div class="navbar-image" layout:fragment="backgroundImage">
         <img th:src="@{/images/main/navbarBg.jpg}" alt="navbar background image" class="w-100">
     </div>
 
@@ -66,7 +75,15 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 <script>
-    function mainSearch(){
+
+    document.querySelector('#searchForm').onsubmit = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        mainSearch();
+    }
+
+    function mainSearch() {
+
         let searchValue = document.querySelector(".searchValue").value;
 
         if (searchValue === "") {
@@ -74,7 +91,9 @@
             return;
         }
 
-        window.location.href=`/character/list/${searchValue}`
+        let searchUri = encodeURI(searchValue);
+
+        window.location.href = `/character/list/${searchUri}`
     }
 </script>
 <th:block layout:fragment="script">

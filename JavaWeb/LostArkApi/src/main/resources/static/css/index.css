@@ -52,3 +52,10 @@ body{
 .w-13{
     width: 13% !important;
 }
+/* 드래그 막기 */
+body {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}

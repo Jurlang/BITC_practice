@@ -104,7 +104,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title contentTitle">${o.ContentsName}</h5>
                                         <hr class="marginLittle">
-                                        <p class="card-text marginLittle">${nextTime}</p>
+                                        <p class="card-text marginLittle timeCard">${nextTime}</p>
                                         <div class="timerDiv marginLittle timerContent"></div>
                                     </div>
                                 </div>
@@ -121,8 +121,8 @@
         getTimer();
     });
 
-    function getTimer(){3
-        const cardArr = document.querySelectorAll(".card-text");
+    function getTimer(){
+        const cardArr = document.querySelectorAll(".timeCard");
         const timerDivArr = document.querySelectorAll(".timerDiv");
 
         for(let i = 0 ; i < cardArr.length ; i++){

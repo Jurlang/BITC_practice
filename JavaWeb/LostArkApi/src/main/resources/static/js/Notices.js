@@ -12,7 +12,7 @@ async function getNotices(searchText, type) {
         else
             basicUrl += "searchText=" + searchText + "&type=" + type;
     }
-    console.log(basicUrl);
+
     const result = await axios.get(basicUrl, {
         headers: {
                 Authorization: `Bearer ${accessToken}`

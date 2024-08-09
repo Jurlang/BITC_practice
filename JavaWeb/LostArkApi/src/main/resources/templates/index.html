@@ -9,28 +9,29 @@
 
 <div layout:fragment="content">
     <div class="container row my-3 d-flex">
-        <div class="notices col-2 my-5 w-50">
-
+        <div class="col-2 my-5 w-50">
+            <div class="abyss w-100"></div>
+            <div class="guardian w-100"></div>
+            <div class="notices w-100"></div>
         </div>
-        <div class="events col-2 my-5 w-50">
-
-        </div>
+        <div class="events col-2 my-5 w-50"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script th:src="@{/js/Notices.js}"></script>
     <script th:src="@{/js/Events.js}"></script>
+    <script th:src="@{/js/Challenge.js}"></script>
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
     const noticesDiv = document.querySelector('.notices')
     const eventsDiv = document.querySelector('.events');
+    const abyssDiv = document.querySelector('.abyss');
+    const guardianDiv = document.querySelector('.guardian');
 
     function printNotices() {
-
         let str = '';
-
         getNotices().then(data => {
-            str += `<ul class="list-group" style="width: 95%">`;
+            str += `<ul class="list-group" >`;
             str += `<li class="d-flex justify-content-between list-group-item list-group-item-secondary">
                         <sapn class="index_content_header align-center h4">로스트아크 공지사항</sapn>
                         <a href="/notice" class="align-center">
@@ -39,7 +40,6 @@
                             </svg>
                         </a>
                     </li>`
-            console.log(data)
             for (let i = 0; i < 10; i++) {
                 str += `<li class="list-group-item list-group-item-action bg-dark ellipsis">`
                 switch (data[i].Type) {
@@ -64,18 +64,14 @@
             console.log(e)
         });
     }
-
     function printEvents() {
-
         let str = '';
-
         getEvents().then(data => {
-
             str += `<ul class="list-group">`;
             str += `<li class="list-group-item list-group-item-secondary">
                         <h4 class="index_content_header">진행중인 이벤트</h4>
                     </li>`
-            str += `<div class="row">`
+            str += `<div class="row border border-white">`
             for (const item of data) {
                 str += `<a href="${item.Link}" target="_blank" class="col w-30 link-offset-2 link-underline link-underline-opacity-0 text-light bg-dark text-light my-3 mx-2 px-2 rounded">
                             <img src="${item.Thumbnail}" class="img-fluid rounded mt-1" alt="eventImage">
@@ -85,18 +81,61 @@
             }
             str += `</div>`;
             str += `</ul>`;
-
             eventsDiv.innerHTML = str;
-
         }).catch(e => {
             console.log(e)
         });
-
+    }
+    function printAbyss(){
+        let str = '';
+        getAbyss().then(data => {
+            str += `<ul class="list-group border border-white  mb-5">`;
+            str += `<li class="list-group-item list-group-item-secondary">
+                        <h4 class="index_content_header">이번 주 어비스</h4>
+                    </li>`
+            str += `<div class="d-flex bg-dark rounded-3">`
+            for(const o of data){
+                str += `<div class="card text-bg-dark col-6">
+                            <img src="${o.Image}" class="card-img p-1" alt="어비스사진">
+                                <div class="card-img-overlay">
+                                    <h5 class="card-title badge text-bg-dark position-absolute start-50 translate-middle bottom-0">${o.Name}</h5>
+                                </div>
+                        </div>`
+            }
+            str += `</div></ul>`
+            abyssDiv.innerHTML = str;
+        }).catch(e => {
+            console.log(e)
+        });
+    }
+    function printGuardian(){
+        let str = '';
+        getGuardian().then(data => {
+            console.log(data);
+            str += `<ul class="list-group border border-white  mb-5">`;
+            str += `<li class="list-group-item list-group-item-secondary">
+                        <h4 class="index_content_header">이번 주 가디언</h4>
+                    </li>`
+            str += `<div class="d-flex bg-dark rounded-3">`
+            for(const o of data.Raids){
+                str += `<div class="card text-bg-dark col-4">
+                            <img src="${o.Image}" class="card-img p-1" alt="어비스사진">
+                                <div class="mx-auto">
+                                    <h5 class="card-title badge text-bg-dark">${o.Name}</h5>
+                                </div>
+                        </div>`
+            }
+            str += `</div></ul>`
+            guardianDiv.innerHTML = str;
+        }).catch(e => {
+            console.log(e)
+        });
     }
 
+    printAbyss();
+    printGuardian();
     printEvents();
     printNotices();
-
 </script>
 
 </html>

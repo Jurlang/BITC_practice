@@ -15,17 +15,19 @@
         <div class="siteHeader my-3 row">
             <h1 class="text-center">유 저 검 색</h1>
         </div>
-        <div class="my-3 row">
-            <nav class="searchBar navbar bg-dark mb-3">
-                <div class="d-flex w-100 px-2">
-                    <input id="searchInput" class="form-control flex-grow-1 mx-2" type="search"
-                           placeholder="Search" value="아메리카노커피">
-                    <button class="btn btn-secondary searchBtn mx-2 w-25" type="button">검색
-                    </button>
-                </div>
-            </nav>
-            <ul class="list-group noticeList"></ul>
-        </div>
+        <form>
+            <div class="my-3 row">
+                <nav class="searchBar navbar bg-dark mb-3">
+                    <div class="d-flex w-100 px-2">
+                        <input autofocus id="searchInput" class="form-control flex-grow-1 mx-2" type="search"
+                               placeholder="Search">
+                        <button class="btn btn-secondary searchBtn mx-2 w-25" type="submit">검색
+                        </button>
+                    </div>
+                </nav>
+                <ul class="list-group noticeList"></ul>
+            </div>
+        </form>
         <div class="characterList row d-flex justify-content-start">
 
         </div>
@@ -41,6 +43,8 @@
     const characterListDiv = document.querySelector('.characterList');
 
     let characterName = new URL(location.href).pathname.substring(16);
+    searchInput.value = decodeURI(characterName);
+
 
     function printCharacterList(searchText) {
 
@@ -48,8 +52,8 @@
         let serverName = '';
 
         getCharacterList(searchText).then(data => {
-            if (data === null) {
-                console.log("데이터 없음");
+            if (data === null || data.length === 0) {
+                str = `<div>검색하신 데이터가 없습니다. 시즌3에 사용한 계정의 보유 캐릭터를 검색하여주세요.</div>`
             } else {
                 console.log(data);
 
@@ -60,7 +64,7 @@
                         str += `<hr><h3 class="text-white"><strong>${item.ServerName}</strong></h3>`
                     }
 
-                    str += `<div type="button" class="btn btn-secondary card bg-dark text-white rounded-4" onclick="window.location.href='/character/${item.CharacterName}'" style="width: 30%; margin: 1%">
+                    str += `<div type="button" class="btn btn-secondary card bg-dark text-white rounded-4" onclick="window.location.href='/character/${item.CharacterName}'" style="width: 23.5%; margin: 0.5%">
                                 <div class="card-body col d-flex justify-content-between align-items-center">
                                     <div>
                                         <p style="color: aqua">${item.CharacterClassName}</p>
@@ -69,15 +73,16 @@
                                         <p class="d-inline" style="color: #ff7f50">${item.ItemAvgLevel}</p>
                                     </div>
                                     <div>
-                                        <img src="/images/dog.jpg" width="150" alt="직업 사진">
+                                        <img src=`
+                    str += iconUrl + classIcon[className.indexOf(item.CharacterClassName)] + "_s.png";
+                    str += ` width="50" alt="직업 사진">
                                     </div>
                                 </div>
                             </div>`;
                 }
                 str += `<hr>`;
-
-                characterListDiv.innerHTML = str;
             }
+            characterListDiv.innerHTML = str;
         }).catch(e => {
             console.log(e)
         });
@@ -90,7 +95,9 @@
         else printCharacterList(searchInput.value);
     })
 
-    printCharacterList(characterName);
+    if (characterName !== "") {
+        printCharacterList(characterName);
+    }
 
 </script>
 
