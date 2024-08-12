@@ -9,12 +9,12 @@
 
 <div layout:fragment="content">
     <div class="container row my-3 d-flex">
-        <div class="col-2 my-5 w-50">
+        <div class="col-2 my-3 w-50">
             <div class="abyss w-100"></div>
             <div class="guardian w-100"></div>
             <div class="notices w-100"></div>
         </div>
-        <div class="events col-2 my-5 w-50"></div>
+        <div class="events col-2 my-3 w-50"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script th:src="@{/js/Notices.js}"></script>
@@ -71,13 +71,18 @@
             str += `<li class="list-group-item list-group-item-secondary">
                         <h4 class="index_content_header">진행중인 이벤트</h4>
                     </li>`
-            str += `<div class="row border border-white">`
+            str += `<div class="list-group-item bg-black border border-white d-flex flex-wrap">`
             for (const item of data) {
-                str += `<a href="${item.Link}" target="_blank" class="col w-30 link-offset-2 link-underline link-underline-opacity-0 text-light bg-dark text-light my-3 mx-2 px-2 rounded">
-                            <img src="${item.Thumbnail}" class="img-fluid rounded mt-1" alt="eventImage">
-                            <h5 class="card-title my-2 ellipsis">${item.Title}</h5>
-                            <p class="card-text my-0">${`${item.StartDate}`.substring(0, 10)} ~ ${`${item.EndDate}`.substring(0, 10)}</p>
-                        </a>`
+                str += `<div class="card mb-3 col col-4 bg-black">
+                            <a href="${item.Link}" target="_blank"
+                               class="link-offset-2 link-underline link-underline-opacity-0 text-light bg-dark text-light mt-2 mx-1 rounded">
+                                <img src="${item.Thumbnail}" class="card-img-top" alt="eventImage">
+                                <div class="card-body">
+                                    <h5 class="card-title ellipsis">${item.Title}</h5>
+                                    <p class="card-text"><small class="text-body-white">${`${item.StartDate}`.substring(2, 10)} ~ ${`${item.EndDate}`.substring(2, 10)}</small></p>
+                                </div>
+                            </a>
+                        </div>`
             }
             str += `</div>`;
             str += `</ul>`;
