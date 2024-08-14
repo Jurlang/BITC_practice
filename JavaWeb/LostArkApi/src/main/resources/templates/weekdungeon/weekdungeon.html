@@ -4,6 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
 <head>
+    <link rel="stylesheet" th:href="@{/css/Challenge.css}">
     <title>LostArkAPI - Week Dungeon</title>
 </head>
 
@@ -59,8 +60,9 @@
                         </div>
                         <div class="card col-6 mb-3 bg-black d-flex">`
             for (const reward of o.RewardItems){
-            str += `<div class="ms-2 mt-2 d-flex"><img class="image-fluid" src="${reward.Icon}" width="15%" alt="보상아이템사진">
-                    <span class="d-inlineblock badge text-bg-success mx-3">${reward.Grade}</span><p><small class="text-white">${reward.Name}</small></p></div>`
+            str += `<div class="ms-2 mt-2 d-flex"><img class="image-fluid" src="${reward.Icon}" width="15%" alt="보상아이템사진">`
+            str += switchType(reward.Grade);
+            str += `<p class="my-auto"><small class="text-white">${reward.Name}</small></p></div>`
             }
             str += `</div>
                 </li>
@@ -72,7 +74,6 @@
     getGuardian().then(data => {
         let guardianData = data;
         console.log(guardianData);
-
         let str = '';
         str += `<ul class="list-group">`;
         str += `<li class="list-group-item list-group-item-secondary">
@@ -92,11 +93,15 @@
         }
         str += `</div>`;
         str += `</ul>`;
-        str += `<div class="mt-3 bg-dark accordion accordion-flush" id="accordionFlushExample">
+        str += `<ul class="mt-3 list-group border border-white">
+                <li class="list-group-item list-group-item-secondary">
+                    <h4 class="index_content_header">레이드 레벨별 보상</h4>
+                </li>
+                <div class="bg-dark accordion accordion-flush" id="accordionFlushExample">
 `
         for (const o of data.RewardItems) {
             str += `
-                    <div class="accordion-item mt-2">
+                    <div class="accordion-item mt-1">
                         <h2 class="accordion-header bg-dark">
                             <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#a${o.ItemLevel}" aria-expanded="false" aria-controls="a${o.ItemLevel}">
                                 Item Level : ${o.ItemLevel}
@@ -105,18 +110,38 @@
                         <div id="a${o.ItemLevel}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body bg-dark">`
             for(const r of o.Items) {
-                str += `<div class="ms-2 mt-2 d-flex"><img class="image-fluid" src="${r.Icon}" width="6%" alt="보상아이템사진">
-                    <span class="d-inlineblock badge text-bg-success mx-3">${r.Grade}</span><p><small class="text-white">${r.Name}</small></p></div>`
+                str += `<div class="ms-2 mt-2 d-flex"><img class="image-fluid" src="${r.Icon}" width="6%" alt="보상아이템사진">`
+                str += switchType(r.Grade);
+                str += `<p class="my-auto"><small class="text-white">${r.Name}</small></p></div>`
             }
             str +=          `</div>
                         </div>
                     </div>
                     `
         }
-        str += `</div>`
+        str += `</div></ul>`
 
         guardianDiv.innerHTML = str;
+
     })
+
+    function switchType(type) {
+
+        switch (type) {
+            case "고대":
+                return `<span class="badge d-inline mx-3 my-auto" style="background: beige; color: black">${type}</span>`
+            case "유물":
+                return `<span class="badge d-inline mx-3 my-auto" style="background: darkorange; color: white">${type}</span>`
+            case "전설":
+                return `<span class="badge d-inline mx-3 my-auto" style="background: #ffff7c; color: black">${type}</span>`
+            case "영웅":
+                return `<span class="badge d-inline mx-3 my-auto" style="background: rebeccapurple; color: white">${type}</span>`
+            case "희귀":
+                return `<span class="badge d-inline mx-3 my-auto" style="background: deepskyblue; color: black">${type}</span>`
+            case "일반":
+                return `<span class="badge d-inline mx-3 my-auto" style="background: gray; color: white">${type}</span>`
+        }
+    }
 </script>
 
 </html>

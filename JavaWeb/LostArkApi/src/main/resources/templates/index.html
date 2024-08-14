@@ -4,6 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
 <head>
+    <script th:src="@{/js/Notices.js}"></script>
+    <script th:src="@{/js/Events.js}"></script>
+    <script th:src="@{/js/Challenge.js}"></script>
     <title>LostArkAPI - Main</title>
 </head>
 
@@ -17,9 +20,6 @@
         <div class="events col-2 my-3 w-50"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script th:src="@{/js/Notices.js}"></script>
-    <script th:src="@{/js/Events.js}"></script>
-    <script th:src="@{/js/Challenge.js}"></script>
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
